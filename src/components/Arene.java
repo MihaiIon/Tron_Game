@@ -1,11 +1,14 @@
 package components;
 
+import liste.Liste;
 import liste.ListeChainee;
+import liste.Noeud;
 import players.ComputerPlayer;
 import players.HumanPlayer;
 import players.Joueur;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -16,6 +19,7 @@ public class Arene extends JComponent{
     // Attributs
     private int largeur_grille;
     private int hauteur_grille;
+    private boolean multiplayer;
     private Joueur[] joueurs;
 
     // Contructor
@@ -25,9 +29,11 @@ public class Arene extends JComponent{
      */
     public Arene()
     {
-        // Default dimensions
+        // Initialize Arene
         largeur_grille = 500;
         hauteur_grille = 500;
+        multiplayer = false;
+        setBackgroundAndBorders();
 
         // Players
         joueurs = new Joueur[]{
@@ -45,9 +51,11 @@ public class Arene extends JComponent{
      */
     public Arene(int width, int height, boolean multiplayer)
     {
-        // Dimensions
+        // Initialize Arene
         largeur_grille = width;
         hauteur_grille = height;
+        this.multiplayer = multiplayer;
+        setBackgroundAndBorders();
 
         // Players
         if (multiplayer)
@@ -65,31 +73,41 @@ public class Arene extends JComponent{
 
     // Methods
     /**
-     * On repaint, this methods draws all segments related to all players.
+     * On paint, this methods draws all segments related to all players.
      * @param g
      */
-    @Override
     public void paintComponent(Graphics g) {
-        g.setColor(Color.white);
+        super.paintComponent(g);
+        g.setColor(new Color(0, 0, 0, 220));
         g.fillRect(0, 0, getWidth(), getHeight());
-        Dimension d = getPreferredSize();
         for (Joueur joueur : joueurs){
 
             g.setColor(joueur.getCouleur());    // Sets segments color;
-
+            Liste segments = joueur.getTrace().getSegments();
             for (int i = 0; i < joueur.getTrace().getSegments().size(); i++) {
+
                 g.drawLine(
-                    ((Point)joueur.getTrace().getSegments().getFirst()).getX(),
-                    ((Point)joueur.getTrace().getSegments().getFirst()).getY(),
-                    ((Point)joueur.getTrace().getSegments().getLast()).getX(),
-                    ((Point)joueur.getTrace().getSegments().getLast()).getX()
+                    ((Segment)((Noeud)segments.get(i)).content).getDebut().getX(),
+                    ((Segment)((Noeud)segments.get(i)).content).getDebut().getY(),
+                    ((Segment)((Noeud)segments.get(i)).content).getFin().getX(),
+                    ((Segment)((Noeud)segments.get(i)).content).getFin().getY()
                 );
             }
         }
     }
 
+    /**
+     * Sets the arena dimensions and adds borders to it.
+     * @return
+     */
+    public void setBackgroundAndBorders(){
+        setPreferredSize(new Dimension(largeur_grille, hauteur_grille));
+        setBorder(BorderFactory.createLineBorder(Color.white, 8));
+    }
+
     // Getters
     public int getLargeur_grille() { return largeur_grille; }
     public int getHauteur_grille() { return hauteur_grille; }
-    public Joueur[] getJoueurs() { return joueurs; }
+    public boolean isMultiplayer() { return multiplayer;    }
+    public Joueur[] getJoueurs()   { return joueurs;        }
 }
