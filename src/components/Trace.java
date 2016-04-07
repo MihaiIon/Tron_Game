@@ -53,6 +53,9 @@ public class Trace {
 
         return isInTrace;
     }*/
+
+    // Getters
+    public Liste getSegments() { return segments;  }
 }
 
 //((debut.x  <= p.x && p.x <= fin.x) && (debut.y <= p.y && p.y <= fin.y))||((debut.x  >= p.x && p.x <= fin.x) && (debut.y >= p.y && p.y <= fin.y))

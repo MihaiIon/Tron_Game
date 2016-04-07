@@ -30,5 +30,5 @@ public class Segment {
      * segment ending Point.
      * @return
      */
-    public Point getFin()   { return fin;   }
+    public Point getFin()   { return fin; }
 }
