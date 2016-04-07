@@ -8,10 +8,7 @@ public class Noeud {
 	
 	// Constructor
 	public Noeud(){}
-	
-	public String toString()
-	{		  
-		return(""+this.content);
-		
-	}
+
+	// Methods
+	public String toString() { return ""+this.content; }
 }
