@@ -11,7 +11,7 @@ public abstract class Joueur {
     private boolean isAlive;
     private Color couleur;
     private String direction_courante;
-    private String nouvelle_direction;
+    private String nouvelle_direction; // WHY
 
     // Constructors
     public Joueur(Color color)
@@ -30,13 +30,12 @@ public abstract class Joueur {
 
     // Getters
     public Trace getTrace() { return trace; }
-    public boolean isAlive()  { return isAlive; }
-    public Color getCouleur() { return couleur; }
-    public String getDirection_courante() { return direction_courante; }
-    public String getNouvelle_direction() { return nouvelle_direction; }
+    public boolean isAlive(){ return isAlive; }
+    public Color getColor() { return couleur; }
+    public String getDirection() { return direction_courante; }
 
     // Setters
-    public void setAlive(boolean alive) { isAlive = alive; }
-    public void setDirection_courante(String direction_courante) { this.direction_courante = direction_courante; }
-    public void setNouvelle_direction(String nouvelle_direction) { this.nouvelle_direction = nouvelle_direction; }
+    public void killPlayer()   { isAlive = false; }
+    public void revivePlayer() { isAlive = true;  }
+    public void setDirection(String direction) { this.direction_courante = direction; }
 }

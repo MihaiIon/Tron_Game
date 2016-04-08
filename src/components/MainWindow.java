@@ -9,11 +9,9 @@ import java.awt.*;
  */
 public class MainWindow extends JFrame{
 
-    //
-    //private
+    // Attributes
     private JLabel background;
-    private JPanel main_panel;
-    private Arene arena;
+    private TronPanel main_panel;
 
     /**
      * Creates the main window of the application.
@@ -28,8 +26,7 @@ public class MainWindow extends JFrame{
         setVisible(true);
 
         // Initialize main_panel and background
-        main_panel = new JPanel(new BorderLayout());
-        main_panel.setBackground(new Color(0, 0, 0, 0));    // Transparent
+        main_panel = new TronPanel();
         background = new JLabel(new ImageIcon("res/background.jpg"));
         background.setLayout(new BorderLayout());
         background.add(main_panel);
@@ -40,18 +37,13 @@ public class MainWindow extends JFrame{
         setLayout(new FlowLayout());
         setBackground(Color.black);
 
-        // Initialize to default size and add it to the main_panel center pane
-        arena = new Arene();
-        main_panel.add(arena, BorderLayout.CENTER);
-
-        //
-        //main_panel.add(new Button("allo"), BorderLayout.NORTH);
-
         // Just for refresh : So image can be refreshed before the programs opens
         setSize(399,399);
         setSize(400,400);
     }
 
+    public void refresh(){ main_panel.getArena().repaint(); }
+
     // Getters
-    public Arene getArena() { return arena; }
+    public Arene getArena() { return main_panel.getArena(); }
 }

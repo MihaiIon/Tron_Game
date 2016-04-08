@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="yui3-js-enabled" dir="ltr" xml:lang="fr" lang="fr"><div class="" id="yui3-css-stamp" style="position: absolute !important; visibility: hidden !important"></div><head>
+    <title>CheckList</title>
+    <link rel="shortcut icon" href="https://studium.umontreal.ca/theme/image.php/cleanudem/theme/1458040187/favicon"><link rel="apple-touch-icon" sizes="76x76" href="https://studium.umontreal.ca/theme/image.php/cleanudem/theme/1458040187/apple-touch-icon/apple-touch-icon-76x76"><link rel="apple-touch-icon" sizes="120x120" href="https://studium.umontreal.ca/theme/image.php/cleanudem/theme/1458040187/apple-touch-icon/apple-touch-icon-120x120"><link rel="apple-touch-icon" sizes="152x152" href="https://studium.umontreal.ca/theme/image.php/cleanudem/theme/1458040187/apple-touch-icon/apple-touch-icon-152x152"><link rel="apple-touch-icon" sizes="180x180" href="https://studium.umontreal.ca/theme/image.php/cleanudem/theme/1458040187/apple-touch-icon/apple-touch-icon-180x180"><link rel="apple-touch-icon" href="https://studium.umontreal.ca/theme/image.php/cleanudem/theme/1458040187/apple-touch-icon/apple-touch-icon"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="keywords" content="moodle, Devoir"><link rel="stylesheet" type="text/css" href="Devoir_fichiers/yui_combo.css"><link rel="stylesheet" type="text/css" href="Devoir_fichiers/all.css"><meta name="google-site-verification" content="RR5CwwS7BnjkSytETo56hvf06_AR8gisnRg6hCVpxzY"><meta name="google-site-verification" content="mark9fS7TMMcfKKCt4eGFiG97wHTfthp9C63tfDwHuQ"><meta name="google-site-verification" content="0rVHphNCGUqt0jUz4xihJTITBXHwcyhBfovZdILNsMU"><meta name="msapplication-tooltip" content="StudiUM"><meta name="msapplication-starturl" content="/moodle/"><meta name="msapplication-task" content="name=Accueil;action-uri=https://studium.umontreal.ca;icon-uri=https://studium.umontreal.ca/favicon.ico"><meta name="msapplication-task" content="name=Mon StudiUM;action-uri=https://studium.umontreal.ca/my;icon-uri=https://studium.umontreal.ca/favicon.ico"><meta name="msapplication-task" content="name=Aide et documentation;action-uri=https://wiki.umontreal.ca/display/StudiUMDocs/Accueil;icon-uri=https://wiki.umontreal.ca/favicon.ico"><link href="Devoir_fichiers/font-awesome.css" rel="stylesheet" type="text/css"><link href="Devoir_fichiers/css.css" rel="stylesheet" type="text/css">    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="application-name" content="StudiUM"><meta name="msapplication-TileColor" content="#0E79D4"><meta name="msapplication-square70x70logo" content="https://studium.umontreal.ca/theme/image.php/cleanudem/theme/1458040187/msapplication/tiny"><meta name="msapplication-square150x150logo" content="https://studium.umontreal.ca/theme/image.php/cleanudem/theme/1458040187/msapplication/square"><meta name="msapplication-wide310x150logo" content="https://studium.umontreal.ca/theme/image.php/cleanudem/theme/1458040187/msapplication/wide"><meta name="msapplication-square310x310logo" content="https://studium.umontreal.ca/theme/image.php/cleanudem/theme/1458040187/msapplication/large">
+
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+	
+	var visible = false;
+
+	function hideOrShow_Partie_A(){
+		var element = document.getElementById("partie-a");
+		var etat = document.getElementById("partie-a-etat");
+
+		if (visible){
+			element.style = "display:none;";
+			etat.innerHTML = "cacher"; } 
+
+		else {
+			element.style = "display:block;";
+			etat.innerHTML = "visible"; }
+
+		visible = !visible;
+	}
+
+	function closeLegende() {
+		document.getElementById("legende").style = "display:none";
+	}
+
+</script>
+
+</head><body id="page-mod-assign-view" class="format-topics  path-mod path-mod-assign gecko dir-ltr lang-fr yui-skin-sam yui3-skin-sam studium-umontreal-ca pagelayout-incourse course-74342 context-2337136 cmid-1195674 category-219 three-column side-regions-with-max-width has-region-side-pre docked-region-side-pre has-region-side-post used-region-side-post jsenabled has_dock has_dock_left_vertical empty-region-side-pre side-post-only"><div class="skiplinks"><a class="skip" href="#maincontent">Passer au contenu principal</a></div><div id="page" class="container-fluid" style="margin-bottom: 20em; font-size: 1.5em;"><header id="page-header" class="clearfix"><div class="page-context-header"><div class="page-header-headings"><h1 style="font-size:2em">IFT1025-A-H16 - Programmation 2</h1></div></div><div id="course-header"></div></header><div id="page-content" class="row-fluid"><div id="region-main-box" class="span9"><div class="row-fluid"><section id="region-main" class="span8 pull-right"><div role="main"><span id="maincontent"></span><h2>Devoir 2 Partie 2: jeu de Tron local</h2><div id="intro" class="box generalbox boxaligncenter"><div class="no-overflow">
+
+
+
+
+
+	<!-- ******************************************************************************************
+    *****
+    ***** SPECIAL 
+    *****
+    ******************************************************************************************* -->
+
+    <button id="hide-or-show-partie-a" onclick="hideOrShow_Partie_A()">Afficher/Cacher le principe de Tron</button>
+    <p style="font-size: 1.1em; margin-top:0.5em; margin-bottom: 2em"><span style="font-weight: bold; font-size: 1.1em">Etat: </span> <span id="partie-a-etat">cacher</span>.</p>
+
+    <div id="legende">
+    	<div class="close" onclick="closeLegende()"><span style="margin: auto">X</span></div>
+    	<h3>Legende</h3>
+    	<ul>
+    		<li><div class="box" style="background:#00edff;"></div><h4> : Fait</h4></li>
+			<li><div class="box" style="background:rgb(101, 216, 151);"></div><h4> : Done, but...</h4></li>
+    		<li><div class="box" style="background:#ff7878;"></div><h4> : Fuck That</h4></li>
+    	</ul>
+    </div>
+
+    <!-- ******************************************************************************************
+    *****
+    ***** PARTIE A 
+    *****
+    ******************************************************************************************* -->
+
+    <div id="partie-a">
+
+    	<h3>a) Principe du Jeu de Tron</h3>
+		<p>Le&nbsp; jeu Tron est un grand classique inspiré du film du même nom 
+		(l'un des premiers à avoir utilisé des images de synthèse, très simples,
+		 mais révolutionnaire à l'époque...), et se prête très bien à une 
+		implantation en réseau.</p>
+		<p>Le principe est simple et peut être vu ainsi:</p>
+		<ol><ol>
+		<ul>
+		<li>Tous les joueurs sont dans une arène fermée par un mur blanc (qui 
+		apparait vu d'en haut, comme un carré vide, au contour blanc sur un fond
+		 d'écran noir par exemple)</li>
+		<li>Les joueurs ont chacun une couleur et une position initiale 
+		différente et apparaissent au départ comme un point de couleur dans 
+		l'arène..</li>
+		<li>Après le démarrage, chaque joueur avance à grande vitesse, et laisse derrière lui une <strong>trace</strong>, <b>un mur,</b> de sa couleur.</li>
+		<li>Les joueurs peuvent changer de direction à angle droit en utilisant 
+		des touches: les seules directions de déplacement possibles sont Nord 
+		(haut), Sud (bas), Est (droite), Ouest (gauche).</li>
+		<li>Un joueur meurt lorsqu'il fonce dans un mur: soit la trace de 
+		couleur (le mur) laissée par un autre joueur, soit sa propre 
+		trace,&nbsp;soit le mur blanc délimitant l'arène,</li>
+		<li>Dans une autre variante, foncer dans le mur d'enceinte n'entraine 
+		pas la mort du joueur, mais le&nbsp; téléporte de l'autre côté (ex: si 
+		il file vers l'ouest et rencontre le mur ouest, il réapparait à la même 
+		hauteur du côté est, sans cesser de filer à la même allure vers 
+		l'ouest). Vous pouvez implémenter la variante de votre choix.</li>
+		<li>Le gagnant de la partie est le dernier à rester en vie!</li>
+		</ul>
+		</ol></ol>
+		<p>Ex:</p>
+		<p><img src="Devoir_fichiers/hardlines.jpg" alt="Jeu de Tron" height="367" width="550"></p>
+		<p>L'arène peut être vue conceptuellement comme une <i>grille de jeu <strong>virtuelle</strong></i> de dimension <b>gridwidth</b> x <b>gridheight</b>
+		 (qui sont deux entiers). Le pourtour de cette grille forme le mur blanc
+		 délimitant l'arène, et le tracé des joueurs progresse à chaque 
+		time-step d'un petit segment de grille, ce qui fait que la position 
+		courante d'un joueur peut toujours être représentée par deux 
+		coordonnées&nbsp; entières:</p>
+		<ol><ol>
+		<ul>
+		<li>une coordonné horizontale entière <b>x</b> comprise entre 0 et <b>gridwidth </b>inclus qui part du bord gauche et va jusqu'au bord droit.</li>
+		<li>une coordonnée verticale entière <b>y </b>comprise entre 0 et <b>gridheight </b>inclus qui part du haut et va jusqu'en bas.</li>
+		</ul>
+		</ol></ol>
+		<p>Ce qu'on entend par <i>petit segment de grille</i> est un petit 
+		segment de droite horizontal ou vertical de longueur 1 reliant deux 
+		points adjacents sur la grille (donc pas en diagonale). <br> Le tracé d'un joueur peut être vu comme un ensemble de <i>petits segments de grilles </i>correspondants aux <i>pas </i>que
+		 le joueur a fait. Chaque pas supplémentaire se fait en reliant un point
+		 adjacent de la grille (immédiatement juste au dessus, en dessous, à 
+		gauche ou à droite du point courant).</p>
+		<p><b><i>Note: </i></b>Comme c'est souvent le cas dans les graphiques 
+		informatiques (contrairement au système d'axes usuels en maths), nous 
+		considérerons nos systèmes de coordonnées comme ayant leur origine en 
+		haut à gauche (et non pas en bas à gauche), et l'axe des y dirigé vers 
+		le bas (au lieu d'être dirigé vers le haut). <br> <b><i>Note: </i></b>Typiquement, les coordonnées de la <i>grille de jeu virtuelle</i> ne correspondront pas exactement à des coordonnées écran en pixels: un segment de grille correspondra plus typiquement à <i>plusieurs</i>
+		 pixels écrans. On pourra néanmoins passer d'un système de coordonnées à
+		 l'autre par une simple transformation des coordonnées (scaling des axes
+		 et translation). <br> &nbsp;</p>
+
+ 	</div>
+
+
+
+
+
+
+ 	<!-- ******************************************************************************************
+    *****
+    ***** PARTIE B 
+    *****
+    ******************************************************************************************* -->
+
+
+	<div id="partie-b">
+
+		<h3>b) Décomposition du programme en classes</h3>
+		<p>Vous allez réaliser un jeu de Tron local (pas en réseau) pour 1 ou 2 
+		joueurs humains (qui se partageront le même clavier) et 1 joueur 
+		ordinateur.</p>
+		<p>Pour cela vous devrez définir:</p>
+		<ul>
+		<li class="fait">une classe <strong>Point</strong> pour représenter la position d'un point aux coordonnées x,y (attributs de type int) de la grille virtuelle</li>
+		<li class="fait">une classe <strong>Segment</strong> pour représenter un segment de
+		droite (de la trace d'un des joueurs ou du mur d'enceinte). Elle a 2 
+		attributs de type Point: debut, fin. et représente le segment de droite 
+		reliant ces deux points (dont les coordonnées seront exprimées dans le 
+		système de coordonnées virtuel et non pas en pixels).</li>
+		<li class="fait">une classe <strong>Trace</strong> pour représenter la trace d'un joueur (ou du contour de l'arène de jeu). Elle a les attributs suivants:&nbsp; <br><strong>Liste segments; <br><br></strong>Liste correspond à votre type interface Liste de la partie 1 du devoir. <em>segments</em> contiendra une liste d'objets de type Segment.<br>&nbsp;<br>
+		<ul>
+		<li class="fait">la classe Trace devra avoir une méthode <strong>allonge&nbsp; </strong>prenant
+		 en paramètre une direction (par exemple un char ou un autre type pour 
+		représenter les directions Nord, Sud, Est ou Ouest) et qui allongera la 
+		trace dans cette direction. Elle pourrait selon le cas, modifier 
+		l'extrémité du dernier segment pour le rallonger, ou ajouter un nouveau 
+		segment si il y a changement de direction par rapport au dernier.</li>
+		<li class="fait">une méthode <strong>Point tete()</strong> qui retournera le point correspondant à la tête de cette trace.</li>
+		<li class="fait-mais">une méthode <strong>boolean</strong> <strong>contient(Point p)</strong> pour vérifier si la trace (reliant tous les segments), passe par ce point.</li>
+		<li class="fait">Ces méthodes vous permettront de facilement vérifier quand la tête d'une trace heurte une trace (une autre trace, ou elle même)</li>
+		</ul>
+		</li>
+		<li class="fait">une classe <strong>Joueur</strong> pour représenter un Joueur. Vous pourrez faire deux sous-classe: JoueurHumain et JoueurOrdinateur. Elle contiendra notamment:
+		<ul>
+		<li class="fait">une propriété de type Trace</li>
+		<li class="fait">une propriété Color couleur;<strong>&nbsp;</strong>Color est en fait le type java.awt.Color (que vous aurez préalablement importé en faisant <em>import java.awt.Color; </em>). Vous pourrez donner à <em>couleur</em> des valeurs telles que ex: Color.BLUE</li>
+		<li class="fait">une propriétés indiquant si le joueur est encore en vie</li>
+		<li class="fait">la <em>direction_courante</em> dans laquelle il se déplace présentement (nord, est, sud, ouest)</li>
+		<li class="fait"la <em>nouvelle_direction</em> dans laquelle il veut/va faire son prochain pas au prochain tick d'horloge.</li>
+		</ul>
+		</li>
+		<li>une classe <strong>Arene</strong> qui sera une sous-classe de JComponent et qui servira à définir votre propre composant graphique qui s'occupera de <span style="text-decoration: underline;">dessiner</span> l'arène de jeu et les traces des joueurs. Cette classe devra notamment avoir:
+		<ul>
+		<li class="fait">des propriétés int <em>largeur_grille</em> et <em>hauteur_grille</em> contenant les dimensions de la grille virtuelle (un constructeur par défaut pourra les initialiser par défaut à 500x500)</li>
+		<li class="fait">une propriété Joueur[] <em>joueurs</em>; pour contenir la trace des joueurs.</li>
+		<li class="non">optionellement une propriété Trace enceinte représentant l'enceinte
+		de l'arène (vous pouvez aussi gérer l'enceinte d'une autre manière si 
+		vous voulez).</li>
+		<li><span class="fait"><span style="line-height: 1.4;">vous devrez redéfinir la méthode </span><strong style="line-height: 1.4;">paintComponent</strong></span><span style="line-height: 1.4;"><span class="fait">
+		 (définie dans JComponent) pour qu'elle dessine l'arène de jeu et son 
+		contenu (le mur d'enceinte et toutes les traces des joueurs) <em>au complet</em> à chaque fois qu'elle est appelée. Le code de cette méthode devra bien sûr se baser sur les dimensions de la <em>grille de jeu virtuelle</em>, et sur les &nbsp;informations contenues dans la <em>Trace</em>
+		 de chaque joueur (couleur, et coordonnées dans la grille vitruelle)</span>. Et
+		 elle devra effectuer un calcul simple de changement de coordonnées 
+		(changement d'échelle) pour appeler les instructions de tracé adaptées 
+		aux dimensions réelles en pixels de votre composant graphique. Note: <span style="line-height: 1.4;">La taille en <em>pixels</em> d'un composant graphique Swing ou AWT (donc de votre Arene) peut s'obtenir en appelant ses méthodes <strong>getWidth()&nbsp;</strong>et&nbsp;<strong>getHeight()</strong>.&nbsp;Normalement, au moment de "dessiner" votre Arene, lorsque son <strong>paintComponent</strong> sera appelé par le système, ses dimensions en pixels devraient être accessibles avec ces méthodes. </span>Les seules méthodes du contexte graphique (Graphics) nécessaires pour (re)dessiner l'arène et son contenu sont <strong>setColor</strong> et <strong>fillRect</strong>.
+		 Mais vous pouvez laisser libre cours à votre créativité si vous voulez 
+		enjoliver le dessin des traces d'une manière ou d'une autre. <br></span></li>
+		</ul>
+		</li>
+		<li>une classe TronControlPanel qui sera une sous-classe de JPanel et 
+		qui contiendra, agencé comme vous voulez, des composantes montrant la 
+		couleur de chaque joueur, indiquant pour chaque joueur s'il est humain 
+		ou ordinateur et s'il est humain, décrivant ses touches de direction. Il
+		 devra aussi contenir un boutons permettant de démarrer ou mettre en 
+		pause la partie en cours. Une ou plusieurs <em>dropbox</em> permettant 
+		de choisir le type de nouvelle partie (2 joueurs humains, 1 humain 
+		contre 1 ordinateur, 2 humains 1 ordinateur, ...) et un bouton 
+		permettant de débuter une nouvelle partie. Un champ texte pourra 
+		permettre de modifier le nombre de millisecondes entre chaque pas 
+		d'avancement des traces. Un JLabel pourra être utilisé pour indiquer 
+		l'état de la partie en cours (pause, en cours, joueur 2 a gagné, ...). 
+		Affichez-y également le nombre de parties gagnées par chaque joueur 
+		depuis le début. Vous pouvez laiss libre cours à votre créativité pour 
+		cette composante de controle et d'affichage.</li>
+		<li class="fait"><span >une classe TronPanel qui utilisera un LayoutManager de type BorderLayout et placera un Arene dans sa partie <em>Center</em></span>. Et un TronControlPanel dans une autre partie (ex. <em>East</em>) et qui implémentera la logique et le fonctionnement du jeu.<span style="line-height: 1.4;"></span></li>
+		<li class="fait">un programme principal Tron.java qui pourra se contenter de créer un JFrame et d'y ajouter un TronPanel</li>
+		</ul>
+		<p>Pour gérer l'avancement automatique des joueurs sur des ticks 
+		d'horloge, vous devriez utiliser un Timer. C'est sur lui aussi que le 
+		bouton pause/redémarrage pourrait agir. À chaque tick d'horloge de ce 
+		timer, vous devriez:</p>
+		<ul>
+		<li>faire avancer d'un pas dans la bonne direction toutes les traces des joueurs encore en vie</li>
+		<li>détecter si la tête d'une trace heurte un mur, et si oui indiquer 
+		que le joueur en question est mort (et faire en sorte qu'il n'avance 
+		plus).</li>
+		<li>scheduler un redessin de l'arène (en appelant <strong>repaint()</strong> ).</li>
+		</ul>
+		<p>Autres points importants:</p>
+		<ul>
+		<li>Le changement de direction de chaque joueur humain est effectué en 
+		utilisant 4 touches pour les directions Nord, Est, Sud, Ouest (ex: 
+		W,S,Z,A pour le joueur 1 et I,K,M,J pour le joueur 2). Votre interface 
+		graphique doit clairement afficher quelles sont les touches de 
+		direction. </li>
+		<li>Au moment de débuter une partie, la position et direction initiale de déplacement de chaque joueur est choisie au hasard.</li>
+		<li>L'interface graphique se fera à l'aide de la librairie Swing.</li>
+		</ul>
+		<p></p>
+
+	</div>
+
+
+
+
+
+	<!-- ******************************************************************************************
+    *****
+    ***** PARTIE C
+    *****
+    ******************************************************************************************* -->
+
+    <div id="partie-c">
+
+		<h3>c) Indications complémentaires</h3>
+		<h3>Contrôle de direction dans le client: réaction aux touches</h3>
+		<p>Pour pouvoir jouer, il faut pouvoir détecter et réagir au fait que le
+		 joueur appuie sur des touches de direction. Pour ce faire vous pouvez:</p>
+		<ol><ol>
+		<ul>
+		<li>Définir une classe comme implémentant l'interface KeyListener</li>
+		<li>Implémentez les méthodes mandatées par cette interface. Notamment la méthode <br><strong>public void keyTyped(KeyEvent e)</strong> dans laquelle vous pourrez récupérer le caractère de la touche appuyée ainsi:<br>
+		<pre>char c = e.getKeyChar();<br>System.out.println("Caractère appuyé: "+c);  // pour l'afficher sur la console</pre>
+		</li>
+		<li>déclarez votre listener auprès de votre Arene, TronControlPanel, TronPanel ( avec addKeyListener ).</li>
+		<li>Pour pouvoir réagir aux touches, votre composant, tel que votre TronPanel doit avoir le focus d'entrée clavier. Pour cela:<br>Dans son constructeur, assurez-vous de faire en sorte que votre TronPanel soit Focusable, en appelant la méthode <code>setFocusable(true)</code><br>Et aussi, assurez-vous que votre composante reçoive bien le focus à chaque fois que votre fenêtre de jeu (votre_jframe) est sélectionnée en vous assurant que la méthode <strong>requestFocusInWindow()</strong> est bien appelée sur votre composant arene. Ce qui peut se faire ainsi:<br>
+		<pre><em>votre_frame</em>.addWindowFocusListener(new WindowAdapter() {
+		    public void windowGainedFocus(WindowEvent e) {
+		        <em>votre_arene_tron</em>.requestFocusInWindow();
+		    }
+		});</pre>
+		</li>
+		<li>Vérifiez que les caractères appuyés sont bien affichés dans la console quand vous appuyez sur une touche dans votre arène de jeu.</li>
+		<li>Vous n'aurez alors plus qu'à modifier légèrement votre méthode <strong>keyTyped </strong>pour qu'au lieu d'afficher la touche sur la console, elle résulte en un changement de direction du joueur (quand le joueur appuie sur une touche de direction valide, correspondant à un changement de direction). <strong>Recommandations:</strong> appuyer sur une touche ne déplace pas sur le champ le joueur dans cette direction. Cela devrait simplement modifier la propriété <em>nouvelle_direction</em> du joueur, et c'est seulement au prochain tick d'horloge qu'un pas sera fait dans cette nouvelle direction, qui deviendra sa direction courante. Aussi ignorez les commandes de changement de direction si elles vont dans le sens opposée de sa direction courante (ex: il va vers l'Est et appuie sur la touche pour aller vers l'Ouest) car cette maladresse courante se traduirait en une mort immédiate du joueur.</li>
+		</ul></ol></ol>
+
+	</div></div></div></div></section></div></div></div></div></body></html>

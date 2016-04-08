@@ -82,10 +82,10 @@ public class Arene extends JComponent{
         g.fillRect(0, 0, getWidth(), getHeight());
         for (Joueur joueur : joueurs){
 
-            g.setColor(joueur.getCouleur());    // Sets segments color;
+            g.setColor(joueur.getColor());    // Sets segments color;
             Liste segments = joueur.getTrace().getSegments();
-            for (int i = 0; i < joueur.getTrace().getSegments().size(); i++) {
 
+            for (int i = 0; i < joueur.getTrace().getSegments().size(); i++) {
                 g.drawLine(
                     ((Segment)((Noeud)segments.get(i)).content).getDebut().getX(),
                     ((Segment)((Noeud)segments.get(i)).content).getDebut().getY(),
@@ -100,7 +100,7 @@ public class Arene extends JComponent{
      * Sets the arena dimensions and adds borders to it.
      * @return
      */
-    public void setBackgroundAndBorders(){
+    private void setBackgroundAndBorders(){
         setPreferredSize(new Dimension(largeur_grille, hauteur_grille));
         setBorder(BorderFactory.createLineBorder(Color.white, 8));
     }
@@ -109,5 +109,5 @@ public class Arene extends JComponent{
     public int getLargeur_grille() { return largeur_grille; }
     public int getHauteur_grille() { return hauteur_grille; }
     public boolean isMultiplayer() { return multiplayer;    }
-    public Joueur[] getJoueurs()   { return joueurs;        }
+    public Joueur[] getPlayers()   { return joueurs;        }
 }
