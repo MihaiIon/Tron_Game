@@ -2,7 +2,7 @@ package players; /**
  * Created by farlyprj on 16-04-06.
  */
 import java.awt.*;
-import components.Trace;
+import players.attributes.Trace;
 
 public abstract class Joueur {
 

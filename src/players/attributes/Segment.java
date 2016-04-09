@@ -1,4 +1,4 @@
-package components;
+package players.attributes;
 
 /**
  * Created by farlyprj on 16-04-06.

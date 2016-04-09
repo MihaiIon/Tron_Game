@@ -1,4 +1,4 @@
-package components;
+package players.attributes;
 
 import constant.Direction;
 import liste.Liste;
@@ -24,7 +24,7 @@ public class Trace {
      * Stretches the current segment in the received direction. If the current_direction is different then
      * the direction passed in parameter, a new segment is created : starting at the same coordinates ( +direction )
      * then the ending coordinates of last segment.
-     * @param direction
+     * @param direction : UP, RIGHT, DOWN, LEFT
      */
     public void allonge(String direction)
     {
@@ -61,8 +61,10 @@ public class Trace {
     private Point tete() { return ((Segment)((Noeud)segments.getLast()).content).getFin(); }
 
     /**
-     *
-     * @param p
+     * Checks if the Point p is on a segment by comparing it's coordinates to each segments. If the Point p
+     * matches a coordinate on a segments, this means that the player, at the Point p, hit a segment.
+     * Therefore, this method returns true.
+     * @param p : A coordinate in the Arena.
      * @return
      */
     public boolean contient(Point p)
@@ -78,7 +80,7 @@ public class Trace {
 
                 else continue;
             }
-            else{                                                       // ... if segment is horizontal
+            else{                                                       // ... else : segment is horizontal
                 if (p.getY() == segment.getDebut().getY() && (
                         p.getX() <= Math.max(segment.getDebut().getX(), segment.getFin().getX()) &&
                         p.getY() >= Math.min(segment.getDebut().getX(), segment.getFin().getX())
@@ -87,7 +89,6 @@ public class Trace {
                 else continue;
             }
         }
-
         return false;
     }
 

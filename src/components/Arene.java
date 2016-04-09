@@ -1,14 +1,14 @@
 package components;
 
 import liste.Liste;
-import liste.ListeChainee;
 import liste.Noeud;
 import players.ComputerPlayer;
 import players.HumanPlayer;
 import players.Joueur;
+import players.attributes.Segment;
+import players.controls.Controls;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -40,6 +40,8 @@ public class Arene extends JComponent{
             new HumanPlayer(251, 118, 6),       // Custom Orange : rgb(251, 118, 6)
             new ComputerPlayer(Color.red)
         };
+
+        addKeyListener(new Controls());
     }
 
     /**
@@ -69,6 +71,8 @@ public class Arene extends JComponent{
                 new HumanPlayer(251, 118, 6),   // Custom Orange : rgb(251, 118, 6)
                 new ComputerPlayer(Color.red)
             };
+
+        addKeyListener(new Controls());
     }
 
     // Methods

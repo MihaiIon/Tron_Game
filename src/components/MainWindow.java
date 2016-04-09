@@ -1,8 +1,12 @@
 package components;
 
+import players.controls.Controls;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by Mihai-A on 07/04/2016.
@@ -40,6 +44,15 @@ public class MainWindow extends JFrame{
         // Just for refresh : So image can be refreshed before the programs opens
         setSize(399,399);
         setSize(400,400);
+
+        // KeyLister Section
+        addKeyListener(new Controls());
+        setFocusable(true);
+        addWindowFocusListener(new WindowAdapter() {
+            public void windowGainedFocus(WindowEvent e) {
+                getArena().requestFocusInWindow();
+            }
+        });
     }
 
     public void refresh(){ main_panel.getArena().repaint(); }

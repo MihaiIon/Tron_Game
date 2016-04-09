@@ -62,7 +62,7 @@
 
     <div id="partie-a">
 
-    	<h3>a) Principe du Jeu de Tron</h3>
+    	<h3 style="font-size:2em;margin-bottom:1em">a) Principe du Jeu de Tron</h3>
 		<p>Le&nbsp; jeu Tron est un grand classique inspiré du film du même nom 
 		(l'un des premiers à avoir utilisé des images de synthèse, très simples,
 		 mais révolutionnaire à l'époque...), et se prête très bien à une 
@@ -134,9 +134,9 @@
     ******************************************************************************************* -->
 
 
-	<div id="partie-b">
+	<div id="partie-b" style="margin-top:4em;">
 
-		<h3>b) Décomposition du programme en classes</h3>
+		<h3 style="font-size:2em;margin-bottom:1em">b) Décomposition du programme en classes</h3>
 		<p>Vous allez réaliser un jeu de Tron local (pas en réseau) pour 1 ou 2 
 		joueurs humains (qui se partageront le même clavier) et 1 joueur 
 		ordinateur.</p>
@@ -177,7 +177,7 @@
 		<li class="non">optionellement une propriété Trace enceinte représentant l'enceinte
 		de l'arène (vous pouvez aussi gérer l'enceinte d'une autre manière si 
 		vous voulez).</li>
-		<li><span class="fait"><span style="line-height: 1.4;">vous devrez redéfinir la méthode </span><strong style="line-height: 1.4;">paintComponent</strong></span><span style="line-height: 1.4;"><span class="fait">
+		<li><span class="fait-mais"><span style="line-height: 1.4;">vous devrez redéfinir la méthode </span><strong style="line-height: 1.4;">paintComponent</strong></span><span style="line-height: 1.4;"><span class="fait-mais">
 		 (définie dans JComponent) pour qu'elle dessine l'arène de jeu et son 
 		contenu (le mur d'enceinte et toutes les traces des joueurs) <em>au complet</em> à chaque fois qu'elle est appelée. Le code de cette méthode devra bien sûr se baser sur les dimensions de la <em>grille de jeu virtuelle</em>, et sur les &nbsp;informations contenues dans la <em>Trace</em>
 		 de chaque joueur (couleur, et coordonnées dans la grille vitruelle)</span>. Et
@@ -204,7 +204,7 @@
 		depuis le début. Vous pouvez laiss libre cours à votre créativité pour 
 		cette composante de controle et d'affichage.</li>
 		<li class="fait"><span >une classe TronPanel qui utilisera un LayoutManager de type BorderLayout et placera un Arene dans sa partie <em>Center</em></span>. Et un TronControlPanel dans une autre partie (ex. <em>East</em>) et qui implémentera la logique et le fonctionnement du jeu.<span style="line-height: 1.4;"></span></li>
-		<li class="fait">un programme principal Tron.java qui pourra se contenter de créer un JFrame et d'y ajouter un TronPanel</li>
+		<li class="fait-mais">un programme principal Tron.java qui pourra se contenter de créer un JFrame et d'y ajouter un TronPanel</li>
 		</ul>
 		<p>Pour gérer l'avancement automatique des joueurs sur des ticks 
 		d'horloge, vous devriez utiliser un Timer. C'est sur lui aussi que le 
@@ -241,28 +241,28 @@
     *****
     ******************************************************************************************* -->
 
-    <div id="partie-c">
+    <div id="partie-c" style="margin-top:4em;">
 
-		<h3>c) Indications complémentaires</h3>
-		<h3>Contrôle de direction dans le client: réaction aux touches</h3>
-		<p>Pour pouvoir jouer, il faut pouvoir détecter et réagir au fait que le
+		<h3 style="font-size:2em;margin-bottom:1em">c) Indications complémentaires</h3>
+		<h3 class="fait">Contrôle de direction dans le client: réaction aux touches</h3>
+		<p class="fait">Pour pouvoir jouer, il faut pouvoir détecter et réagir au fait que le
 		 joueur appuie sur des touches de direction. Pour ce faire vous pouvez:</p>
 		<ol><ol>
 		<ul>
-		<li>Définir une classe comme implémentant l'interface KeyListener</li>
-		<li>Implémentez les méthodes mandatées par cette interface. Notamment la méthode <br><strong>public void keyTyped(KeyEvent e)</strong> dans laquelle vous pourrez récupérer le caractère de la touche appuyée ainsi:<br>
-		<pre>char c = e.getKeyChar();<br>System.out.println("Caractère appuyé: "+c);  // pour l'afficher sur la console</pre>
+		<li  class="fait">Définir une classe comme implémentant l'interface KeyListener</li>
+		<li  class="fait">Implémentez les méthodes mandatées par cette interface. Notamment la méthode <br><strong>public void keyTyped(KeyEvent e)</strong> dans laquelle vous pourrez récupérer le caractère de la touche appuyée ainsi:<br>
+		<pre class="fait">char c = e.getKeyChar();<br>System.out.println("Caractère appuyé: "+c);  // pour l'afficher sur la console</pre>
 		</li>
-		<li>déclarez votre listener auprès de votre Arene, TronControlPanel, TronPanel ( avec addKeyListener ).</li>
-		<li>Pour pouvoir réagir aux touches, votre composant, tel que votre TronPanel doit avoir le focus d'entrée clavier. Pour cela:<br>Dans son constructeur, assurez-vous de faire en sorte que votre TronPanel soit Focusable, en appelant la méthode <code>setFocusable(true)</code><br>Et aussi, assurez-vous que votre composante reçoive bien le focus à chaque fois que votre fenêtre de jeu (votre_jframe) est sélectionnée en vous assurant que la méthode <strong>requestFocusInWindow()</strong> est bien appelée sur votre composant arene. Ce qui peut se faire ainsi:<br>
-		<pre><em>votre_frame</em>.addWindowFocusListener(new WindowAdapter() {
+		<li  class="fait">déclarez votre listener auprès de votre Arene, TronControlPanel, TronPanel ( avec addKeyListener ).</li>
+		<li  class="fait">Pour pouvoir réagir aux touches, votre composant, tel que votre TronPanel doit avoir le focus d'entrée clavier. Pour cela:<br>Dans son constructeur, assurez-vous de faire en sorte que votre TronPanel soit Focusable, en appelant la méthode <code>setFocusable(true)</code><br>Et aussi, assurez-vous que votre composante reçoive bien le focus à chaque fois que votre fenêtre de jeu (votre_jframe) est sélectionnée en vous assurant que la méthode <strong>requestFocusInWindow()</strong> est bien appelée sur votre composant arene. Ce qui peut se faire ainsi:<br>
+		<pre  class="fait"><em>votre_frame</em>.addWindowFocusListener(new WindowAdapter() {
 		    public void windowGainedFocus(WindowEvent e) {
 		        <em>votre_arene_tron</em>.requestFocusInWindow();
 		    }
 		});</pre>
 		</li>
-		<li>Vérifiez que les caractères appuyés sont bien affichés dans la console quand vous appuyez sur une touche dans votre arène de jeu.</li>
-		<li>Vous n'aurez alors plus qu'à modifier légèrement votre méthode <strong>keyTyped </strong>pour qu'au lieu d'afficher la touche sur la console, elle résulte en un changement de direction du joueur (quand le joueur appuie sur une touche de direction valide, correspondant à un changement de direction). <strong>Recommandations:</strong> appuyer sur une touche ne déplace pas sur le champ le joueur dans cette direction. Cela devrait simplement modifier la propriété <em>nouvelle_direction</em> du joueur, et c'est seulement au prochain tick d'horloge qu'un pas sera fait dans cette nouvelle direction, qui deviendra sa direction courante. Aussi ignorez les commandes de changement de direction si elles vont dans le sens opposée de sa direction courante (ex: il va vers l'Est et appuie sur la touche pour aller vers l'Ouest) car cette maladresse courante se traduirait en une mort immédiate du joueur.</li>
+		<li  class="fait">Vérifiez que les caractères appuyés sont bien affichés dans la console quand vous appuyez sur une touche dans votre arène de jeu.</li>
+		<li>Vous n'aurez alors plus qu'à modifier légèrement votre méthode <strong>keyTyped </strong>pour qu'au lieu d'afficher la touche sur la console, elle résulte en un changement de direction du joueur (quand le joueur appuie sur une touche de direction valide, correspondant à un changement de direction)</li><li class="non"><strong>Recommandations:</strong> appuyer sur une touche ne déplace pas sur le champ le joueur dans cette direction. Cela devrait simplement modifier la propriété <em>nouvelle_direction</em> du joueur, et c'est seulement au prochain tick d'horloge qu'un pas sera fait dans cette nouvelle direction, qui deviendra sa direction courante. Aussi ignorez les commandes de changement de direction si elles vont dans le sens opposée de sa direction courante (ex: il va vers l'Est et appuie sur la touche pour aller vers l'Ouest) car cette maladresse courante se traduirait en une mort immédiate du joueur.</li>
 		</ul></ol></ol>
 
 	</div></div></div></div></section></div></div></div></div></body></html>

@@ -1,7 +1,11 @@
 package components;
 
+import players.controls.Controls;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by Mihai-A on 08/04/2016.
@@ -26,6 +30,9 @@ public class TronPanel extends JPanel{
         // Add TronControlePanel to Top pane
         control_panel = new TronControlPanel();
         add(control_panel, BorderLayout.NORTH);
+
+        addKeyListener(new Controls());
+        setFocusable(true);
     }
 
     // Getters

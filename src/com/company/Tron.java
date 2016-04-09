@@ -1,8 +1,8 @@
 package com.company;
 
 import components.MainWindow;
-import components.Point;
-import components.Segment;
+import players.attributes.Point;
+import players.attributes.Segment;
 
 public class Tron {
 
