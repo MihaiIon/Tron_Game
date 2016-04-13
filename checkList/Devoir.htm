@@ -180,12 +180,12 @@
 		<li><span class="fait-mais"><span style="line-height: 1.4;">vous devrez redéfinir la méthode </span><strong style="line-height: 1.4;">paintComponent</strong></span><span style="line-height: 1.4;"><span class="fait-mais">
 		 (définie dans JComponent) pour qu'elle dessine l'arène de jeu et son 
 		contenu (le mur d'enceinte et toutes les traces des joueurs) <em>au complet</em> à chaque fois qu'elle est appelée. Le code de cette méthode devra bien sûr se baser sur les dimensions de la <em>grille de jeu virtuelle</em>, et sur les &nbsp;informations contenues dans la <em>Trace</em>
-		 de chaque joueur (couleur, et coordonnées dans la grille vitruelle)</span>. Et
+		 de chaque joueur (couleur, et coordonnées dans la grille vitruelle)</span>. <div class="non">Et
 		 elle devra effectuer un calcul simple de changement de coordonnées 
 		(changement d'échelle) pour appeler les instructions de tracé adaptées 
 		aux dimensions réelles en pixels de votre composant graphique. Note: <span style="line-height: 1.4;">La taille en <em>pixels</em> d'un composant graphique Swing ou AWT (donc de votre Arene) peut s'obtenir en appelant ses méthodes <strong>getWidth()&nbsp;</strong>et&nbsp;<strong>getHeight()</strong>.&nbsp;Normalement, au moment de "dessiner" votre Arene, lorsque son <strong>paintComponent</strong> sera appelé par le système, ses dimensions en pixels devraient être accessibles avec ces méthodes. </span>Les seules méthodes du contexte graphique (Graphics) nécessaires pour (re)dessiner l'arène et son contenu sont <strong>setColor</strong> et <strong>fillRect</strong>.
 		 Mais vous pouvez laisser libre cours à votre créativité si vous voulez 
-		enjoliver le dessin des traces d'une manière ou d'une autre. <br></span></li>
+		enjoliver le dessin des traces d'une manière ou d'une autre. <br></div></div></li>
 		</ul>
 		</li>
 		<li>une classe TronControlPanel qui sera une sous-classe de JPanel et 
@@ -206,16 +206,16 @@
 		<li class="fait"><span >une classe TronPanel qui utilisera un LayoutManager de type BorderLayout et placera un Arene dans sa partie <em>Center</em></span>. Et un TronControlPanel dans une autre partie (ex. <em>East</em>) et qui implémentera la logique et le fonctionnement du jeu.<span style="line-height: 1.4;"></span></li>
 		<li class="fait-mais">un programme principal Tron.java qui pourra se contenter de créer un JFrame et d'y ajouter un TronPanel</li>
 		</ul>
-		<p>Pour gérer l'avancement automatique des joueurs sur des ticks 
-		d'horloge, vous devriez utiliser un Timer. C'est sur lui aussi que le 
+		<p><span class="fait">Pour gérer l'avancement automatique des joueurs sur des ticks
+		d'horloge, vous devriez utiliser un Timer <b> : TronTimer (notre Timer)</b></span>. C'est sur lui aussi que le
 		bouton pause/redémarrage pourrait agir. À chaque tick d'horloge de ce 
 		timer, vous devriez:</p>
 		<ul>
-		<li>faire avancer d'un pas dans la bonne direction toutes les traces des joueurs encore en vie</li>
+		<li><span class="fait">faire avancer</span> d'un pas dans la bonne direction toutes les traces des joueurs encore en vie</li>
 		<li>détecter si la tête d'une trace heurte un mur, et si oui indiquer 
 		que le joueur en question est mort (et faire en sorte qu'il n'avance 
 		plus).</li>
-		<li>scheduler un redessin de l'arène (en appelant <strong>repaint()</strong> ).</li>
+		<li class="fait">scheduler un redessin de l'arène (en appelant <strong>repaint()</strong> ).</li>
 		</ul>
 		<p>Autres points importants:</p>
 		<ul>

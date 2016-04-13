@@ -1,6 +1,7 @@
 package com.company;
 
 import components.MainWindow;
+import constant.RefreshRate;
 import mecanism.GameManager;
 import mecanism.TronTimer;
 import players.Joueur;
@@ -13,28 +14,21 @@ public class Tron {
     {
         MainWindow window = new MainWindow();
         GameManager GM = new GameManager(window.getTronPanel());
+        window.addKeyListener(GM);
         window.pack();
 
-        // TESTS SEGMENTS
-        /*GM.getPlayers()[0].addSegment(20, 50, 100, 50);
-        GM.getPlayers()[0].addSegment(20, 100, 400, 100);
-        GM.getPlayers()[1].addSegment(20, 200, 150, 200);
-        GM.getPlayers()[0].addSegment(20, 300);
-        GM.getPlayers()[0].addSegment(20, 400);*/
         GM.getArena().print();
 
         // TESTS NEW ARENA
-        /*
-        GM.createNewArena(400, 400, true);
-        GM.getArena().print();
-        GM.getPlayers()[0].addSegment(20, 50, 100, 50);
-        GM.getPlayers()[2].addSegment(20, 100, 400, 100);
-        GM.getPlayers()[1].addSegment(20, 200, 150, 200);
-        GM.getPlayers()[0].addSegment(20, 300);
-        GM.getPlayers()[0].addSegment(20, 400);
-        GM.getArena().print();*/
+        //GM.createNewArena(600, 600, true);
 
-        //GM.createNewArena(200, 200, true);
+        // TEST SPEED
+        //GM.setDefaultPlayersSpeed(3);
+
+        // TESTS SLOWER_DEBUG_MODE
+        //GM.setRefreshRate(RefreshRate.SLOWER_DEBUG_MODE);
+
+        // TEST START
         GM.start();
     }
 }

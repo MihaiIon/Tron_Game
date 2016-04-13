@@ -6,7 +6,6 @@ import players.ComputerPlayer;
 import players.HumanPlayer;
 import players.Joueur;
 import players.attributes.Segment;
-import players.controls.Controls;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +24,8 @@ public class Arene extends JComponent{
 
     // Static Attributes
     public static final int ARENA_BORDER_WIDTH = 8;
-    public static final int PLAYER_PATH_WIDTH = 3;
+    public static final int PLAYER_PATH_WIDTH  = 3;
+    public static final int PLAYER_PATH2_WIDTH = PLAYER_PATH_WIDTH + 2;
 
     // Contructor
     /**
@@ -39,6 +39,8 @@ public class Arene extends JComponent{
         hauteur_grille = 500;
         multiplayer = false;
         setBackgroundAndBorders();
+        setOpaque(false);
+        setBackground(new Color(0, 0, 0, 0));
 
         // Players
         joueurs = new Joueur[]{
@@ -47,7 +49,6 @@ public class Arene extends JComponent{
         };
 
         initializePlayersTrace();
-        addKeyListener(new Controls());
     }
 
     /**
@@ -64,6 +65,8 @@ public class Arene extends JComponent{
         hauteur_grille = height;
         this.multiplayer = multiplayer;
         setBackgroundAndBorders();
+        setOpaque(false);
+        setBackground(new Color(0, 0, 0, 0));
 
         // Players
         if (multiplayer)
@@ -79,11 +82,9 @@ public class Arene extends JComponent{
             };
 
         initializePlayersTrace();
-        addKeyListener(new Controls());
     }
 
     // Methods
-
     /**
      * Initializes every player's Trace.
      */
@@ -101,7 +102,7 @@ public class Arene extends JComponent{
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        g.setColor(new Color(0, 0, 0, 220));
+        g.setColor(new Color(0, 0, 0, 200));
         g.fillRect(0, 0, getWidth(), getHeight());
         Graphics2D line = (Graphics2D) g;
 
@@ -113,9 +114,25 @@ public class Arene extends JComponent{
 
             for (int i = 0; i < segments.size(); i++) {
 
-                line.setColor(player.getColor());                       // Get player color
-                line.setStroke(new BasicStroke(PLAYER_PATH_WIDTH));     // Set stroke width
-                line.draw(new Line2D.Float(                             // Draw player Path
+                line.setColor(player.getPathColor2());                       // Get player color
+                line.setStroke(new BasicStroke(
+                    PLAYER_PATH2_WIDTH,                                      // Set stroke width
+                    BasicStroke.CAP_ROUND,                                   // Set stroke End-cap style
+                    BasicStroke.JOIN_ROUND)                                  // Set stroke Join style
+                );
+                line.draw(new Line2D.Float(                                  // Draw player Path
+                    ((Segment)segments.get(i).content).getDebut().getX(),
+                    ((Segment)segments.get(i).content).getDebut().getY(),
+                    ((Segment)segments.get(i).content).getFin().getX(),
+                    ((Segment)segments.get(i).content).getFin().getY()
+                ));
+                line.setColor(player.getPathColor());
+                line.setStroke(new BasicStroke(
+                    PLAYER_PATH_WIDTH,                                      // Set stroke width
+                    BasicStroke.CAP_ROUND,                                  // Set stroke End-cap style
+                    BasicStroke.JOIN_ROUND)                                 // Set stroke Join style
+                );
+                line.draw(new Line2D.Float(                                 // Draw player Glow Path
                     ((Segment)segments.get(i).content).getDebut().getX(),
                     ((Segment)segments.get(i).content).getDebut().getY(),
                     ((Segment)segments.get(i).content).getFin().getX(),
@@ -150,9 +167,9 @@ public class Arene extends JComponent{
      */
     @Override
     public String toString(){
-        String _outprut = "Arena Info :"
+        String _output = "Arena Info :"
                 + "\n\tWidth : " + largeur_grille
                 + "\n\tHeight : " + hauteur_grille;
-        return _outprut + "\n\tNumber of Players : " + getPlayers().length;
+        return _output + "\n\tNumber of Players : " + getPlayers().length;
     }
 }

@@ -12,9 +12,9 @@ public class Trace {
     // Attributs
     private Liste segments;
     private String current_direction;
+    private int speed;
 
     // Constructor
-
     /**
      * Contains the player's path and current direction. Initialized in Joueur.java.
      * @param starting_point : Starting coordinates of the player.
@@ -24,6 +24,7 @@ public class Trace {
         segments = new ListeChainee();
         segments.append(new Segment(starting_point));
         this.current_direction = current_direction;
+        this.speed = 1;
     }
 
     /**
@@ -44,17 +45,22 @@ public class Trace {
 
         switch(direction){
             case Direction.UP:
-                _head.setY(_head.getY()+1);
+                current_direction = Direction.UP;
+                _head.setY(_head.getY()-speed);
                 break;
             case Direction.RIGHT:
-                _head.setX(_head.getX()+1);
+                current_direction = Direction.RIGHT;
+                _head.setX(_head.getX()+speed);
                 break;
             case Direction.DOWN:
-                _head.setY(_head.getY()-1);
+                current_direction = Direction.DOWN;
+                _head.setY(_head.getY()+speed);
                 break;
             case Direction.LEFT:
+                current_direction = Direction.LEFT;
+                _head.setX(_head.getX()-speed);
             default:
-                _head.setX(_head.getX()-1);
+
         }
     }
 
@@ -97,7 +103,12 @@ public class Trace {
     }
 
     // Getters
-    public Liste getSegments() { return segments;  }
+    public Liste getSegments() { return segments; }
+    public String getCurrent_direction() { return current_direction; }
+    public int getSpeed() {  return speed; }
+
+    // Setters
+    public void setSpeed(int speed) { this.speed = speed; }
 }
 
 /*

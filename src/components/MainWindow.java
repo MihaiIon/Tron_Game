@@ -1,9 +1,7 @@
 package components;
 
-import players.controls.Controls;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -49,7 +47,6 @@ public class MainWindow extends JFrame{
 
 
         // KeyLister Section
-        addKeyListener(new Controls());
         setFocusable(true);
         addWindowFocusListener(new WindowAdapter() {
             public void windowGainedFocus(WindowEvent e) {

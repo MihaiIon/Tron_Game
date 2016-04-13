@@ -102,10 +102,19 @@ public abstract class Joueur {
     }
 
     // Getters
+    public boolean isAlive(){ return isAlive; }
     public Trace getTrace() { return trace; }
     public Liste getSegments() { return trace.getSegments(); }
-    public boolean isAlive(){ return isAlive; }
     public Color getColor() { return couleur; }
+    public Color getPathColor() { return new Color(couleur.getRed(), couleur.getGreen(), couleur.getBlue(), 200);}
+    public Color getPathColor2(){
+        return new Color(
+                    couleur.getRed()+120   > 255 ? 255 : couleur.getRed()+120,
+                    couleur.getGreen()+120 > 255 ? 255 : couleur.getGreen()+120,
+                    couleur.getBlue()+120  > 255 ? 255 : couleur.getBlue()+120,
+                    200
+               );
+    }
     public String getDirection() { return direction_courante; }
     public Point getCurrentPosition(){
         return ((Segment)getTrace().getSegments().getLast().content).getFin();
@@ -115,4 +124,5 @@ public abstract class Joueur {
     public void killPlayer()   { isAlive = false; }
     public void revivePlayer() { isAlive = true;  }
     public void setDirection(String direction) { this.direction_courante = direction; }
+    public void setSpeed(int default_players_peed) { trace.setSpeed(default_players_peed); }
 }

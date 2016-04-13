@@ -1,7 +1,5 @@
 package components;
 
-import players.controls.Controls;
-
 import javax.swing.*;
 
 /**
@@ -10,6 +8,5 @@ import javax.swing.*;
 public class TronControlPanel extends JPanel {
 
     public TronControlPanel() {
-        addKeyListener(new Controls());
     }
 }

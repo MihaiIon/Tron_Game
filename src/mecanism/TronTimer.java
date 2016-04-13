@@ -24,18 +24,18 @@ public class TronTimer extends TimerTask {
 
     @Override
     public void run() {
-
-        if (console_info) arena.print();            // console_info == true
-
         for (Joueur player : players){
             player.getTrace().allonge(player.getDirection());
-            if (console_info) player.print(); }     // console_info == true
+            if (console_info) {
+                System.out.println();
+                player.print();
+            }
+        }     // console_info == true
 
         refresh();      // Refresh
     }
 
     // Methods
-
     /**
      * If console_info is set to true, informations about players and the arenas will be printed in the console
      * @param state : True/False

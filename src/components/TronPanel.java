@@ -1,6 +1,5 @@
 package components;
 
-import players.controls.Controls;
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,7 +17,7 @@ public class TronPanel extends JPanel{
 
         // Initialize main_panel and background
         setLayout(new BorderLayout());
-        setBackground(new Color(0, 0, 0, 0));    // Transparent
+        setOpaque(false);               // Transparent
 
         // Initialize to default size and add it to the main_panel center pane
         arena = new Arene();
@@ -28,7 +27,6 @@ public class TronPanel extends JPanel{
         control_panel = new TronControlPanel();
         add(control_panel, BorderLayout.NORTH);
 
-        addKeyListener(new Controls());
         setFocusable(true);
     }
 

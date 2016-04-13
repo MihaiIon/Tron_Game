@@ -5,7 +5,7 @@ package constant;
  */
 public class Direction {
 
-    /**
+    /*
      * Players possible directions
      */
     public static final String UP = "UP";
