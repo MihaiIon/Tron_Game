@@ -3,9 +3,12 @@ package players; /**
  */
 import java.awt.*;
 
+import components.Arene;
+import constant.Direction;
 import liste.Liste;
 import players.attributes.*;
 import players.attributes.Point;
+import players.attributes.Segment;
 
 public abstract class Joueur {
 
@@ -21,17 +24,39 @@ public abstract class Joueur {
     {
         couleur = color;
         isAlive = true;
-        trace   = new Trace();
     }
 
     public Joueur(int r, int g, int b)
     {
         couleur = new Color(r, g, b);
         isAlive = true;
-        trace   = new Trace();
     }
 
     // Methods
+    /**
+     * Generates random starting coordinates and direction for the player. This method then
+     * initializes the player's Trace at that coordinate ( Point ). The direction is chosed
+     * based on the player' starting coordinate : if the player is on the right-hand side of
+     * the arena, it's direction will be LEFT, vice versa for the left-hand side.
+     * @param arena_width : Arena's width
+     * @param arena_height : Arena's height
+     */
+    public void initializeTrace(int arena_width, int arena_height)
+    {
+        int _player_x_position  = (int)(Math.random()*(arena_width - 2*Arene.ARENA_BORDER_WIDTH))
+                                + Arene.ARENA_BORDER_WIDTH;
+        direction_courante      = _player_x_position < arena_width/2
+                                ? Direction.RIGHT
+                                : Direction.LEFT;
+
+        trace = new Trace(
+            new Point(
+                _player_x_position,
+                (int)(Math.random()*(arena_height - 2*Arene.ARENA_BORDER_WIDTH)) + Arene.ARENA_BORDER_WIDTH
+            ),
+            direction_courante
+        );
+    }
 
     /**
      * **COMPLETE THIS**
@@ -49,12 +74,31 @@ public abstract class Joueur {
      * @param ending_x : **COMPLETE THIS**
      * @param ending_y : **COMPLETE THIS**
      */
-    public void addSegment(int starting_x, int starting_y, int ending_x, int ending_y){
+    public void addSegment(int starting_x, int starting_y, int ending_x, int ending_y)
+    {
         trace.getSegments().append(
             new Segment(
-                    new Point(starting_x, starting_y),
-                    new Point(ending_x, ending_y)
-            ));
+                new Point(starting_x, starting_y),
+                new Point(ending_x, ending_y)
+            )
+        );
+    }
+
+    /**
+     * Prints object in console.
+     */
+    public void print(){ System.out.println(this); }
+
+    /**
+     * Returns players status <Player color> <Position> <Direction>
+     * @return : Player status.
+     */
+    @Override
+    public String toString() {
+        return  "Player[" + couleur.toString() + "]" +
+                "\n\t - Position (x,y) : (" + getCurrentPosition().getX() +
+                "," + getCurrentPosition().getY() + ")" +
+                "\n\t - Direction : " + direction_courante;
     }
 
     // Getters
@@ -63,6 +107,9 @@ public abstract class Joueur {
     public boolean isAlive(){ return isAlive; }
     public Color getColor() { return couleur; }
     public String getDirection() { return direction_courante; }
+    public Point getCurrentPosition(){
+        return ((Segment)getTrace().getSegments().getLast().content).getFin();
+    }
 
     // Setters
     public void killPlayer()   { isAlive = false; }

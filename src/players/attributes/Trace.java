@@ -14,9 +14,16 @@ public class Trace {
     private String current_direction;
 
     // Constructor
-    public Trace()
+
+    /**
+     * Contains the player's path and current direction. Initialized in Joueur.java.
+     * @param starting_point : Starting coordinates of the player.
+     */
+    public Trace(Point starting_point, String current_direction)
     {
-        this.segments = new ListeChainee();
+        segments = new ListeChainee();
+        segments.append(new Segment(starting_point));
+        this.current_direction = current_direction;
     }
 
     /**

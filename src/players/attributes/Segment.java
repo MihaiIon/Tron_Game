@@ -19,7 +19,7 @@ public class Segment {
     public Segment(Point starting_point)
     {
         this.debut = starting_point;
-        this.fin = starting_point;
+        this.fin = new Point(starting_point.getX(), starting_point.getY());
     }
 
     /**
