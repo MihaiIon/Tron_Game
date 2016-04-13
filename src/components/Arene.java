@@ -84,21 +84,32 @@ public class Arene extends JComponent{
         super.paintComponent(g);
         g.setColor(new Color(0, 0, 0, 220));
         g.fillRect(0, 0, getWidth(), getHeight());
+
+        System.out.println(largeur_grille);
+        System.out.println(hauteur_grille);
+
+        Liste segments;
+
         for (Joueur joueur : joueurs){
 
             g.setColor(joueur.getColor());    // Sets segments color;
-            Liste segments = joueur.getTrace().getSegments();
+            segments = joueur.getSegments();
 
-            for (int i = 0; i < joueur.getTrace().getSegments().size(); i++) {
+            for (int i = 0; i < segments.size(); i++) {
                 g.drawLine(
-                    ((Segment)((Noeud)segments.get(i)).content).getDebut().getX(),
-                    ((Segment)((Noeud)segments.get(i)).content).getDebut().getY(),
-                    ((Segment)((Noeud)segments.get(i)).content).getFin().getX(),
-                    ((Segment)((Noeud)segments.get(i)).content).getFin().getY()
+                    ((Segment)segments.get(i).content).getDebut().getX(),
+                    ((Segment)segments.get(i).content).getDebut().getY(),
+                    ((Segment)segments.get(i).content).getFin().getX(),
+                    ((Segment)segments.get(i).content).getFin().getY()
                 );
             }
         }
     }
+
+    /**
+     * Print to console the arena.
+     */
+    public void print(){ System.out.println(this); }
 
     /**
      * Sets the arena dimensions and adds borders to it.
@@ -114,4 +125,15 @@ public class Arene extends JComponent{
     public int getHauteur_grille() { return hauteur_grille; }
     public boolean isMultiplayer() { return multiplayer;    }
     public Joueur[] getPlayers()   { return joueurs;        }
+
+    /**
+     *  Arena toString override method
+     */
+    @Override
+    public String toString(){
+        String _outprut = "Arena Info :"
+                + "\n\tWidth : " + largeur_grille
+                + "\n\tHeight : " + hauteur_grille;
+        return _outprut + "\n\tNumber of Players : " + getPlayers().length;
+    }
 }

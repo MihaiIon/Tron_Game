@@ -9,18 +9,26 @@ public class Tron {
     public static void main(String[] args)
     {
         MainWindow window = new MainWindow();
-        window.getArena().getPlayers()[0].getTrace().getSegments().append(new Segment(new Point(20, 50), new Point(2000, 50)));
-        window.getArena().getPlayers()[0].getTrace().getSegments().append(new Segment(new Point(20, 100), new Point(2000, 100)));
-        window.getArena().getPlayers()[0].getTrace().getSegments().append(new Segment(new Point(20, 200), new Point(2000, 200)));
-        window.getArena().getPlayers()[0].getTrace().getSegments().append(new Segment(new Point(20, 300), new Point(2000, 300)));
-        window.getArena().getPlayers()[0].getTrace().getSegments().append(new Segment(new Point(20, 400), new Point(2000, 400)));
-        window.refresh();
+        GameManager GM = new GameManager(window.getTronPanel());
         window.pack();
-        window.getArena().getPlayers()[1].getTrace().getSegments().append(new Segment(new Point(20, 50), new Point(2000, 50)));
-        window.getArena().getPlayers()[1].getTrace().getSegments().append(new Segment(new Point(20, 100), new Point(2000, 120)));
-        window.getArena().getPlayers()[1].getTrace().getSegments().append(new Segment(new Point(20, 200), new Point(2000, 200)));
-        window.getArena().getPlayers()[1].getTrace().getSegments().append(new Segment(new Point(20, 300), new Point(2000, 300)));
-        window.getArena().getPlayers()[1].getTrace().getSegments().append(new Segment(new Point(20, 400), new Point(2000, 400)));
-        window.refresh();
+
+        // TESTS SEGMENTS
+        GM.getPlayers()[0].addSegment(20, 50, 100, 50);
+        GM.getPlayers()[0].addSegment(20, 100, 400, 100);
+        GM.getPlayers()[1].addSegment(20, 200, 150, 200);
+        GM.getPlayers()[0].addSegment(20, 300);
+        GM.getPlayers()[0].addSegment(20, 400);
+        GM.getArena().print();
+
+        // TESTS NEW ARENA
+        /*
+        GM.createNewArena(400, 400, true);
+        GM.getArena().print();
+        GM.getPlayers()[0].addSegment(20, 50, 100, 50);
+        GM.getPlayers()[2].addSegment(20, 100, 400, 100);
+        GM.getPlayers()[1].addSegment(20, 200, 150, 200);
+        GM.getPlayers()[0].addSegment(20, 300);
+        GM.getPlayers()[0].addSegment(20, 400);
+        GM.getArena().print();*/
     }
 }

@@ -3,7 +3,6 @@ package players.attributes;
 import constant.Direction;
 import liste.Liste;
 import liste.ListeChainee;
-import liste.Noeud;
 
 /**
  * Created by farlyprj on 16-04-06.
@@ -28,29 +27,27 @@ public class Trace {
      */
     public void allonge(String direction)
     {
-        Point head = tete();
+        Point _head = tete();
         if (!current_direction.equals(direction)){
             segments.append(
-                    new Segment(
-                        new Point(head.getX(),head.getY()),
-                        new Point(head.getX(),head.getY())
-                ));
-            head = tete();
+                new Segment( new Point(_head.getX(),_head.getY()))
+            );
+            _head = tete();
         }
 
         switch(direction){
             case Direction.UP:
-                head.setY(head.getY()+1);
+                _head.setY(_head.getY()+1);
                 break;
             case Direction.RIGHT:
-                head.setX(head.getX()+1);
+                _head.setX(_head.getX()+1);
                 break;
             case Direction.DOWN:
-                head.setY(head.getY()-1);
+                _head.setY(_head.getY()-1);
                 break;
             case Direction.LEFT:
             default:
-                head.setX(head.getX()-1);
+                _head.setX(_head.getX()-1);
         }
     }
 
@@ -58,7 +55,7 @@ public class Trace {
      * Provides the coordinate ( Point ) corresponding to the player's current position.
      * @return
      */
-    private Point tete() { return ((Segment)((Noeud)segments.getLast()).content).getFin(); }
+    private Point tete() { return ((Segment)segments.getLast().content).getFin(); }
 
     /**
      * Checks if the Point p is on a segment by comparing it's coordinates to each segments. If the Point p
@@ -69,21 +66,21 @@ public class Trace {
      */
     public boolean contient(Point p)
     {
-        Segment segment;
+        Segment _segment;
         for (int i=0; i<segments.size();i++){
-            segment = (Segment)((Noeud)segments.get(i)).content;
-            if (segment.getDebut().getX() == segment.getFin().getX()){  // ... if segment is vertical
-                if (p.getX() == segment.getDebut().getX() && (
-                        p.getY() <= Math.max(segment.getDebut().getY(), segment.getFin().getY()) &&
-                        p.getY() >= Math.min(segment.getDebut().getY(), segment.getFin().getY())
+            _segment = (Segment)segments.get(i).content;
+            if (_segment.getDebut().getX() == _segment.getFin().getX()){  // ... if _segment is vertical
+                if (p.getX() == _segment.getDebut().getX() && (
+                        p.getY() <= Math.max(_segment.getDebut().getY(), _segment.getFin().getY()) &&
+                        p.getY() >= Math.min(_segment.getDebut().getY(), _segment.getFin().getY())
                         )) return true;
 
                 else continue;
             }
-            else{                                                       // ... else : segment is horizontal
-                if (p.getY() == segment.getDebut().getY() && (
-                        p.getX() <= Math.max(segment.getDebut().getX(), segment.getFin().getX()) &&
-                        p.getY() >= Math.min(segment.getDebut().getX(), segment.getFin().getX())
+            else{                                                       // ... else : _segment is horizontal
+                if (p.getY() == _segment.getDebut().getY() && (
+                        p.getX() <= Math.max(_segment.getDebut().getX(), _segment.getFin().getX()) &&
+                        p.getY() >= Math.min(_segment.getDebut().getX(), _segment.getFin().getX())
                 )) return true;
 
                 else continue;

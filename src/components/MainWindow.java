@@ -14,14 +14,57 @@ import java.awt.event.WindowEvent;
 public class MainWindow extends JFrame{
 
     // Attributes
-    private JLabel background;
+    private BackgroundPanel background;
     private TronPanel main_panel;
 
     /**
-     * Creates the main window of the application.
+     * Creates the main window of the application/game. It contains the TronPanel.
      * @throws HeadlessException
      */
     public MainWindow() throws HeadlessException
+    {
+        // Set Basic attributs
+        setTitle("Tron Game");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+
+                /*// Initialize main_panel and background
+                main_panel = new TronPanel();
+                setLayout(new GridBagLayout());
+                add(main_panel);*/
+
+                // Initialize main_panel and background
+                main_panel = new TronPanel();
+                background = new BackgroundPanel(main_panel, new ImageIcon("res/background.jpg"));
+
+                // Set background
+                setContentPane(background);
+                setLayout(new GridBagLayout());
+                setBackground(Color.black);
+
+                // Just for refresh : So image can be refreshed before the programs opens
+                setSize(399,399);
+                setSize(400,400);
+                setResizable(false);    // Resize = false
+
+
+        // KeyLister Section
+        addKeyListener(new Controls());
+        setFocusable(true);
+        addWindowFocusListener(new WindowAdapter() {
+            public void windowGainedFocus(WindowEvent e) {
+                main_panel.getArena().requestFocusInWindow();
+            }
+        });
+    }
+
+    // Getters
+    public TronPanel getTronPanel() { return main_panel; }
+}
+
+
+/*
+public MainWindow() throws HeadlessException
     {
         // Set Basic attributs
         setTitle("Tron Game");
@@ -29,34 +72,26 @@ public class MainWindow extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
 
-        // Initialize main_panel and background
-        main_panel = new TronPanel();
-        background = new JLabel(new ImageIcon("res/background.jpg"));
-        background.setLayout(new BorderLayout());
-        background.add(main_panel);
+                    // Initialize main_panel and background
+                    main_panel = new TronPanel();
+                    background = new BackgroundPanel(main_panel, new ImageIcon("res/background.jpg"));
 
-        // Set background
-        setLayout(new BorderLayout());  // image full size
-        setContentPane(background);
-        setLayout(new FlowLayout());
-        setBackground(Color.black);
+                    // Set background
+                    setContentPane(background);
+                    setLayout(new GridBagLayout());
+                    setBackground(Color.black);
 
-        // Just for refresh : So image can be refreshed before the programs opens
-        setSize(399,399);
-        setSize(400,400);
+                    // Just for refresh : So image can be refreshed before the programs opens
+                    setSize(399,399);
+                    setSize(400,400);
 
         // KeyLister Section
         addKeyListener(new Controls());
         setFocusable(true);
         addWindowFocusListener(new WindowAdapter() {
             public void windowGainedFocus(WindowEvent e) {
-                getArena().requestFocusInWindow();
+                main_panel.getArena().requestFocusInWindow();
             }
         });
     }
-
-    public void refresh(){ main_panel.getArena().repaint(); }
-
-    // Getters
-    public Arene getArena() { return main_panel.getArena(); }
-}
+ */

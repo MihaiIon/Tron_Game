@@ -74,21 +74,21 @@ public class ListeChainee implements Liste{
 	 /**
 	 * Returns first Element
 	 **/
-	 public Object getFirst(){ return premier; }
+	 public Noeud getFirst(){ return premier; }
 	 
 	 /**
 	 * Returns last Element
 	 **/
-	 public Object getLast(){ return dernier; }
+	 public Noeud getLast(){ return dernier; }
 	 
 	 /**
 	 * Removes first Element and returns it
 	 **/
-	 public Object removeFirst() 
+	 public Noeud removeFirst()
 	 { 
 		 Noeud first = new Noeud();
 		 first.content = premier.content;
-		 premier = (Noeud) premier.next;
+		 premier = premier.next;
 		 size--;
 		 return first;
 	 }
@@ -96,16 +96,16 @@ public class ListeChainee implements Liste{
 	 /**
 	 * Returns the Element at the index : position.
 	 **/
-	 public Object get(int position) throws ArrayIndexOutOfBoundsException
+	 public Noeud get(int position) throws ArrayIndexOutOfBoundsException
 	 {
 		 if(position < 0 || position >= size) throw new ArrayIndexOutOfBoundsException();
 		 else{
 			 int i = 0;
-			 Object currentNode = premier;
+			 Noeud currentNode = premier;
 			 while( i != position)
 			 {
 				 i++;
-				 currentNode = ((Noeud)currentNode).next;
+				 currentNode = currentNode.next;
 			 }
 			 return currentNode;
 		 }
@@ -117,9 +117,9 @@ public class ListeChainee implements Liste{
 	 public void set(int position, Object o) throws ArrayIndexOutOfBoundsException
 	 {
 		 Noeud newNode = new Noeud();
-	 	newNode.content = o;    //nodeTS =  as in node to set
-	 	newNode.next = ((Noeud)get(position)).next; //cNode = current node
-	 	((Noeud)get(position-1)).next = newNode;
+	 	 newNode.content = o;    //nodeTS =  as in node to set
+	 	 newNode.next = get(position).next; //cNode = current node
+	 	 get(position-1).next = newNode;
 	 }
 	 
 	 /**
@@ -130,12 +130,12 @@ public class ListeChainee implements Liste{
 		 String output = "ListeChainee[ ";
 	 
 		 int i = 0;
-		 Object currentNode = premier;
+		 Noeud currentNode = premier;
 		 while( i != size)
 		 {
 			 i++;
-			 output += ( ((Noeud)currentNode).content + ", ");
-			 currentNode = ((Noeud)currentNode).next;
+			 output += (currentNode.content + ", ");
+			 currentNode = currentNode.next;
 		 }
 		 return output.substring(0, output.length()-2) + " ]";
 	 }

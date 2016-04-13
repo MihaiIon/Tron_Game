@@ -1,11 +1,8 @@
 package components;
 
 import players.controls.Controls;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 /**
  * Created by Mihai-A on 08/04/2016.
@@ -38,4 +35,20 @@ public class TronPanel extends JPanel{
     // Getters
     public Arene getArena() { return arena; }
     public TronControlPanel getControlPanel(){ return control_panel; }
+
+    // Setters
+    /**
+     * **COMPLETE THIS**
+     * @param newArena : **COMPLETE THIS**
+     */
+    public void setArena(Arene newArena){
+
+        remove(arena);      // Remove current arena
+        arena = newArena;   // **COMPLETE THIS**
+
+        // Adds new arena to Layout
+        add(arena, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
 }

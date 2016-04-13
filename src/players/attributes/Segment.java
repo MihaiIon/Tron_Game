@@ -11,10 +11,26 @@ public class Segment {
     private Point fin;
 
     // Constructor
-    public Segment(Point debut, Point fin)
+
+    /**
+     * **COMPLETE THIS**
+     * @param starting_point : **COMPLETE THIS**
+     */
+    public Segment(Point starting_point)
     {
-        this.debut = debut;
-        this.fin = fin;
+        this.debut = starting_point;
+        this.fin = starting_point;
+    }
+
+    /**
+     * **COMPLETE THIS**
+     * @param starting_point : **COMPLETE THIS**
+     * @param ending_point : **COMPLETE THIS**
+     */
+    public Segment(Point starting_point, Point ending_point)
+    {
+        this.debut = starting_point;
+        this.fin = ending_point;
     }
 
     // Getters
