@@ -1,14 +1,18 @@
 package components;
 
 import liste.Liste;
-import liste.Noeud;
 import players.ComputerPlayer;
 import players.HumanPlayer;
 import players.Joueur;
+import players.attributes.Point;
 import players.attributes.Segment;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
+import java.awt.Dimension;
 import java.awt.geom.Line2D;
 
 /**
@@ -85,6 +89,27 @@ public class Arene extends JComponent{
     }
 
     // Methods
+
+    /**
+     * **COMPLETE THIS**
+     * @param player_current_coordinates : **COMPLETE THIS**
+     * @return : **COMPLETE THIS**
+     */
+    public boolean isNotInArena(Point player_current_coordinates){
+        return  player_current_coordinates.getX() > largeur_grille - ARENA_BORDER_WIDTH  ||
+                player_current_coordinates.getY() > largeur_grille - ARENA_BORDER_WIDTH  ||
+                player_current_coordinates.getX() < ARENA_BORDER_WIDTH ||
+                player_current_coordinates.getY() < ARENA_BORDER_WIDTH;
+    }
+
+    public boolean isPlayerInCollision(Point player_current_position, Point player_last_position){
+        for(Joueur player : joueurs)
+            if (player.getTrace().contient(player_current_position, player_last_position))
+                return true;
+
+        return false;
+    }
+
     /**
      * Initializes every player's Trace.
      */
@@ -96,7 +121,7 @@ public class Arene extends JComponent{
 
     /**
      * On paint, this methods draws all segments related to all players.
-     * @param g
+     * @param g : **COMPLETE THIS**
      */
     @Override
     public void paintComponent(Graphics g)
@@ -149,7 +174,7 @@ public class Arene extends JComponent{
 
     /**
      * Sets the arena dimensions and adds borders to it.
-     * @return
+     * @return : **COMPLETE THIS**
      */
     private void setBackgroundAndBorders(){
         setPreferredSize(new Dimension(largeur_grille, hauteur_grille));

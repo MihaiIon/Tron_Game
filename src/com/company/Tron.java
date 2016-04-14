@@ -1,6 +1,7 @@
 package com.company;
 
 import components.MainWindow;
+import constant.Direction;
 import constant.RefreshRate;
 import mecanism.GameManager;
 import mecanism.TronTimer;
@@ -23,10 +24,10 @@ public class Tron {
         //GM.createNewArena(600, 600, true);
 
         // TEST SPEED
-        //GM.setDefaultPlayersSpeed(3);
+        GM.setDefaultPlayersSpeed(3);
 
         // TESTS SLOWER_DEBUG_MODE
-        //GM.setRefreshRate(RefreshRate.SLOWER_DEBUG_MODE);
+        GM.setRefreshRate(RefreshRate.FPS_30);
 
         // TEST START
         GM.start();

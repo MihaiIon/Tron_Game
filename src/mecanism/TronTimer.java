@@ -3,6 +3,8 @@ package mecanism;
 import components.Arene;
 import components.TronPanel;
 import players.Joueur;
+import players.attributes.Point;
+
 import java.util.TimerTask;
 
 /**
@@ -14,6 +16,7 @@ public class TronTimer extends TimerTask {
     private Joueur[] players;
     private TronPanel tron_panel;
     private boolean console_info;
+    private Point last_position;
 
     // Constructor
     public TronTimer(TronPanel tron_panel) {
@@ -25,12 +28,26 @@ public class TronTimer extends TimerTask {
     @Override
     public void run() {
         for (Joueur player : players){
-            player.getTrace().allonge(player.getDirection());
-            if (console_info) {
-                System.out.println();
-                player.print();
+            if (player.isAlive()) {
+
+                last_position = new Point(
+                    player.getCurrentPosition().getX(),
+                    player.getCurrentPosition().getY()
+                );
+
+                player.getTrace().allonge(player.getDirection());
+
+                if (arena.isNotInArena(player.getCurrentPosition()) ||
+                    arena.isPlayerInCollision(player.getCurrentPosition(), last_position))
+                        player.kill();
+
             }
-        }     // console_info == true
+        }
+
+        if (console_info && players[0].isAlive()) {
+            System.out.println();
+            players[0].print();
+        }
 
         refresh();      // Refresh
     }

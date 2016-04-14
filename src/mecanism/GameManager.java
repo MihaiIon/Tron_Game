@@ -119,33 +119,62 @@ public class GameManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()){
-            case KeyEvent.VK_W:
-                System.out.println("Player_1 : Up");
-                break;
-            case KeyEvent.VK_D:
-                System.out.println("Player_1 : RIGHT");
-                break;
-            case KeyEvent.VK_S:
-                System.out.println("Player_1 : DOWN");
-                break;
-            case KeyEvent.VK_A:
-                System.out.println("Player_1 : LEFT");
-                break;
-            case KeyEvent.VK_UP:
-                System.out.println("Player_2 : Up");
-                break;
-            case KeyEvent.VK_RIGHT:
-                System.out.println("Player_2 : RIGHT");
-                break;
-            case KeyEvent.VK_DOWN:
-                System.out.println("Player_2 : DOWN");
-                break;
-            case KeyEvent.VK_LEFT:
-                System.out.println("Player_2 : LEFT");
-                break;
-            default:
+
+        /*
+            First Player Controls
+
+        ***************************************************/
+
+        if (players[0].isAlive()){
+            switch (e.getKeyCode()){
+                case KeyEvent.VK_W:
+                    if (!players[0].getDirection().equals( Direction.UP ) && !Direction.isOpposite(players[0].getDirection(), Direction.UP)){
+                        players[0].setDirection(Direction.UP); }
+                    break;
+                case KeyEvent.VK_D:
+                    if (!players[0].getDirection().equals( Direction.RIGHT ) && !Direction.isOpposite(players[0].getDirection(), Direction.RIGHT)){
+                        players[0].setDirection(Direction.RIGHT); }
+                    break;
+                case KeyEvent.VK_S:
+                    if (!players[0].getDirection().equals( Direction.DOWN ) && !Direction.isOpposite(players[0].getDirection(), Direction.DOWN)){
+                        players[0].setDirection(Direction.DOWN); }
+                    break;
+                case KeyEvent.VK_A:
+                    if (!players[0].getDirection().equals( Direction.LEFT ) && !Direction.isOpposite(players[0].getDirection(), Direction.LEFT)){
+                        players[0].setDirection(Direction.LEFT); }
+                    break;
+                default:
+            }
         }
+
+
+        /*
+            Second Player Controls
+
+         ***************************************************/
+
+        if (arena.isMultiplayer() && players[1].isAlive()){
+            switch (e.getKeyCode()){
+                case KeyEvent.VK_UP:
+                    if (!players[1].getDirection().equals( Direction.UP ) && !Direction.isOpposite(players[1].getDirection(), Direction.UP)){
+                        players[1].setDirection(Direction.UP); }
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    if (!players[1].getDirection().equals( Direction.RIGHT ) && !Direction.isOpposite(players[1].getDirection(), Direction.RIGHT)){
+                        players[1].setDirection(Direction.RIGHT); }
+                    break;
+                case KeyEvent.VK_DOWN:
+                    if (!players[1].getDirection().equals( Direction.DOWN ) && !Direction.isOpposite(players[1].getDirection(), Direction.DOWN)){
+                        players[1].setDirection(Direction.DOWN); }
+                    break;
+                case KeyEvent.VK_LEFT:
+                    if (!players[1].getDirection().equals( Direction.LEFT ) && !Direction.isOpposite(players[1].getDirection(), Direction.LEFT)){
+                        players[1].setDirection(Direction.LEFT); }
+                    break;
+                default:
+            }
+        }
+
     }
 
     @Override

@@ -121,8 +121,8 @@ public abstract class Joueur {
     }
 
     // Setters
-    public void killPlayer()   { isAlive = false; }
-    public void revivePlayer() { isAlive = true;  }
+    public void kill()   { isAlive = false; System.out.println("player is dead"); }
+    public void revive() { isAlive = true;  }
     public void setDirection(String direction) { this.direction_courante = direction; }
     public void setSpeed(int default_players_peed) { trace.setSpeed(default_players_peed); }
 }
