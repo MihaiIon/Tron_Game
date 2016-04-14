@@ -8,7 +8,6 @@ import players.Joueur;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.DirectColorModel;
 import java.util.Timer;
 
 /**
@@ -107,6 +106,7 @@ public class GameManager implements KeyListener {
         for (Joueur player : players)  player.setSpeed(default_players_peed);
     }
 
+
     /*
      ************************************************************
 
@@ -114,6 +114,7 @@ public class GameManager implements KeyListener {
 
      ************************************************************
      ************************************************************/
+
     @Override
     public void keyTyped(KeyEvent e) { }
 
@@ -143,6 +144,9 @@ public class GameManager implements KeyListener {
                     if (!players[0].getDirection().equals( Direction.LEFT ) && !Direction.isOpposite(players[0].getDirection(), Direction.LEFT)){
                         players[0].setDirection(Direction.LEFT); }
                     break;
+                case KeyEvent.VK_SPACE:
+                    if (!players[0].isBoosting()) players[0].boost();
+                    break;
                 default:
             }
         }
@@ -170,6 +174,9 @@ public class GameManager implements KeyListener {
                 case KeyEvent.VK_LEFT:
                     if (!players[1].getDirection().equals( Direction.LEFT ) && !Direction.isOpposite(players[1].getDirection(), Direction.LEFT)){
                         players[1].setDirection(Direction.LEFT); }
+                    break;
+                case KeyEvent.VK_NUMPAD0:
+                    if (!players[1].isBoosting())  players[1].boost();
                     break;
                 default:
             }

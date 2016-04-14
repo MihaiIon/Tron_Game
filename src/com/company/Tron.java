@@ -20,7 +20,7 @@ public class Tron {
 
         GM.getArena().print();
 
-        // TESTS NEW ARENA
+        // TESTS NEW ARENA + multiplayer
         //GM.createNewArena(600, 600, true);
 
         // TEST SPEED

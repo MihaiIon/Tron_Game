@@ -157,7 +157,7 @@
 		l'extrémité du dernier segment pour le rallonger, ou ajouter un nouveau 
 		segment si il y a changement de direction par rapport au dernier.</li>
 		<li class="fait">une méthode <strong>Point tete()</strong> qui retournera le point correspondant à la tête de cette trace.</li>
-		<li class="fait-mais">une méthode <strong>boolean</strong> <strong>contient(Point p)</strong> pour vérifier si la trace (reliant tous les segments), passe par ce point.</li>
+		<li class="fait">une méthode <strong>boolean</strong> <strong>contient(Point p)</strong> pour vérifier si la trace (reliant tous les segments), passe par ce point.</li>
 		<li class="fait">Ces méthodes vous permettront de facilement vérifier quand la tête d'une trace heurte une trace (une autre trace, ou elle même)</li>
 		</ul>
 		</li>
@@ -170,14 +170,14 @@
 		<li class="fait"la <em>nouvelle_direction</em> dans laquelle il veut/va faire son prochain pas au prochain tick d'horloge.</li>
 		</ul>
 		</li>
-		<li>une classe <strong>Arene</strong> qui sera une sous-classe de JComponent et qui servira à définir votre propre composant graphique qui s'occupera de <span style="text-decoration: underline;">dessiner</span> l'arène de jeu et les traces des joueurs. Cette classe devra notamment avoir:
+		<li  class="fait">une classe <strong>Arene</strong> qui sera une sous-classe de JComponent et qui servira à définir votre propre composant graphique qui s'occupera de <span style="text-decoration: underline;">dessiner</span> l'arène de jeu et les traces des joueurs. Cette classe devra notamment avoir:
 		<ul>
 		<li class="fait">des propriétés int <em>largeur_grille</em> et <em>hauteur_grille</em> contenant les dimensions de la grille virtuelle (un constructeur par défaut pourra les initialiser par défaut à 500x500)</li>
 		<li class="fait">une propriété Joueur[] <em>joueurs</em>; pour contenir la trace des joueurs.</li>
 		<li class="non">optionellement une propriété Trace enceinte représentant l'enceinte
 		de l'arène (vous pouvez aussi gérer l'enceinte d'une autre manière si 
 		vous voulez).</li>
-		<li><span class="fait-mais"><span style="line-height: 1.4;">vous devrez redéfinir la méthode </span><strong style="line-height: 1.4;">paintComponent</strong></span><span style="line-height: 1.4;"><span class="fait-mais">
+		<li class="fait"><span class="fait"><span style="line-height: 1.4;">vous devrez redéfinir la méthode </span><strong style="line-height: 1.4;">paintComponent</strong></span><span style="line-height: 1.4;"><span class="fait">
 		 (définie dans JComponent) pour qu'elle dessine l'arène de jeu et son 
 		contenu (le mur d'enceinte et toutes les traces des joueurs) <em>au complet</em> à chaque fois qu'elle est appelée. Le code de cette méthode devra bien sûr se baser sur les dimensions de la <em>grille de jeu virtuelle</em>, et sur les &nbsp;informations contenues dans la <em>Trace</em>
 		 de chaque joueur (couleur, et coordonnées dans la grille vitruelle)</span>. <div class="non">Et
@@ -211,10 +211,10 @@
 		bouton pause/redémarrage pourrait agir. À chaque tick d'horloge de ce 
 		timer, vous devriez:</p>
 		<ul>
-		<li><span class="fait">faire avancer</span> d'un pas dans la bonne direction toutes les traces des joueurs encore en vie</li>
-		<li>détecter si la tête d'une trace heurte un mur, et si oui indiquer 
-		que le joueur en question est mort (et faire en sorte qu'il n'avance 
-		plus).</li>
+		<li  class="fait"><span class="fait">faire avancer</span> d'un pas dans la bonne direction toutes les traces des joueurs encore en vie</li>
+		<li<span  class="fait">détecter si la tête d'une trace heurte un mur</span  class="fait">, et si oui indiquer
+		que le joueur en question est mort <span>(et faire en sorte qu'il n'avance
+		plus).</span></li>
 		<li class="fait">scheduler un redessin de l'arène (en appelant <strong>repaint()</strong> ).</li>
 		</ul>
 		<p>Autres points importants:</p>
@@ -224,7 +224,7 @@
 		W,S,Z,A pour le joueur 1 et I,K,M,J pour le joueur 2)</span>. Votre interface 
 		graphique doit clairement afficher quelles sont les touches de 
 		direction. </li>
-		<li>Au moment de débuter une partie, la position et direction initiale de déplacement de chaque joueur est choisie au hasard.</li>
+		<li  class="fait">Au moment de débuter une partie, la position et direction initiale de déplacement de chaque joueur est choisie au hasard.</li>
 		<li class="fait">L'interface graphique se fera à l'aide de la librairie Swing.</li>
 		</ul>
 		<p></p>
@@ -262,7 +262,7 @@
 		});</pre>
 		</li>
 		<li  class="fait">Vérifiez que les caractères appuyés sont bien affichés dans la console quand vous appuyez sur une touche dans votre arène de jeu.</li>
-		<li>Vous n'aurez alors plus qu'à modifier légèrement votre méthode <strong>keyTyped </strong>pour qu'au lieu d'afficher la touche sur la console, elle résulte en un changement de direction du joueur (quand le joueur appuie sur une touche de direction valide, correspondant à un changement de direction)</li><li class="non"><strong>Recommandations:</strong> appuyer sur une touche ne déplace pas sur le champ le joueur dans cette direction. Cela devrait simplement modifier la propriété <em>nouvelle_direction</em> du joueur, et c'est seulement au prochain tick d'horloge qu'un pas sera fait dans cette nouvelle direction, qui deviendra sa direction courante. Aussi ignorez les commandes de changement de direction si elles vont dans le sens opposée de sa direction courante (ex: il va vers l'Est et appuie sur la touche pour aller vers l'Ouest) car cette maladresse courante se traduirait en une mort immédiate du joueur.</li>
+		<li  class="fait">Vous n'aurez alors plus qu'à modifier légèrement votre méthode <strong>keyTyped </strong>pour qu'au lieu d'afficher la touche sur la console, elle résulte en un changement de direction du joueur (quand le joueur appuie sur une touche de direction valide, correspondant à un changement de direction)</li><li class="non"><strong>Recommandations:</strong> appuyer sur une touche ne déplace pas sur le champ le joueur dans cette direction. Cela devrait simplement modifier la propriété <em>nouvelle_direction</em> du joueur, et c'est seulement au prochain tick d'horloge qu'un pas sera fait dans cette nouvelle direction, qui deviendra sa direction courante. Aussi ignorez les commandes de changement de direction si elles vont dans le sens opposée de sa direction courante (ex: il va vers l'Est et appuie sur la touche pour aller vers l'Ouest) car cette maladresse courante se traduirait en une mort immédiate du joueur.</li>
 		</ul></ol></ol>
 
 	</div></div></div></div></section></div></div></div></div></body></html>

@@ -2,6 +2,8 @@ package players; /**
  * Created by farlyprj on 16-04-06.
  */
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import components.Arene;
 import constant.Direction;
@@ -14,7 +16,8 @@ public abstract class Joueur {
 
     // Attributs
     private Trace trace;
-    private boolean isAlive;
+    private boolean boost;
+    private boolean alive;
     private Color couleur;
     private String direction_courante;
     private String nouvelle_direction; // WHY
@@ -23,13 +26,14 @@ public abstract class Joueur {
     public Joueur(Color color)
     {
         couleur = color;
-        isAlive = true;
+        alive = true;
+        boost = false;
     }
 
     public Joueur(int r, int g, int b)
     {
         couleur = new Color(r, g, b);
-        isAlive = true;
+        alive = true;
     }
 
     // Methods
@@ -85,6 +89,30 @@ public abstract class Joueur {
     }
 
     /**
+     * Activates the boost and calls boostDuration() which sets a Timer to cancel the boost process after
+     * a certain amount of time.
+     */
+    public void boost(){
+        boost = true;
+        setSpeed(10);
+        boostDuration(this);
+    }
+
+    /**
+     * Cancel the boost after a certain amount of time.
+     * @param player : The current player using the boost.
+     */
+    private static void boostDuration(Joueur player){
+        new Timer().schedule(new TimerTask(){
+            @Override
+            public void run() {
+                player.setBoost(false);
+            }
+        }, 400);
+
+    }
+
+    /**
      * Prints object in console.
      */
     public void print(){ System.out.println(this); }
@@ -102,7 +130,8 @@ public abstract class Joueur {
     }
 
     // Getters
-    public boolean isAlive(){ return isAlive; }
+    public boolean isAlive(){ return alive; }
+    public boolean isBoosting() { return boost; }
     public Trace getTrace() { return trace; }
     public Liste getSegments() { return trace.getSegments(); }
     public Color getColor() { return couleur; }
@@ -121,8 +150,12 @@ public abstract class Joueur {
     }
 
     // Setters
-    public void kill()   { isAlive = false; System.out.println("player is dead"); }
-    public void revive() { isAlive = true;  }
+    public void kill()   { alive = false; System.out.println("player is dead"); }
+    public void revive() { alive = true;  }
     public void setDirection(String direction) { this.direction_courante = direction; }
     public void setSpeed(int default_players_peed) { trace.setSpeed(default_players_peed); }
+    public void setBoost(boolean isBoosting) {
+        boost = isBoosting;
+        setSpeed(3);
+    }
 }

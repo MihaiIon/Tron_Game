@@ -94,8 +94,19 @@ public class Trace {
                 if (isTargetValueInBetween(p.getX(), _segment.getDebut().getX(), last_position.getX()) &&
                     isTargetValueInBetween(_segment.getDebut().getY(), p.getY(), _segment.getFin().getY())){
 
-                    if((p == ((Segment)segments.getLast().content).getFin())) return i != segments.size()-2;
-                    else return true;
+                    if((p == ((Segment)segments.getLast().content).getFin())){
+                        if (i != segments.size()-2){
+                            p.setX(_segment.getDebut().getX());
+                            return true;}
+
+                        else return false;
+
+                    }
+
+                    else{
+                        p.setX(_segment.getDebut().getX());
+                        return true;
+                    }
                 }
 
             } else {                                                       // ... else : _segment is horizontal
@@ -103,8 +114,20 @@ public class Trace {
                 if (isTargetValueInBetween(p.getY(), _segment.getDebut().getY(), last_position.getY()) &&
                     isTargetValueInBetween(_segment.getDebut().getX(), p.getX(), _segment.getFin().getX())) {
 
-                    if((p == ((Segment)segments.getLast().content).getFin())) return i != segments.size()-2;
-                    else return true;
+                    if((p == ((Segment)segments.getLast().content).getFin())){
+
+                        if (i != segments.size()-2){
+                            p.setY(_segment.getDebut().getY());
+                            return true;
+                        }
+
+                        else return false;
+                    }
+
+                    else {
+                        p.setY(_segment.getDebut().getY());
+                        return true;
+                    }
                 }
             }
         }
