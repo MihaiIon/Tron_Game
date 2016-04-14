@@ -11,17 +11,19 @@ import java.util.Timer;
 
 public class Tron {
 
+    public static GameManager GM;
+
     public static void main(String[] args)
     {
         MainWindow window = new MainWindow();
-        GameManager GM = new GameManager(window.getTronPanel());
+        GM = new GameManager(window.getTronPanel());
         window.addKeyListener(GM);
         window.pack();
 
         GM.getArena().print();
 
         // TESTS NEW ARENA + multiplayer
-        //GM.createNewArena(600, 600, true);
+        GM.createNewArena(300, 500, true, false);
 
         // TEST SPEED
         GM.setDefaultPlayersSpeed(3);

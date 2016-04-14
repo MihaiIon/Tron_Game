@@ -24,7 +24,7 @@ public class Trace {
         segments = new ListeChainee();
         segments.append(new Segment(starting_point));
         this.current_direction = current_direction;
-        this.movement_speed = 1;
+        this.movement_speed = 3;
     }
 
     /**

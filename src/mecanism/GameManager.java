@@ -35,7 +35,7 @@ public class GameManager implements KeyListener {
         this.tron_panel = tron_panel;
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
-        tron_timer = new TronTimer(tron_panel);
+        tron_timer = new TronTimer(players);
         refresh_rate = RefreshRate.FPS_30;
     }
 
@@ -51,14 +51,18 @@ public class GameManager implements KeyListener {
     public void pause(){ timer.cancel(); }
 
     /**
-     * Creates a new arena with Default settings : < width : 500 > < height : 500 >.
-     * Then replaces the main arena.
+     * If the settings are the same on replay, it keeps the same Arena and only resets the players.
+     * Else, it creates a whole new Arena.
      */
-    public void createNewArena(){
-        tron_panel.setArena(new Arene());
-        arena = tron_panel.getArena();
-        players = tron_panel.getArena().getPlayers();
-        tron_timer = new TronTimer(tron_panel);
+    public void replay(int arena_width, int arena_height, boolean multiplayer, boolean computer_player)
+    {
+        if (arena_width == arena.getLargeur_grille() && arena_height == arena.getHauteur_grille() &&
+            multiplayer == arena.isMultiplayer() && computer_player == arena.isComputerPlayer())
+                arena.revivePlayers();
+
+        else createNewArena(arena_width, arena_height, multiplayer, computer_player);
+
+        start();
     }
 
     /**
@@ -67,26 +71,24 @@ public class GameManager implements KeyListener {
      * @param height : Height of the arena. < MIN : **COMPLETE THIS**> < MAX : **COMPLETE THIS**>
      * @param multiplayer : Is the game multiplayer ( Two players + Computer ) or not.
      */
-    public void createNewArena(int width, int height, boolean multiplayer){
-        tron_panel.setArena(new Arene(width, height, multiplayer));
+    public void createNewArena(int width, int height, boolean multiplayer, boolean computer_player){
+        tron_panel.setArena(new Arene(width, height, multiplayer, computer_player));
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
-        tron_timer = new TronTimer(tron_panel);
+        tron_timer = new TronTimer(players);
     }
 
     // Getters
     public Arene getArena() { return arena; }
     public Joueur[] getPlayers() { return players; }
+    public boolean isConsoleInfoON() { return console_info; }
 
     // Setters
     /**
      * If console_info is set to true, informations about players will be printed in the console
      * @param state : True/False
      */
-    public void setConsoleInfo(boolean state){
-        console_info = state;
-        tron_timer.setConsoleInfo(state);
-    }
+    public void setConsoleInfo(boolean state){ console_info = state; }
 
     /**
      * Sets the rate at which the game will refresh it's content. Setting it to SLOWER_DEBUG_MODE
@@ -120,6 +122,26 @@ public class GameManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+
+
+        /*
+            General Controls
+
+        ***************************************************/
+
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_R:     // Reset Game
+                replay(arena.getLargeur_grille(), arena.getHauteur_grille(), true, false);
+                break;
+            case KeyEvent.VK_P:     // Pause Game
+                pause();
+                break;
+            case KeyEvent.VK_U:     // Start Game
+                start();
+                break;
+            default:
+        }
+
 
         /*
             First Player Controls
