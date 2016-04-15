@@ -10,6 +10,7 @@ public class TronPanel extends JPanel{
 
     // Attributes
     private Arene arena;
+    private ArenaContainer arena_container;
     private TronControlPanel control_panel;
 
     // Constructor
@@ -18,11 +19,12 @@ public class TronPanel extends JPanel{
         // Initialize main_panel and background
         setBorder(BorderFactory.createLineBorder(Color.black, 10));
         setLayout(new BorderLayout());
-        setOpaque(false);               // Transparent
+        setOpaque(false);    // Transparent
 
         // Initialize to default size and add it to the main_panel center pane
         arena = new Arene();
-        add(arena, BorderLayout.CENTER);
+        arena_container = new ArenaContainer(arena);
+        add(arena_container, BorderLayout.CENTER);
 
         // Add TronControlePanel to Top pane
         control_panel = new TronControlPanel();
@@ -38,15 +40,17 @@ public class TronPanel extends JPanel{
     // Setters
     /**
      * **COMPLETE THIS**
-     * @param newArena : **COMPLETE THIS**
+     * @param new_arena : **COMPLETE THIS**
      */
-    public void setArena(Arene newArena){
+    public void setArena(Arene new_arena){
+        // Remove current arena
+        arena_container.removeArena();
 
-        remove(arena);      // Remove current arena
-        arena = newArena;   // **COMPLETE THIS**
+        // Set new Arena
+        arena_container.setArena(new_arena);
+        arena = arena_container.getArena();
 
         // Adds new arena to Layout
-        add(arena, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
