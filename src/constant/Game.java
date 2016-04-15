@@ -22,4 +22,7 @@ public class Game {
     public static final int PLAYERS_DEFAULT_SPEED = 3;
     public static final int PLAYERS_BOOST_SPEED = 10;
     public static final int PLAYERS_BOOST_DURATION = 400;
+    public static final Color PLAYER_1_COLOR = new Color(251, 158, 17);
+    public static final Color PLAYER_2_COLOR = new Color(96, 197, 226);
+    public static final Color COMPUTER_COLOR = new Color(255, 35, 65);
 }

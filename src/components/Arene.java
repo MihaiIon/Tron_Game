@@ -1,5 +1,6 @@
 package components;
 
+import constant.Game;
 import liste.Liste;
 import players.ComputerPlayer;
 import players.HumanPlayer;
@@ -48,12 +49,11 @@ public class Arene extends JComponent{
         background_grid = generateBackgroundGrid();
         setBackgroundAndBorders();
         setOpaque(false);
-        setBackground(new Color(0, 0, 0, 0));
 
         // Players
         joueurs = new Joueur[]{
-            new HumanPlayer(new Color(251, 158, 17)),   // Custom Orange : rgb(251, 158, 17)
-            new ComputerPlayer(new Color(255, 35, 65))  // Custom Red : rgb (255, 35, 65)
+            new HumanPlayer(Game.PLAYER_1_COLOR),
+            new ComputerPlayer(Game.COMPUTER_COLOR)
         };
 
         initializePlayersTrace();
@@ -141,19 +141,19 @@ public class Arene extends JComponent{
     public void configurePlayers(boolean multiplayer, boolean computer_player){
         if (multiplayer && computer_player)
             joueurs = new Joueur[]{
-                    new HumanPlayer(new Color(251, 158, 17)),   // Custom Orange : (251, 158, 17)
-                    new HumanPlayer(new Color(96, 197, 226)),   // Custom Cyan   : rgb(96, 197, 226)
-                    new ComputerPlayer(new Color(255, 35, 65))
+                    new HumanPlayer(Game.PLAYER_1_COLOR),
+                    new HumanPlayer(Game.PLAYER_2_COLOR),
+                    new ComputerPlayer(Game.COMPUTER_COLOR)
             };
         else if(multiplayer)
             joueurs = new Joueur[]{
-                    new HumanPlayer(new Color(251, 158, 17)),   // Custom Orange : (251, 158, 17)
-                    new HumanPlayer(new Color(96, 197, 226)),   // Custom Cyan   : rgb(96, 197, 226)
+                    new HumanPlayer(Game.PLAYER_1_COLOR),
+                    new HumanPlayer(Game.PLAYER_2_COLOR)
             };
         else
             joueurs = new Joueur[]{
-                    new HumanPlayer(new Color(251, 158, 17)),   // Custom Orange : rgb(251, 158, 17)
-                    new ComputerPlayer(new Color(255, 35, 65))  // Custom Red : rgb (255, 35, 65)
+                    new HumanPlayer(Game.PLAYER_1_COLOR),
+                    new ComputerPlayer(Game.COMPUTER_COLOR)
             };
     }
 
@@ -192,12 +192,12 @@ public class Arene extends JComponent{
     {
         // Fills the background
         super.paintComponent(g);
-        g.setColor(new Color(0, 0, 0, 200));
+        g.setColor(new Color(0, 0, 0, 150));
         g.fillRect(0, 0, getWidth(), getHeight());
         Graphics2D line = (Graphics2D) g;
 
         // Draws grid
-        line.setColor(new Color(255, 255, 255, 20));
+        line.setColor(new Color(255, 255, 255, 12));
         line.setStroke(new BasicStroke(2));
         for (Segment _segment : background_grid){
             line.draw(new Line2D.Float(                                  // Draw player Path

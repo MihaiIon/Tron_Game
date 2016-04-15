@@ -58,37 +58,3 @@ public class MainWindow extends JFrame{
     // Getters
     public TronPanel getTronPanel() { return main_panel; }
 }
-
-
-/*
-public MainWindow() throws HeadlessException
-    {
-        // Set Basic attributs
-        setTitle("Tron Game");
-        //setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-
-                    // Initialize main_panel and background
-                    main_panel = new TronPanel();
-                    background = new BackgroundPanel(main_panel, new ImageIcon("res/background.jpg"));
-
-                    // Set background
-                    setContentPane(background);
-                    setLayout(new GridBagLayout());
-                    setBackground(Color.black);
-
-                    // Just for refresh : So image can be refreshed before the programs opens
-                    setSize(399,399);
-                    setSize(400,400);
-
-        // KeyLister Section
-        addKeyListener(new Controls());
-        setFocusable(true);
-        addWindowFocusListener(new WindowAdapter() {
-            public void windowGainedFocus(WindowEvent e) {
-                main_panel.getArena().requestFocusInWindow();
-            }
-        });
-    }
- */
