@@ -15,11 +15,11 @@ import java.io.IOException;
  */
 public class TronControlPanel extends JPanel {
 
-    private static final Color backgroundColor = new Color(14,14,14);
+    private static final Color backgroundColor = new Color(15,15,15);
     public TronControlPanel() {
 
         //Caracteristique
-        setPreferredSize(new Dimension(420,500));
+        setPreferredSize(new Dimension(450,500));
         setBackground(backgroundColor);
         setLayout(new BorderLayout());
 
@@ -36,6 +36,7 @@ public class TronControlPanel extends JPanel {
     public JPanel initializeNorth()
     {
         JPanel _north = new JPanel();
+        _north.setPreferredSize(new Dimension(450,120));
         JLabel _title = new JLabel("Tron");
         _north.add(_title);
         _north. setBackground(backgroundColor);
@@ -44,10 +45,10 @@ public class TronControlPanel extends JPanel {
     public JPanel initializeEast() throws IOException {
         JPanel _east = new JPanel();
         _east.setBackground(backgroundColor);
-        _east.setPreferredSize(new Dimension(210,250));
+        _east.setPreferredSize(new Dimension(225,210));
         //Image 1
-        BufferedImage Player1Control = ImageIO.read(new File("res/controls.jpg"));
-        JLabel picLabel1 = new JLabel(new ImageIcon(Player1Control.getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
+        BufferedImage Player1Control = ImageIO.read(new File("res/controls.png"));
+        JLabel picLabel1 = new JLabel(new ImageIcon(Player1Control.getScaledInstance(210, 195, Image.SCALE_DEFAULT)));
         _east.add(picLabel1);
 
         //return
@@ -57,7 +58,7 @@ public class TronControlPanel extends JPanel {
     {
         JPanel _west = new JPanel();
         _west.setBackground(backgroundColor);
-        _west.setPreferredSize(new Dimension(210,250));
+        _west.setPreferredSize(new Dimension(225,210));
 
         //GAMETYPE
         JLabel _gameTypeTitle = new JLabel("Game Type");
@@ -80,6 +81,9 @@ public class TronControlPanel extends JPanel {
         });
         _arenaSize.setBackground(backgroundColor);
 
+        //Start button
+        JButton _start =  new JButton("START");
+
         //ADDS
         _west.add(_gameTypeTitle);
         _west.add(_gameType);
@@ -87,6 +91,7 @@ public class TronControlPanel extends JPanel {
         _west.add(_playerSpeed);
         _west.add(_arenaSizeTitle);
         _west.add(_arenaSize);
+        _west.add(_start);
 
         //return
         return _west;
@@ -95,6 +100,8 @@ public class TronControlPanel extends JPanel {
     public JPanel initializeSouth()
     {
         JPanel _south = new JPanel();
+        _south.setBackground(backgroundColor);
+        _south.setPreferredSize(new Dimension(450,170));
         return _south;
     }
 }
