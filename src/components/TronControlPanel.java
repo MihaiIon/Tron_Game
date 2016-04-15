@@ -4,6 +4,7 @@ import jdk.nashorn.internal.scripts.JO;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
@@ -62,28 +63,38 @@ public class TronControlPanel extends JPanel {
 
         //GAMETYPE
         JLabel _gameTypeTitle = new JLabel("Game Type");
+        _gameTypeTitle.setForeground(Color.white);
         JComboBox _gameType = new JComboBox(new String[]{
                 "Human vs Human","Human vs Computer", "H vs H vs Computer"
         });
-        _gameType.setBackground(backgroundColor);
+        _gameType.setPreferredSize(new Dimension(200,20));
+        _gameType.setBackground(Color.white);
 
         //Player Speed
         JLabel _playerSpeedTitle = new JLabel("Players speed");
+        _playerSpeedTitle.setForeground(Color.white);
         JComboBox _playerSpeed = new JComboBox(new String[]{
-                "1","2", "3"
+                "             1","             2", "             3"
         });
-        _playerSpeed.setBackground(backgroundColor);
+        _playerSpeed.setPreferredSize(new Dimension(112,20));
+        _playerSpeed.setBackground(Color.white);
 
         //Arena Size
         JLabel _arenaSizeTitle = new JLabel("Arena Size");
+        _arenaSizeTitle.setForeground(Color.white);
         JComboBox _arenaSize = new JComboBox(new String[]{
                 "Small","Medium", "Big"
         });
-        _arenaSize.setBackground(backgroundColor);
+        _arenaSize.setPreferredSize(new Dimension(132,20));
+        _arenaSize.setBackground(Color.white);
 
+/*
         //Start button
         JButton _start =  new JButton("START");
-
+        _start.setBackground(new Color(57,163,157));
+        _start.setPreferredSize(new Dimension(220,50));
+        _start.setForeground(Color.white);
+*/
         //ADDS
         _west.add(_gameTypeTitle);
         _west.add(_gameType);
@@ -91,7 +102,7 @@ public class TronControlPanel extends JPanel {
         _west.add(_playerSpeed);
         _west.add(_arenaSizeTitle);
         _west.add(_arenaSize);
-        _west.add(_start);
+        //_west.add(_start);
 
         //return
         return _west;
