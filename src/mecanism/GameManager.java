@@ -22,6 +22,7 @@ public class GameManager implements KeyListener {
     private TronTimer tron_timer;
     private boolean console_info;
     private int refresh_rate;
+    private int players_alive;
 
     // Static Attributes
     private static final Timer timer = new Timer();
@@ -35,6 +36,7 @@ public class GameManager implements KeyListener {
         this.tron_panel = tron_panel;
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
+        players_alive = players.length;
         tron_timer = new TronTimer(players);
         refresh_rate = RefreshRate.FPS_30;
     }
@@ -58,7 +60,10 @@ public class GameManager implements KeyListener {
     {
         if (arena_width == arena.getLargeur_grille() && arena_height == arena.getHauteur_grille() &&
             multiplayer == arena.isMultiplayer() && computer_player == arena.isComputerPlayer())
-                arena.revivePlayers();
+        {
+            arena.revivePlayers();
+            players_alive = players.length;
+        }
 
         else createNewArena(arena_width, arena_height, multiplayer, computer_player);
 
@@ -75,6 +80,7 @@ public class GameManager implements KeyListener {
         tron_panel.setArena(new Arene(width, height, multiplayer, computer_player));
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
+        players_alive = players.length;
         tron_timer = new TronTimer(players);
     }
 
@@ -209,3 +215,9 @@ public class GameManager implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) { }
 }
+
+    //ALTERNATIVE TO ENDGAME... with a nbOfAlivePlayers
+    /*public void EndGame()
+    * { if(nbOfAlivePLayers == 1) endgame
+    *   else( nbOfAlivePLayers--)
+    * }*/

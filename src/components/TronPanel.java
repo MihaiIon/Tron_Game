@@ -25,7 +25,7 @@ public class TronPanel extends JPanel{
 
         // Add TronControlePanel to Top pane
         control_panel = new TronControlPanel();
-        add(control_panel, BorderLayout.NORTH);
+        add(control_panel, BorderLayout.EAST);
 
         setFocusable(true);
     }

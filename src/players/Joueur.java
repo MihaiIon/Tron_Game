@@ -21,6 +21,7 @@ public abstract class Joueur {
     private Color couleur;
     private String direction_courante;
     private String nouvelle_direction; // WHY
+    //private int nb_of_boost;
 
     // Constructors
     public Joueur(Color color)
@@ -150,7 +151,7 @@ public abstract class Joueur {
     }
 
     // Setters
-    public void kill()   { alive = false; System.out.println("player is dead"); }
+    public void kill()   { alive = false;/*GameManager.endGame()*/ System.out.println("player is dead"); }
     public void revive() { alive = true;  }
     public void setDirection(String direction) { this.direction_courante = direction; }
     public void setSpeed(int default_players_peed) { trace.setSpeed(default_players_peed); }
