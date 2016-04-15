@@ -1,6 +1,7 @@
 package players.attributes;
 
 import constant.Direction;
+import constant.Game;
 import liste.Liste;
 import liste.ListeChainee;
 
@@ -24,7 +25,7 @@ public class Trace {
         segments = new ListeChainee();
         segments.append(new Segment(starting_point));
         this.current_direction = current_direction;
-        this.movement_speed = 3;
+        this.movement_speed = Game.PLAYERS_DEFAULT_SPEED;
     }
 
     /**

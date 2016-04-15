@@ -16,6 +16,7 @@ public class TronPanel extends JPanel{
     public TronPanel() {
 
         // Initialize main_panel and background
+        setBorder(BorderFactory.createLineBorder(Color.black, 10));
         setLayout(new BorderLayout());
         setOpaque(false);               // Transparent
 

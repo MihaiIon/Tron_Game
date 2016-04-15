@@ -22,7 +22,7 @@ public class GameManager implements KeyListener {
     private TronTimer tron_timer;
     private boolean console_info;
     private int refresh_rate;
-    private int players_alive;
+    private int players_alive;  // Numbers of players alive
 
     // Static Attributes
     private static final Timer timer = new Timer();
@@ -68,6 +68,17 @@ public class GameManager implements KeyListener {
         else createNewArena(arena_width, arena_height, multiplayer, computer_player);
 
         start();
+    }
+
+    /**
+     * **COMPLETE THIS**
+     * @param multiplayer : **COMPLETE THIS**
+     * @param computer_player : **COMPLETE THIS**
+     */
+    public void reConfigurePlayers(boolean multiplayer, boolean computer_player){
+        arena.configurePlayers(multiplayer, computer_player);
+        players = arena.getPlayers();
+        tron_timer = new TronTimer(players);
     }
 
     /**
@@ -125,10 +136,8 @@ public class GameManager implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) { }
-
     @Override
     public void keyPressed(KeyEvent e) {
-
 
         /*
             General Controls

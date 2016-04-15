@@ -65,6 +65,7 @@ public class Arene extends JComponent{
      * @param width : **COMPLETE THIS**
      * @param height : **COMPLETE THIS**
      * @param multiplayer : **COMPLETE THIS**
+     * @param computer_player : **COMPLETE THIS**
      */
     public Arene(int width, int height, boolean multiplayer, boolean computer_player)
     {
@@ -79,23 +80,7 @@ public class Arene extends JComponent{
         setBackground(new Color(0, 0, 0, 0));
 
         // Players
-        if (multiplayer && computer_player)
-            joueurs = new Joueur[]{
-                new HumanPlayer(new Color(251, 158, 17)),   // Custom Orange : (251, 158, 17)
-                new HumanPlayer(new Color(96, 197, 226)),   // Custom Cyan   : rgb(96, 197, 226)
-                new ComputerPlayer(new Color(255, 35, 65))
-            };
-        else if(multiplayer)
-            joueurs = new Joueur[]{
-                    new HumanPlayer(new Color(251, 158, 17)),   // Custom Orange : (251, 158, 17)
-                    new HumanPlayer(new Color(96, 197, 226)),   // Custom Cyan   : rgb(96, 197, 226)
-            };
-        else
-            joueurs = new Joueur[]{
-                new HumanPlayer(new Color(251, 158, 17)),   // Custom Orange : rgb(251, 158, 17)
-                new ComputerPlayer(new Color(255, 35, 65))  // Custom Red : rgb (255, 35, 65)
-            };
-
+        configurePlayers(multiplayer, computer_player);
         initializePlayersTrace();
     }
 
@@ -146,6 +131,30 @@ public class Arene extends JComponent{
             player.revive();
             player.initializeTrace(largeur_grille, hauteur_grille);
         }
+    }
+
+    /**
+     * **COMPLETE THIS**
+     * @param multiplayer : **COMPLETE THIS**
+     * @param computer_player : **COMPLETE THIS**
+     */
+    public void configurePlayers(boolean multiplayer, boolean computer_player){
+        if (multiplayer && computer_player)
+            joueurs = new Joueur[]{
+                    new HumanPlayer(new Color(251, 158, 17)),   // Custom Orange : (251, 158, 17)
+                    new HumanPlayer(new Color(96, 197, 226)),   // Custom Cyan   : rgb(96, 197, 226)
+                    new ComputerPlayer(new Color(255, 35, 65))
+            };
+        else if(multiplayer)
+            joueurs = new Joueur[]{
+                    new HumanPlayer(new Color(251, 158, 17)),   // Custom Orange : (251, 158, 17)
+                    new HumanPlayer(new Color(96, 197, 226)),   // Custom Cyan   : rgb(96, 197, 226)
+            };
+        else
+            joueurs = new Joueur[]{
+                    new HumanPlayer(new Color(251, 158, 17)),   // Custom Orange : rgb(251, 158, 17)
+                    new ComputerPlayer(new Color(255, 35, 65))  // Custom Red : rgb (255, 35, 65)
+            };
     }
 
     /**

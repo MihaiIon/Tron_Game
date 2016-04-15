@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import components.Arene;
 import constant.Direction;
+import constant.Game;
 import liste.Liste;
 import players.attributes.*;
 import players.attributes.Point;
@@ -95,7 +96,7 @@ public abstract class Joueur {
      */
     public void boost(){
         boost = true;
-        setSpeed(10);
+        setSpeed(Game.PLAYERS_BOOST_SPEED);
         boostDuration(this);
     }
 
@@ -109,7 +110,7 @@ public abstract class Joueur {
             public void run() {
                 player.setBoost(false);
             }
-        }, 400);
+        }, Game.PLAYERS_BOOST_DURATION);
 
     }
 
@@ -139,11 +140,11 @@ public abstract class Joueur {
     public Color getPathColor() { return new Color(couleur.getRed(), couleur.getGreen(), couleur.getBlue(), 200);}
     public Color getPathColor2(){
         return new Color(
-                    couleur.getRed()+120   > 255 ? 255 : couleur.getRed()+120,
-                    couleur.getGreen()+120 > 255 ? 255 : couleur.getGreen()+120,
-                    couleur.getBlue()+120  > 255 ? 255 : couleur.getBlue()+120,
-                    200
-               );
+            couleur.getRed()+120   > 255 ? 255 : couleur.getRed()+120,
+            couleur.getGreen()+120 > 255 ? 255 : couleur.getGreen()+120,
+            couleur.getBlue()+120  > 255 ? 255 : couleur.getBlue()+120,
+            200
+        );
     }
     public String getDirection() { return direction_courante; }
     public Point getCurrentPosition(){
@@ -157,6 +158,6 @@ public abstract class Joueur {
     public void setSpeed(int default_players_peed) { trace.setSpeed(default_players_peed); }
     public void setBoost(boolean isBoosting) {
         boost = isBoosting;
-        setSpeed(3);
+        setSpeed(Game.PLAYERS_DEFAULT_SPEED);
     }
 }
