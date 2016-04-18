@@ -3,6 +3,7 @@ package mecanism;
 import components.Arene;
 import components.TronPanel;
 import constant.Direction;
+import constant.Game;
 import constant.RefreshRate;
 import players.Joueur;
 
@@ -19,13 +20,13 @@ public class GameManager implements KeyListener {
     private Arene arena;
     private Joueur[] players;
     private TronPanel tron_panel;
-    private TronTimer tron_timer;
     private boolean console_info;
     private int refresh_rate;
-    private int players_alive;  // Numbers of players alive
 
-    // Static Attributes
-    private static final Timer timer = new Timer();
+    // Game flow variables
+    private Timer timer;
+    private String game_state;
+    private int players_alive;  // Numbers of players alive
 
     // Constructor
     /**
@@ -37,7 +38,6 @@ public class GameManager implements KeyListener {
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
         players_alive = players.length;
-        tron_timer = new TronTimer(players);
         refresh_rate = RefreshRate.FPS_30;
     }
 
@@ -45,12 +45,22 @@ public class GameManager implements KeyListener {
     /**
      * Starts the game. This method uses a timer to move forward each player ( frame-by-frame ).
      */
-    public void start(){ timer.scheduleAtFixedRate(tron_timer, 0, refresh_rate); }
+    public void start(){
+        if (timer != null) timer.cancel();
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TronTimer(players), 0, refresh_rate);
+        game_state = Game.IN_PROGRESS;
+    }
 
     /**
      * Pauses the game. Players movements are stopped.
      */
     public void pause(){ timer.cancel(); }
+
+    /**
+     * Resumes the game. Players start moving again from current position.
+     */
+    public void resume(){ start(); }
 
     /**
      * If the settings are the same on replay, it keeps the same Arena and only resets the players.
@@ -78,7 +88,6 @@ public class GameManager implements KeyListener {
     public void reConfigurePlayers(boolean multiplayer, boolean computer_player){
         arena.configurePlayers(multiplayer, computer_player);
         players = arena.getPlayers();
-        tron_timer = new TronTimer(players);
     }
 
     /**
@@ -92,7 +101,6 @@ public class GameManager implements KeyListener {
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
         players_alive = players.length;
-        tron_timer = new TronTimer(players);
     }
 
     // Getters
@@ -138,24 +146,6 @@ public class GameManager implements KeyListener {
     public void keyTyped(KeyEvent e) { }
     @Override
     public void keyPressed(KeyEvent e) {
-
-        /*
-            General Controls
-
-        ***************************************************/
-
-        switch (e.getKeyCode()){
-            case KeyEvent.VK_R:     // Reset Game
-                replay(arena.getLargeur_grille(), arena.getHauteur_grille(), true, false);
-                break;
-            case KeyEvent.VK_P:     // Pause Game
-                pause();
-                break;
-            case KeyEvent.VK_U:     // Start Game
-                start();
-                break;
-            default:
-        }
 
 
         /*
@@ -222,7 +212,38 @@ public class GameManager implements KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) { }
+    public void keyReleased(KeyEvent e) {
+
+        /*
+            General Controls
+
+        ***************************************************/
+
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_R:                                 // Reset Game
+
+                replay(arena.getLargeur_grille(), arena.getHauteur_grille(), true, false);
+                break;
+
+            case KeyEvent.VK_P:
+
+                if (game_state.equals(Game.IN_PROGRESS)) {      // Pause Game
+                    game_state = Game.PAUSED;
+                    pause(); }
+
+                else if (game_state.equals(Game.PAUSED)){       // Resume Game
+                    resume(); }
+                break;
+
+            case KeyEvent.VK_U:
+
+                start();                                        // Start Game
+                break;
+
+            default:
+        }
+
+    }
 }
 
     //ALTERNATIVE TO ENDGAME... with a nbOfAlivePlayers
