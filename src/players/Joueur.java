@@ -9,6 +9,7 @@ import components.Arene;
 import constant.Direction;
 import constant.Game;
 import liste.Liste;
+import mecanism.GameManager;
 import players.attributes.*;
 import players.attributes.Point;
 import players.attributes.Segment;
@@ -152,12 +153,15 @@ public abstract class Joueur {
     }
 
     // Setters
-    public void kill()   { alive = false;/*GameManager.endGame()*/ System.out.println("player is dead"); }
-    public void revive() { alive = true;  }
     public void setDirection(String direction) { this.direction_courante = direction; }
     public void setSpeed(int default_players_peed) { trace.setSpeed(default_players_peed); }
     public void setBoost(boolean isBoosting) {
         boost = isBoosting;
         setSpeed(Game.PLAYERS_DEFAULT_SPEED);
+    }
+    public void revive() { alive = true;  }
+    public void kill(){
+        alive = false;
+        GameManager.killPlayer();
     }
 }

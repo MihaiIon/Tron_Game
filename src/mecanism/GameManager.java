@@ -5,6 +5,7 @@ import components.TronPanel;
 import constant.Direction;
 import constant.Game;
 import constant.RefreshRate;
+import players.HumanPlayer;
 import players.Joueur;
 
 import java.awt.event.KeyEvent;
@@ -18,15 +19,15 @@ public class GameManager implements KeyListener {
 
     // Attributs
     private Arene arena;
-    private Joueur[] players;
     private TronPanel tron_panel;
     private boolean console_info;
-    private int refresh_rate;
+    private static int refresh_rate;
 
     // Game flow variables
-    private Timer timer;
-    private String game_state;
-    private int players_alive;  // Numbers of players alive
+    private static Timer timer;
+    private static String game_state;
+    private static int players_alive_count;
+    private static Joueur[] players;
 
     // Constructor
     /**
@@ -37,7 +38,7 @@ public class GameManager implements KeyListener {
         this.tron_panel = tron_panel;
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
-        players_alive = players.length;
+        players_alive_count = players.length;
         refresh_rate = RefreshRate.FPS_30;
     }
 
@@ -45,22 +46,45 @@ public class GameManager implements KeyListener {
     /**
      * Starts the game. This method uses a timer to move forward each player ( frame-by-frame ).
      */
-    public void start(){
+    public static void start(){
         if (timer != null) timer.cancel();
         timer = new Timer();
-        timer.scheduleAtFixedRate(new TronTimer(players), 0, refresh_rate);
+        timer.scheduleAtFixedRate(new TronTimer(), 0, refresh_rate);
         game_state = Game.IN_PROGRESS;
     }
 
     /**
      * Pauses the game. Players movements are stopped.
      */
-    public void pause(){ timer.cancel(); }
+    public static void pause(){ timer.cancel(); }
 
     /**
-     * Resumes the game. Players start moving again from current position.
+     * Resumes the game if there'a game in progress ( players are alive ). Players start moving again from current position.
      */
-    public void resume(){ start(); }
+    public static void resume(){ if(game_state.equals(Game.NULL)) start(); }
+
+    /**
+     * **COMPLETE THIS**
+     * @param winner : **COMPLETE THIS**
+     */
+    public static void endGame(Joueur winner){
+
+        pause();
+        GameManager.game_state = Game.NULL;
+
+        int _human_player_counter = 0;
+
+        for (Joueur player: players){
+            if (player instanceof HumanPlayer){
+                _human_player_counter++;
+                if (player == winner)
+                    System.out.println("Player " + _human_player_counter + " won!");
+            }
+
+            else if (player == winner)
+                System.out.println("Computer won!");
+        }
+    }
 
     /**
      * If the settings are the same on replay, it keeps the same Arena and only resets the players.
@@ -72,7 +96,7 @@ public class GameManager implements KeyListener {
             multiplayer == arena.isMultiplayer() && computer_player == arena.isComputerPlayer())
         {
             arena.revivePlayers();
-            players_alive = players.length;
+            GameManager.players_alive_count = players.length;
         }
 
         else createNewArena(arena_width, arena_height, multiplayer, computer_player);
@@ -100,13 +124,15 @@ public class GameManager implements KeyListener {
         tron_panel.setArena(new Arene(width, height, multiplayer, computer_player));
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
-        players_alive = players.length;
+        GameManager.players_alive_count = players.length;
     }
 
     // Getters
     public Arene getArena() { return arena; }
-    public Joueur[] getPlayers() { return players; }
     public boolean isConsoleInfoON() { return console_info; }
+    public String getGameState() { return game_state; }
+    public static Joueur[] getPlayers() { return players; }
+    public static int getPlayersAliveCount() { return players_alive_count; }
 
     // Setters
     /**
@@ -132,6 +158,11 @@ public class GameManager implements KeyListener {
     public void setDefaultPlayersSpeed(int default_players_peed){
         for (Joueur player : players)  player.setSpeed(default_players_peed);
     }
+
+    /**
+     * Diminish players_alive by one.
+     */
+    public static void killPlayer(){ players_alive_count--; }
 
 
     /*
@@ -245,9 +276,3 @@ public class GameManager implements KeyListener {
 
     }
 }
-
-    //ALTERNATIVE TO ENDGAME... with a nbOfAlivePlayers
-    /*public void EndGame()
-    * { if(nbOfAlivePLayers == 1) endgame
-    *   else( nbOfAlivePLayers--)
-    * }*/

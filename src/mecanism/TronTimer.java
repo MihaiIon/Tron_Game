@@ -11,18 +11,17 @@ import java.util.TimerTask;
  */
 public class TronTimer extends TimerTask {
 
-    private Joueur[] players;
     private Point last_position;
 
     // Constructor
-    public TronTimer(Joueur[] players) {
-        this.players = players;
-    }
+    public TronTimer(){}
 
     @Override
     public void run() {
-        for (Joueur player : players){
+        for (Joueur player : GameManager.getPlayers()){
             if (player.isAlive()) {
+
+                if (GameManager.getPlayersAliveCount() == 1) GameManager.endGame(player);
 
                 last_position = new Point(
                     player.getCurrentPosition().getX(),
@@ -37,9 +36,9 @@ public class TronTimer extends TimerTask {
             }
         }
 
-        if (Tron.GM.isConsoleInfoON() && players[0].isAlive()) {
+        if (Tron.GM.isConsoleInfoON() && GameManager.getPlayers()[0].isAlive()) {
             System.out.println();
-            players[0].print();
+            GameManager.getPlayers()[0].print();
         }
 
         refresh();      // Refresh Arena
