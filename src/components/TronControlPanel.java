@@ -1,5 +1,6 @@
 package components;
 
+import com.sun.deploy.panel.ControlPanel;
 import constant.Game;
 import jdk.nashorn.internal.scripts.JO;
 import mecanism.GameManager;
@@ -22,6 +23,7 @@ public class TronControlPanel extends JPanel {
 
     private JPanel title_panel;
     private JPanel parametersPane;
+    private BorderLayout tron_control_panel_layout;
 
     public TronControlPanel() {
 
@@ -29,6 +31,7 @@ public class TronControlPanel extends JPanel {
         setPreferredSize(Game.TRON_CONTROL_PANEL_DIMESIONS);
         setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
         setLayout(new BorderLayout());
+        tron_control_panel_layout = (BorderLayout)getLayout();
 
         //Features
         initializeTitlePanel();
@@ -112,7 +115,7 @@ public class TronControlPanel extends JPanel {
         _gameType.setBackground(Color.white);
         _gameType.setForeground(Color.lightGray);
         _gameType.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
-
+        
         //Add Gametype
         _gameType_list.add(_gameTypeTitle);
         _gameType_list.add(_gameType);
@@ -178,9 +181,11 @@ public class TronControlPanel extends JPanel {
     public JPanel initializeButtons()
     {
         JPanel _playButtons = new JPanel();
+        _playButtons.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
 
         //Start Button
         JPanel _startButton = new JPanel();
+        _startButton.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
         JButton _start = new JButton("START");
         _start.addActionListener(
                 e ->{
@@ -201,17 +206,21 @@ public class TronControlPanel extends JPanel {
         _pButton.addActionListener(
                 e -> {
 
-                    if(GameManager.getGameState() != null)
-                    {
-                        System.out.println("Play pressed");
-                        _pButton.setText("PAUSE");
-                        GameManager.resume();
-                    }
-                    else
+                    if(GameManager.getGameState().equals(Game.NULL)){_pButton.setText("PAUSE");}
+
+                    else if(GameManager.getGameState().equals(Game.IN_PROGRESS))
                     {
                         System.out.println("Pause pressed");
                         _pButton.setText("PLAY");
                         GameManager.pause();
+                        System.out.println(GameManager.getGameState());
+                    }
+                    else if (GameManager.getGameState().equals(Game.PAUSED))
+                    {
+                        System.out.println("Play pressed");
+                        _pButton.setText("PAUSE");
+                        GameManager.resume();
+                        System.out.println(GameManager.getGameState());
                     }
                 }
         );
@@ -233,6 +242,12 @@ public class TronControlPanel extends JPanel {
         _south.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
         _south.setPreferredSize(new Dimension(450,30));
         JButton controls = new JButton("");
+        controls.addActionListener(
+                e ->{
+                    tron_control_panel_layout.removeLayoutComponent(tron_control_panel_layout.getLayoutComponent(BorderLayout.CENTER));
+                    tron_control_panel_layout.addLayoutComponent(new JButton("YOLO"), BorderLayout.CENTER);
+                });
+
         controls.setText("<HTML><FONT color=\"#39A39D\"><U>Voir les Contrôles</U></FONT></HTML>");
         controls.setHorizontalAlignment(SwingConstants.RIGHT);
         controls.setBorderPainted(false);

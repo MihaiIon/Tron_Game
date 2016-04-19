@@ -40,6 +40,7 @@ public class GameManager implements KeyListener {
         players = tron_panel.getArena().getPlayers();
         players_alive_count = players.length;
         refresh_rate = RefreshRate.FPS_30;
+        game_state = Game.NULL;
     }
 
     // Methods
@@ -56,12 +57,23 @@ public class GameManager implements KeyListener {
     /**
      * Pauses the game. Players movements are stopped.
      */
-    public static void pause(){ timer.cancel(); }
+    public static void pause()
+    {
+        game_state = Game.PAUSED;
+        timer.cancel();
+
+    }
 
     /**
      * Resumes the game if there'a game in progress ( players are alive ). Players start moving again from current position.
      */
-    public static void resume(){ if(game_state.equals(Game.NULL)) start(); }
+    public static void resume()
+    {
+        if(game_state.equals(Game.PAUSED)){
+            game_state = Game.IN_PROGRESS;
+            start();
+        }
+    }
 
     /**
      * **COMPLETE THIS**
@@ -259,7 +271,6 @@ public class GameManager implements KeyListener {
             case KeyEvent.VK_P:
 
                 if (game_state.equals(Game.IN_PROGRESS)) {      // Pause Game
-                    game_state = Game.PAUSED;
                     pause(); }
 
                 else if (game_state.equals(Game.PAUSED)){       // Resume Game
