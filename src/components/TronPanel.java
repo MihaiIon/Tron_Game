@@ -1,5 +1,7 @@
 package components;
 
+import components.subcomponents.ArenaContainer;
+
 import javax.swing.*;
 import java.awt.*;
 

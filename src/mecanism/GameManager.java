@@ -1,13 +1,13 @@
 package mecanism;
 
 import components.Arene;
+import components.TronControlPanel;
 import components.TronPanel;
 import constant.Direction;
 import constant.Game;
 import constant.RefreshRate;
 import players.HumanPlayer;
 import players.Joueur;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Timer;
@@ -20,6 +20,7 @@ public class GameManager implements KeyListener {
     // Attributs
     private static Arene arena;
     private static TronPanel tron_panel;
+    private static TronControlPanel tron_control_panel;
     private boolean console_info;
     private static int refresh_rate;
 
@@ -36,6 +37,7 @@ public class GameManager implements KeyListener {
      */
     public GameManager(TronPanel tron_panel) {
         GameManager.tron_panel = tron_panel;
+        tron_control_panel = tron_panel.getControlPanel();
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
         players_alive_count = players.length;
@@ -61,7 +63,6 @@ public class GameManager implements KeyListener {
     {
         game_state = Game.PAUSED;
         timer.cancel();
-
     }
 
     /**
@@ -81,21 +82,26 @@ public class GameManager implements KeyListener {
      */
     public static void endGame(Joueur winner){
 
-        pause();
+        // End game
+        timer.cancel();
         GameManager.game_state = Game.NULL;
 
-        int _human_player_counter = 0;
+        // Winner
+        String _winner = null;
 
+        // Find winner
+        int _human_player_counter = 0;
         for (Joueur player: players){
             if (player instanceof HumanPlayer){
                 _human_player_counter++;
-                if (player == winner)
-                    System.out.println("Player " + _human_player_counter + " won!");
+                if (player == winner) {
+                    _winner = "Player " + _human_player_counter;
+                    break;
+                }
             }
-
-            else if (player == winner)
-                System.out.println("Computer won!");
         }
+
+        tron_control_panel.displayWinner(_winner == null ? "Computer" : _winner);
     }
 
     /**
@@ -104,6 +110,8 @@ public class GameManager implements KeyListener {
      */
     public static void replay(int arena_width, int arena_height, boolean multiplayer, boolean computer_player)
     {
+        tron_control_panel.stopDisplayingWinner();
+
         if (arena_width == arena.getLargeur_grille() && arena_height == arena.getHauteur_grille() &&
                 multiplayer == arena.isMultiplayer() && computer_player == arena.isComputerPlayer())
         {
@@ -263,23 +271,20 @@ public class GameManager implements KeyListener {
         ***************************************************/
 
         switch (e.getKeyCode()){
-            case KeyEvent.VK_R:                                 // Reset Game
+            case KeyEvent.VK_R:                                     // Reset Game
 
                 replay(arena.getLargeur_grille(), arena.getHauteur_grille(), true, false);
                 break;
 
             case KeyEvent.VK_P:
 
-                if (game_state.equals(Game.IN_PROGRESS)) {      // Pause Game
-                    pause(); }
-
-                else if (game_state.equals(Game.PAUSED)){       // Resume Game
-                    resume(); }
+                if (game_state.equals(Game.IN_PROGRESS)) pause();   // Pause Game
+                else if (game_state.equals(Game.PAUSED)) resume();  // Resume Game
                 break;
 
             case KeyEvent.VK_U:
 
-                start();                                        // Start Game
+                start();                                            // Start Game
                 break;
 
             default:

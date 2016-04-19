@@ -1,5 +1,6 @@
-package components;
+package components.subcomponents;
 
+import components.Arene;
 import constant.Game;
 
 import javax.swing.*;

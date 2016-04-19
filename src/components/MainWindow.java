@@ -1,6 +1,8 @@
 package components;
 
 
+import components.subcomponents.BackgroundPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
