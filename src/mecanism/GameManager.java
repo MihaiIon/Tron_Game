@@ -18,15 +18,14 @@ import java.util.Timer;
 public class GameManager implements KeyListener {
 
     // Attributs
-    private Arene arena;
-    private TronPanel tron_panel;
+    private static Arene arena;
+    private static TronPanel tron_panel;
     private boolean console_info;
     private static int refresh_rate;
 
     // Game flow variables
     private static Timer timer;
     private static String game_state;
-
     private static int players_alive_count;
     private static Joueur[] players;
 
@@ -36,7 +35,7 @@ public class GameManager implements KeyListener {
      * @param tron_panel : JComponent containing all classes related to our Game.
      */
     public GameManager(TronPanel tron_panel) {
-        this.tron_panel = tron_panel;
+        GameManager.tron_panel = tron_panel;
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
         players_alive_count = players.length;
@@ -62,7 +61,7 @@ public class GameManager implements KeyListener {
     /**
      * Resumes the game if there'a game in progress ( players are alive ). Players start moving again from current position.
      */
-    public static void resume(){ if(!game_state.equals(Game.NULL)) start(); }
+    public static void resume(){ if(game_state.equals(Game.NULL)) start(); }
 
     /**
      * **COMPLETE THIS**
@@ -91,10 +90,10 @@ public class GameManager implements KeyListener {
      * If the settings are the same on replay, it keeps the same Arena and only resets the players.
      * Else, it creates a whole new Arena.
      */
-    public void replay(int arena_width, int arena_height, boolean multiplayer, boolean computer_player)
+    public static void replay(int arena_width, int arena_height, boolean multiplayer, boolean computer_player)
     {
         if (arena_width == arena.getLargeur_grille() && arena_height == arena.getHauteur_grille() &&
-            multiplayer == arena.isMultiplayer() && computer_player == arena.isComputerPlayer())
+                multiplayer == arena.isMultiplayer() && computer_player == arena.isComputerPlayer())
         {
             arena.revivePlayers();
             GameManager.players_alive_count = players.length;
@@ -121,7 +120,7 @@ public class GameManager implements KeyListener {
      * @param height : Height of the arena. < MIN : **COMPLETE THIS**> < MAX : **COMPLETE THIS**>
      * @param multiplayer : Is the game multiplayer ( Two players + Computer ) or not.
      */
-    public void createNewArena(int width, int height, boolean multiplayer, boolean computer_player){
+    public static void createNewArena(int width, int height, boolean multiplayer, boolean computer_player){
         tron_panel.setArena(new Arene(width, height, multiplayer, computer_player));
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
@@ -131,11 +130,9 @@ public class GameManager implements KeyListener {
     // Getters
     public Arene getArena() { return arena; }
     public boolean isConsoleInfoON() { return console_info; }
-    public String getGameState() { return game_state; }
+    public static String getGameState() { return game_state; }
     public static Joueur[] getPlayers() { return players; }
     public static int getPlayersAliveCount() { return players_alive_count; }
-    public static String getGame_state() {return game_state;}
-
 
     // Setters
     /**

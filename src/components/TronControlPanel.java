@@ -20,6 +20,7 @@ import java.io.IOException;
  */
 public class TronControlPanel extends JPanel {
 
+    private JPanel title_panel;
     private JPanel parametersPane;
 
     public TronControlPanel() {
@@ -30,7 +31,8 @@ public class TronControlPanel extends JPanel {
         setLayout(new BorderLayout());
 
         //Features
-        add(initializeNorth(),BorderLayout.NORTH);
+        initializeTitlePanel();
+        add(title_panel,BorderLayout.NORTH);
         try {
             parametersPane = initializeCenter();
             add(parametersPane,BorderLayout.CENTER);
@@ -39,20 +41,32 @@ public class TronControlPanel extends JPanel {
         }
         add(initializeSouth(),BorderLayout.SOUTH);
     }
-    public JPanel initializeNorth()
+
+    /**
+     * Initialize the tron Logo
+     * @return : **COMPLETE THIS**
+     */
+    public void initializeTitlePanel()
     {
-        JPanel _north = new JPanel();
-        _north.setPreferredSize(new Dimension(450,120));
+        JPanel _title_panel = new JPanel();
+        _title_panel.setPreferredSize(new Dimension(450,183));
+        _title_panel.setBorder(BorderFactory.createMatteBorder(
+                50, 0,
+                50, 0,
+                Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR
+        ));
         try
         {
             BufferedImage Player1Control = ImageIO.read(new File("res/tron_Logo.png"));
             JLabel picLabel1 = new JLabel(new ImageIcon(Player1Control.getScaledInstance(290, 83, Image.SCALE_DEFAULT)));
-            _north.add(picLabel1);
+            _title_panel.add(picLabel1);
         }
         catch(IOException e){System.out.println(e);}
-        _north. setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        return _north;
+        _title_panel. setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+
+        title_panel = _title_panel;
     }
+
     public JPanel initializeCenter() throws IOException
     {
         JPanel _center = new JPanel();
@@ -170,23 +184,24 @@ public class TronControlPanel extends JPanel {
         JButton _start = new JButton("START");
         _start.addActionListener(
                 e ->{
-                    if(GameManager.getGame_state() != Game.IN_PROGRESS )
+                    if(GameManager.getGameState() == null)
                     {
                         _start.setText("Replay");
-                        GameManager.start();}
-                    else {//GameManager.replay();}
+                        GameManager.start();
                     }
+                    else {GameManager.replay(500, 500, true, true);}
+
                 } );
         _start.setBackground(new Color (57,163,157));
         _startButton.add(_start);
 
         //Play/Pause Button
         JPanel _p_Button = new JPanel();
-        JButton _pButton = new JButton("PLAY");
+        JButton _pButton = new JButton("PAUSE");
         _pButton.addActionListener(
                 e -> {
 
-                    if(_pButton.getText() == "PLAY")
+                    if(GameManager.getGameState() != null)
                     {
                         System.out.println("Play pressed");
                         _pButton.setText("PAUSE");

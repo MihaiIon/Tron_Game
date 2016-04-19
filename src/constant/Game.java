@@ -13,9 +13,9 @@ public class Game {
     public static final String PAUSED = "PAUSED";
 
     // TronControlPanel Properties
-    public static final Dimension TRON_CONTROL_PANEL_DIMESIONS = new Dimension(500, 600);
+    public static final Dimension TRON_CONTROL_PANEL_DIMESIONS = new Dimension(500, 700);
     public static final int TRON_CONTROL_PANEL_WIDTH = 500;
-    public static final int TRON_CONTROL_PANEL_HEIGHT = 600;
+    public static final int TRON_CONTROL_PANEL_HEIGHT = 700;
     public static final Color TRON_CONTROL_PANEL_BACKGROUND_COLOR = new Color(15,15,15);
     public static final Dimension TRON_PARAMETERS_DIMENSIONS = new Dimension(450, 30);
     public static final Dimension TRON_LIST_DIMENSIONS = new Dimension(200, 30);
