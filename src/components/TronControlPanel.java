@@ -101,12 +101,59 @@ public class TronControlPanel extends JPanel {
 
 
     /**
-     * **COMPLETE THIS**
+     * //COMPLETE THIS**
      * @return : **COMPLETE THIS**
      */
     public void initializeParameters()
     {
-        parameters_panel = new ParametersPanel();
+        parameters_panel = new ParametersPanel(); // components > subccmponents > ParametersPanel.java.
+
+        /*
+            Fais la même chose pour initializeButtons. Comme ça les methods n'ont pas
+            80 - 120 lignes de codes.
+
+            Tu peux créer aussi des classes comme PlayButton, pour faire new PlayButton() pour découper
+            ton code encore plus.
+
+            Comme le prof disait, si ta methode à trop de lignes (20+) ça veux dire que t'aurais pu faire beaucoup
+            mieux.
+
+
+
+            Autre chose, tes noms de variables pourrait être beaucoup plus verbeux et utiliser une structure plus constante,
+            genre plus bas il y a : _p_Button, pButton, play_Button.
+
+                1.) si tu utilises cette écriture _quelque_chose, mets pas de majuscules : _quelque_Chose
+                2.) si tu utilises cette écriture _quelque_chose, utilise pas _quelqueChose. garde toujours tes _ et pas de majuscules.
+                3.) _p_Button, pButton, play_Button, c'est tous la même affaire. J'ai dû lire toutes les 80 lignes de code avant de comprendre.
+                4.) Decoupe plus ton code, crées d'autres classes.
+
+
+
+            Si tu te demandes quand créer des classes ou comment savoir qu'il faut que tu crées des classes, il y a quelque
+            trucs qu'il ne faut pas oublier.
+
+                1.) Quand tu crées une classe par exemple ParametersPanel.java, cette classe peux avoir des propriétés spécifiques
+                    à elle! Elle peux avoir des methodes aussi, des getters, des setters. Tu n'auras jamais ça en faisant
+                    un JPanel parameters_panel = new JPanel();
+
+                2.) Donc en créant un nouvel objet, tu crées un entité solide :
+                    parameters_panel = new ParemetersPanel(tu_peux_même_passer_des_parametres).
+
+                    Ainsi tu vas pouvoir créer tes propres methodes indispensable :
+
+                        parameters_panel.getArenaSelectedOption()
+                        parameters_panel.getPlayersSelectedOption()
+                        parameters_panel.getJumboBox1blablabla();
+                        parameters_panel.changeColorBecauseIWantItMethod();
+                        etc.
+
+                    Tout ça tu ne peux pas le faire si tu instancie des truca par défault.
+
+                3.) Quand tu veux plus de contrôl sur un objet, crées une classe.
+
+
+         */
     }
 
 
