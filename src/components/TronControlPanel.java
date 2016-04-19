@@ -2,6 +2,7 @@ package components;
 
 import constant.Game;
 import jdk.nashorn.internal.scripts.JO;
+import mecanism.GameManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -83,9 +84,12 @@ public class TronControlPanel extends JPanel {
         JPanel _gameType_list = new JPanel();
         _gameType_list.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
         _gameType_list.setPreferredSize(Game.TRON_PARAMETERS_DIMENSIONS);
+
         //GAMETYPE
+
         JLabel _gameTypeTitle = new JLabel("Game Type");
         _gameTypeTitle.setForeground(Color.white);
+        _gameTypeTitle.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
 
         //GameType content
         JComboBox _gameType = new JComboBox(new String[]{
@@ -105,9 +109,11 @@ public class TronControlPanel extends JPanel {
         JPanel _speed_list = new JPanel();
         _speed_list.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
         _speed_list.setPreferredSize(Game.TRON_PARAMETERS_DIMENSIONS);
+
         //Player Speed
         JLabel _playerSpeedTitle = new JLabel("Players speed");
         _playerSpeedTitle.setForeground(Color.white);
+        _playerSpeedTitle.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
 
         //Player Speed content
         JComboBox _playerSpeed = new JComboBox(new String[]{
@@ -130,6 +136,7 @@ public class TronControlPanel extends JPanel {
         //Arena Size text
         JLabel _arenaSizeTitle = new JLabel("Arena Size");
         _arenaSizeTitle.setForeground(Color.white);
+        _arenaSizeTitle.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
 
         //List content
         JComboBox _arenaSize = new JComboBox(new String[]{
@@ -161,6 +168,15 @@ public class TronControlPanel extends JPanel {
         //Start Button
         JPanel _startButton = new JPanel();
         JButton _start = new JButton("START");
+        _start.addActionListener(
+                e ->{
+                    if(GameManager.getGame_state() != Game.IN_PROGRESS )
+                    {
+                        _start.setText("Replay");
+                        GameManager.start();}
+                    else {//GameManager.replay();}
+                    }
+                } );
         _start.setBackground(new Color (57,163,157));
         _startButton.add(_start);
 
@@ -174,11 +190,13 @@ public class TronControlPanel extends JPanel {
                     {
                         System.out.println("Play pressed");
                         _pButton.setText("PAUSE");
+                        GameManager.resume();
                     }
                     else
                     {
                         System.out.println("Pause pressed");
                         _pButton.setText("PLAY");
+                        GameManager.pause();
                     }
                 }
         );

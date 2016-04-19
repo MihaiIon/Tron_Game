@@ -32,6 +32,6 @@ public class Tron {
         //GM.setRefreshRate(RefreshRate.FPS);
 
         // TEST START
-        GM.start();
+        //GM.start();
     }
 }

@@ -26,6 +26,7 @@ public class GameManager implements KeyListener {
     // Game flow variables
     private static Timer timer;
     private static String game_state;
+
     private static int players_alive_count;
     private static Joueur[] players;
 
@@ -61,7 +62,7 @@ public class GameManager implements KeyListener {
     /**
      * Resumes the game if there'a game in progress ( players are alive ). Players start moving again from current position.
      */
-    public static void resume(){ if(game_state.equals(Game.NULL)) start(); }
+    public static void resume(){ if(!game_state.equals(Game.NULL)) start(); }
 
     /**
      * **COMPLETE THIS**
@@ -133,6 +134,8 @@ public class GameManager implements KeyListener {
     public String getGameState() { return game_state; }
     public static Joueur[] getPlayers() { return players; }
     public static int getPlayersAliveCount() { return players_alive_count; }
+    public static String getGame_state() {return game_state;}
+
 
     // Setters
     /**
