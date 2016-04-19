@@ -1,11 +1,14 @@
 package components;
 
+import constant.Game;
 import jdk.nashorn.internal.scripts.JO;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.io.File;
@@ -16,103 +19,194 @@ import java.io.IOException;
  */
 public class TronControlPanel extends JPanel {
 
-    private static final Color backgroundColor = new Color(15,15,15);
+    private JPanel parametersPane;
+
     public TronControlPanel() {
 
         //Caracteristique
-        setPreferredSize(new Dimension(450,500));
-        setBackground(backgroundColor);
+        setPreferredSize(Game.TRON_CONTROL_PANEL_DIMESIONS);
+        setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
         setLayout(new BorderLayout());
 
         //Features
         add(initializeNorth(),BorderLayout.NORTH);
         try {
-            add(initializeEast(),BorderLayout.EAST);
+            parametersPane = initializeCenter();
+            add(parametersPane,BorderLayout.CENTER);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        add(initializeWest(),BorderLayout.WEST);
         add(initializeSouth(),BorderLayout.SOUTH);
     }
     public JPanel initializeNorth()
     {
         JPanel _north = new JPanel();
         _north.setPreferredSize(new Dimension(450,120));
-        JLabel _title = new JLabel("Tron");
-        _north.add(_title);
-        _north. setBackground(backgroundColor);
+        try
+        {
+            BufferedImage Player1Control = ImageIO.read(new File("res/tron_Logo.png"));
+            JLabel picLabel1 = new JLabel(new ImageIcon(Player1Control.getScaledInstance(290, 83, Image.SCALE_DEFAULT)));
+            _north.add(picLabel1);
+        }
+        catch(IOException e){System.out.println(e);}
+        _north. setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
         return _north;
     }
-    public JPanel initializeEast() throws IOException {
-        JPanel _east = new JPanel();
-        _east.setBackground(backgroundColor);
-        _east.setPreferredSize(new Dimension(225,210));
-        //Image 1
-        BufferedImage Player1Control = ImageIO.read(new File("res/controls.png"));
-        JLabel picLabel1 = new JLabel(new ImageIcon(Player1Control.getScaledInstance(210, 195, Image.SCALE_DEFAULT)));
-        _east.add(picLabel1);
+    public JPanel initializeCenter() throws IOException
+    {
+        JPanel _center = new JPanel();
+        _center.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+        _center.setPreferredSize(new Dimension(225,210));
+        _center.setLayout(new FlowLayout());
+
+        //ADD
+        _center.add(initializeParameters());
+        _center.add(initializeButtons());
+
 
         //return
-        return _east;
+        return _center;
     }
-    public JPanel initializeWest()
-    {
-        JPanel _west = new JPanel();
-        _west.setBackground(backgroundColor);
-        _west.setPreferredSize(new Dimension(225,210));
+    /*
+    * @initializeParameters
+     */
 
+    public JPanel initializeParameters()
+    {
+        JPanel _parameters = new JPanel();
+        _parameters.setPreferredSize(new Dimension(450,120));
+        _parameters.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+
+        /*
+        *      @GameType list
+         */
+        JPanel _gameType_list = new JPanel();
+        _gameType_list.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+        _gameType_list.setPreferredSize(Game.TRON_PARAMETERS_DIMENSIONS);
         //GAMETYPE
         JLabel _gameTypeTitle = new JLabel("Game Type");
         _gameTypeTitle.setForeground(Color.white);
+
+        //GameType content
         JComboBox _gameType = new JComboBox(new String[]{
-                "Human vs Human","Human vs Computer", "H vs H vs Computer"
-        });
+                "Human vs Human","Human vs Computer", "H vs H vs Computer"});
         _gameType.setPreferredSize(new Dimension(200,20));
         _gameType.setBackground(Color.white);
+        _gameType.setForeground(Color.lightGray);
+        _gameType.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
 
+        //Add Gametype
+        _gameType_list.add(_gameTypeTitle);
+        _gameType_list.add(_gameType);
+
+        /*
+        *      @Player Speed list
+         */
+        JPanel _speed_list = new JPanel();
+        _speed_list.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+        _speed_list.setPreferredSize(Game.TRON_PARAMETERS_DIMENSIONS);
         //Player Speed
         JLabel _playerSpeedTitle = new JLabel("Players speed");
         _playerSpeedTitle.setForeground(Color.white);
+
+        //Player Speed content
         JComboBox _playerSpeed = new JComboBox(new String[]{
-                "             1","             2", "             3"
-        });
+                "             1","             2", "             3"});
         _playerSpeed.setPreferredSize(new Dimension(112,20));
         _playerSpeed.setBackground(Color.white);
+        _playerSpeed.setForeground(Color.lightGray);
+        _playerSpeed.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
 
-        //Arena Size
+        //Speed add
+        _speed_list.add(_playerSpeedTitle);
+        _speed_list.add(_playerSpeed);
+        /*
+        *      @Arena list
+         */
+        JPanel _arena_list = new JPanel();
+        _arena_list.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+        _arena_list.setPreferredSize(Game.TRON_PARAMETERS_DIMENSIONS);
+
+        //Arena Size text
         JLabel _arenaSizeTitle = new JLabel("Arena Size");
         _arenaSizeTitle.setForeground(Color.white);
+
+        //List content
         JComboBox _arenaSize = new JComboBox(new String[]{
-                "Small","Medium", "Big"
-        });
+                "Small","Medium", "Big"});
         _arenaSize.setPreferredSize(new Dimension(132,20));
         _arenaSize.setBackground(Color.white);
+        _arenaSize.setForeground(Color.lightGray);
+        _arenaSize.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
+        //arena add
+        _arena_list.add(_arenaSizeTitle);
+        _arena_list.add(_arenaSize);
 
-/*
-        //Start button
-        JButton _start =  new JButton("START");
-        _start.setBackground(new Color(57,163,157));
-        _start.setPreferredSize(new Dimension(220,50));
-        _start.setForeground(Color.white);
-*/
-        //ADDS
-        _west.add(_gameTypeTitle);
-        _west.add(_gameType);
-        _west.add(_playerSpeedTitle);
-        _west.add(_playerSpeed);
-        _west.add(_arenaSizeTitle);
-        _west.add(_arenaSize);
-        //_west.add(_start);
+        //ADD
+        _parameters.add(_gameType_list);
+        _parameters.add(_arena_list);
+        _parameters.add(_speed_list);
 
         //return
-        return _west;
-
+        return _parameters;
     }
+
+    /*
+    * @intializeButtons
+     */
+    public JPanel initializeButtons()
+    {
+        JPanel _playButtons = new JPanel();
+
+        //Start Button
+        JPanel _startButton = new JPanel();
+        JButton _start = new JButton("START");
+        _start.setBackground(new Color (57,163,157));
+        _startButton.add(_start);
+
+        //Play/Pause Button
+        JPanel _p_Button = new JPanel();
+        JButton _pButton = new JButton("PLAY");
+        _pButton.addActionListener(
+                e -> {
+
+                    if(_pButton.getText() == "PLAY")
+                    {
+                        System.out.println("Play pressed");
+                        _pButton.setText("PAUSE");
+                    }
+                    else
+                    {
+                        System.out.println("Pause pressed");
+                        _pButton.setText("PLAY");
+                    }
+                }
+        );
+        _pButton.setBackground(new Color (57,163,157));
+        _p_Button.add(_pButton);
+        _p_Button.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+
+
+        //ADD
+        _playButtons.add(_startButton);
+        _playButtons.add(_p_Button);
+        //Return
+        return _playButtons;
+    }
+
     public JPanel initializeSouth()
     {
         JPanel _south = new JPanel();
-        _south.setBackground(backgroundColor);
-        _south.setPreferredSize(new Dimension(450,170));
+        _south.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+        _south.setPreferredSize(new Dimension(450,30));
+        JButton controls = new JButton("");
+        controls.setText("<HTML><FONT color=\"#39A39D\"><U>Voir les Contrôles</U></FONT></HTML>");
+        controls.setHorizontalAlignment(SwingConstants.RIGHT);
+        controls.setBorderPainted(false);
+        controls.setOpaque(false);
+        controls.setBackground(Color.WHITE);
+        //ADD
+        _south.add(controls);
         return _south;
     }
 }
