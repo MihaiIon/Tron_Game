@@ -28,6 +28,10 @@ public class TronControlPanel extends JPanel {
     private JLabel title_container;
     private BufferedImage tron_logo;
 
+    //JButtons
+    private JButton pButton;
+    private JButton _start;
+
     // Show winner
     private Timer winner_display_timer;
     private boolean winner_displayed;
@@ -166,34 +170,18 @@ public class TronControlPanel extends JPanel {
         JPanel _playButtons = new JPanel();
         _playButtons.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
 
-        // Start Button
-        JPanel _startButton = new JPanel();
-        _startButton.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        JButton _start = new JButton("START");
-        _start.addActionListener(
-            e -> {
-                if(GameManager.getGameState() == null){
-                    _start.setText("Replay");
-                    GameManager.start();
-                }
-                else { GameManager.replay(500, 500, true, true); }
-            }
-        );
-        _start.setBackground(new Color (57,163,157));
-        _startButton.add(_start);
-
         // Play/Pause Button
         JPanel _p_Button = new JPanel();
-        JButton _pButton = new JButton("PAUSE");
-        _pButton.addActionListener(
+        JButton pButton = new JButton("PAUSE");
+        pButton.addActionListener(
             e -> {
 
-                if(GameManager.getGameState().equals(Game.NULL)){ _pButton.setText("PAUSE"); }
+                if(GameManager.getGameState().equals(Game.NULL)){ pButton.setText("PAUSE"); }
 
                 else if(GameManager.getGameState().equals(Game.IN_PROGRESS))
                 {
                     System.out.println("Pause pressed");
-                    _pButton.setText("PLAY");
+                    pButton.setText("PLAY");
                     GameManager.pause();
                     System.out.println(GameManager.getGameState());
                 }
@@ -201,15 +189,36 @@ public class TronControlPanel extends JPanel {
                 else if (GameManager.getGameState().equals(Game.PAUSED))
                 {
                     System.out.println("Play pressed");
-                    _pButton.setText("PAUSE");
+                    pButton.setText("PAUSE");
                     GameManager.resume();
                     System.out.println(GameManager.getGameState());
                 }
             }
         );
-        _pButton.setBackground(new Color (57,163,157));
-        _p_Button.add(_pButton);
+        pButton.setBackground(new Color (57,163,157));
+        _p_Button.add(pButton);
         _p_Button.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+
+        // Start Button
+        JPanel _startButton = new JPanel();
+        _startButton.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+        _start = new JButton("START");
+        _start.addActionListener(
+                e -> {
+                    if(GameManager.getGameState().equals(Game.NULL)){
+                        _start.setText("RESET");
+                        System.out.println(_start.getText());
+                        GameManager.start();
+                    }
+                    else {
+                        pButton.setText("PAUSE");
+                        GameManager.replay(500, 500, true, true);
+
+                    }
+                }
+        );
+        _start.setBackground(new Color (57,163,157));
+        _startButton.add(_start);
 
 
         // ADD
