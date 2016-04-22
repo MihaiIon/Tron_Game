@@ -1,6 +1,7 @@
 package mecanism;
 
 import com.company.Tron;
+import constant.Game;
 import players.Joueur;
 import players.attributes.Point;
 
@@ -18,21 +19,24 @@ public class TronTimer extends TimerTask {
 
     @Override
     public void run() {
-        for (Joueur player : GameManager.getPlayers()){
-            if (player.isAlive()) {
+        for (int i=0; i<GameManager.getPlayers().length; i++){
+            if (GameManager.getPlayers()[i].isAlive()) {
 
-                if (GameManager.getPlayersAliveCount() == 1) GameManager.endGame(player);
+                if (GameManager.getPlayersAliveCount() == 1) GameManager.endGame(GameManager.getPlayers()[i]);
 
                 last_position = new Point(
-                    player.getCurrentPosition().getX(),
-                    player.getCurrentPosition().getY()
+                    GameManager.getPlayers()[i].getCurrentPosition().getX(),
+                    GameManager.getPlayers()[i].getCurrentPosition().getY()
                 );
 
-                player.getTrace().allonge(player.getDirection());
+                GameManager.getPlayers()[i].getTrace().allonge(GameManager.getPlayers()[i].getDirection());
 
-                if (Tron.GM.getArena().isPlayerInCollisionWithArenaWalls(player.getCurrentPosition()) ||
-                    Tron.GM.getArena().isPlayerInCollisionWithPath(player.getCurrentPosition(), last_position))
-                        player.kill();
+                if (Tron.GM.getArena().isPlayerInCollisionWithArenaWalls(GameManager.getPlayers()[i].getCurrentPosition()) ||
+                    Tron.GM.getArena().isPlayerInCollisionWithPath(GameManager.getPlayers()[i].getCurrentPosition(), last_position))
+                {
+                    GameManager.getPlayers()[i].kill();
+                    GameManager.getPlayersBoard().getPlayerInfos(i).setStatus(Game.PLAYER_STATUS_DEAD);
+                }
             }
         }
 

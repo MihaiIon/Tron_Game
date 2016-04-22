@@ -112,7 +112,6 @@ public abstract class Joueur {
                 player.setBoost(false);
             }
         }, Game.PLAYERS_BOOST_DURATION);
-
     }
 
     /**

@@ -1,6 +1,7 @@
 package components;
 
 import components.subcomponents.ArenaContainer;
+import components.subcomponents.PlayersBoard.PlayersBoard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +30,7 @@ public class TronPanel extends JPanel{
         add(arena_container, BorderLayout.CENTER);
 
         // Add TronControlePanel to Top pane
-        control_panel = new TronControlPanel();
+        control_panel = new TronControlPanel(arena.getPlayers());
         add(control_panel, BorderLayout.EAST);
 
         setFocusable(true);
@@ -37,6 +38,7 @@ public class TronPanel extends JPanel{
 
     // Getters
     public Arene getArena() { return arena; }
+    public PlayersBoard getPlayersBoard() { return control_panel.getPlayersBoard(); }
     public TronControlPanel getControlPanel(){ return control_panel; }
 
     // Setters

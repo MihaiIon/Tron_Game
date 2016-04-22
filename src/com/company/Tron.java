@@ -1,13 +1,12 @@
 package com.company;
 
 import components.MainWindow;
-import constant.Direction;
-import constant.RefreshRate;
 import mecanism.GameManager;
-import mecanism.TronTimer;
-import players.Joueur;
 
-import java.util.Timer;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Tron {
 
@@ -15,23 +14,35 @@ public class Tron {
 
     public static void main(String[] args)
     {
+        // Initialize Font
+        initializeRobotoFont();
+
+        // Initialize Game
         MainWindow window = new MainWindow();
         GM = new GameManager(window.getTronPanel());
+        GM.createNewArena(700,700,true, true);
         window.addKeyListener(GM);
         window.pack();
+    }
 
-        GM.getArena().print();
+    private static void initializeRobotoFont()
+    {
+        try {
+            Font _roboto_medium = Font.createFont(Font.TRUETYPE_FONT, new File("res/Roboto-Regular.ttf")).deriveFont(12f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(_roboto_medium);
 
-        // TESTS NEW ARENA + multiplayer
-        //GM.createNewArena(400, 400, true, false);
+            UIManager.put("Button.font", _roboto_medium);
+            UIManager.put("ToggleButton.font", _roboto_medium);
+            UIManager.put("RadioButton.font", _roboto_medium);
+            UIManager.put("CheckBox.font", _roboto_medium);
+            UIManager.put("ColorChooser.font", _roboto_medium);
+            UIManager.put("ComboBox.font", _roboto_medium);
+            UIManager.put("Label.font", _roboto_medium);
+            UIManager.put("List.font", _roboto_medium);
 
-        // TEST SPEED
-        GM.setDefaultPlayersSpeed(3);
-
-        // TESTS SLOWER_DEBUG_MODE
-        //GM.setRefreshRate(RefreshRate.FPS);
-
-        // TEST START
-        //GM.start();
+        } catch (IOException | FontFormatException e) {
+            System.out.println("No such Font");
+        }
     }
 }

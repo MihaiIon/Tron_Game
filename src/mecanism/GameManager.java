@@ -3,11 +3,15 @@ package mecanism;
 import components.Arene;
 import components.TronControlPanel;
 import components.TronPanel;
+import components.subcomponents.PlayersBoard.PlayersBoard;
 import constant.Direction;
 import constant.Game;
 import constant.RefreshRate;
+import players.ComputerPlayer;
 import players.HumanPlayer;
 import players.Joueur;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Timer;
@@ -21,6 +25,7 @@ public class GameManager implements KeyListener {
     private static Arene arena;
     private static TronPanel tron_panel;
     private static TronControlPanel tron_control_panel;
+    private static PlayersBoard players_board;
     private boolean console_info;
     private static int refresh_rate;
 
@@ -38,6 +43,7 @@ public class GameManager implements KeyListener {
     public GameManager(TronPanel tron_panel) {
         GameManager.tron_panel = tron_panel;
         tron_control_panel = tron_panel.getControlPanel();
+        players_board = tron_control_panel.getPlayersBoard();
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
         players_alive_count = players.length;
@@ -84,24 +90,36 @@ public class GameManager implements KeyListener {
 
         // End game
         timer.cancel();
-        GameManager.game_state = Game.NULL;
+        game_state = Game.NULL;
 
         // Winner
         String _winner = null;
+        Color _winner_color = Color.white;
 
         // Find winner
         int _human_player_counter = 0;
-        for (Joueur player: players){
-            if (player instanceof HumanPlayer){
+        for (int i=0; i<players.length; i++){
+            if (players[i] instanceof HumanPlayer){
                 _human_player_counter++;
-                if (player == winner) {
+                if (players[i] == winner) {
                     _winner = "Player " + _human_player_counter;
+                    _winner_color = players[i].getColor();
+                    players_board.getPlayerInfos(i).addWin();
+                    break;
+                }
+            }
+            if (players[i] instanceof ComputerPlayer){
+                _human_player_counter++;
+                if (players[i] == winner) {
+                    _winner = "Computer";
+                    _winner_color = players[i].getColor();
+                    players_board.getPlayerInfos(i).addWin();
                     break;
                 }
             }
         }
 
-        tron_control_panel.displayWinner(_winner == null ? "Computer" : _winner);
+        tron_control_panel.displayWinner(_winner, _winner_color);
     }
 
     /**
@@ -116,7 +134,8 @@ public class GameManager implements KeyListener {
                 multiplayer == arena.isMultiplayer() && computer_player == arena.isComputerPlayer())
         {
             arena.revivePlayers();
-            GameManager.players_alive_count = players.length;
+            players_board.resetStatus();
+            players_alive_count = players.length;
         }
 
         else createNewArena(arena_width, arena_height, multiplayer, computer_player);
@@ -144,7 +163,8 @@ public class GameManager implements KeyListener {
         tron_panel.setArena(new Arene(width, height, multiplayer, computer_player));
         arena = tron_panel.getArena();
         players = tron_panel.getArena().getPlayers();
-        GameManager.players_alive_count = players.length;
+        players_alive_count = players.length;
+        players_board.initializePlayers(players);
     }
 
     // Getters
@@ -153,6 +173,7 @@ public class GameManager implements KeyListener {
     public static String getGameState() { return game_state; }
     public static Joueur[] getPlayers() { return players; }
     public static int getPlayersAliveCount() { return players_alive_count; }
+    public static PlayersBoard getPlayersBoard() { return players_board; }
 
     // Setters
     /**
@@ -183,6 +204,7 @@ public class GameManager implements KeyListener {
      * Diminish players_alive by one.
      */
     public static void killPlayer(){ players_alive_count--; }
+
 
 
     /*

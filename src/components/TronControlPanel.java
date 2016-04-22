@@ -1,8 +1,12 @@
 package components;
 
 import components.subcomponents.ParametersPanel;
+import components.subcomponents.PlayersBoard.PlayersBoard;
+import components.subcomponents.PlayersBoard.PlayersBoardContainer;
 import constant.Game;
 import mecanism.GameManager;
+import players.Joueur;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +24,7 @@ public class TronControlPanel extends JPanel {
     // Panels
     private JPanel title_panel;
     private JPanel parameters_panel;
+    private PlayersBoardContainer players_board_container; // Contains players informations
 
     // Main Layout
     private BorderLayout tron_control_panel_layout;
@@ -33,6 +38,7 @@ public class TronControlPanel extends JPanel {
     private JButton _start;
 
     // Show winner
+    private Font roboto_thin;
     private Timer winner_display_timer;
     private boolean winner_displayed;
 
@@ -40,7 +46,7 @@ public class TronControlPanel extends JPanel {
     /**
      * **COMPLETE THIS**
      */
-    public TronControlPanel() {
+    public TronControlPanel(Joueur[] players) {
 
         // Caracteristique
         setPreferredSize(Game.TRON_CONTROL_PANEL_DIMESIONS);
@@ -48,10 +54,10 @@ public class TronControlPanel extends JPanel {
         setLayout(new BorderLayout());
         tron_control_panel_layout = (BorderLayout)getLayout();
 
-        // Add top pane
+        // Title panel
         initializeTitlePanel();
         add(title_panel,BorderLayout.NORTH);
-        add(getCenterPanel(),BorderLayout.CENTER);
+        add(getCenterPanel(players),BorderLayout.CENTER);
 
         // Add bottom pane
         add(getSouthPanel(),BorderLayout.SOUTH);
@@ -73,6 +79,8 @@ public class TronControlPanel extends JPanel {
             50, 0,
             Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR
         ));
+
+        // Load Logo
         try
         {
             tron_logo = ImageIO.read(new File("res/tron_Logo.png"));
@@ -80,6 +88,16 @@ public class TronControlPanel extends JPanel {
             title_panel.add(title_container);
         }
         catch(IOException e){System.out.println(e);}
+
+        // Load Roboto thin font
+        try {
+            roboto_thin = Font.createFont(Font.TRUETYPE_FONT, new File("res/Roboto-Thin.ttf")).deriveFont(40f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(roboto_thin);
+
+        } catch (IOException | FontFormatException e) {
+            System.out.println("No such Font");
+        }
     }
 
     /**
@@ -87,7 +105,7 @@ public class TronControlPanel extends JPanel {
      * (switches between with the button located in tron_control_panel_layout bottom pane).
      * @return : Center Pane.
      */
-    public JPanel getCenterPanel()
+    public JPanel getCenterPanel(Joueur[] players)
     {
         JPanel _center = new JPanel();
         _center.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
@@ -98,6 +116,10 @@ public class TronControlPanel extends JPanel {
         initializeParameters();
         _center.add(parameters_panel);
         _center.add(initializeButtons());
+
+        // Players board panel
+        initializePlayersBoard(players);
+        _center.add(players_board_container, BorderLayout.CENTER);
 
         //return
         return _center;
@@ -169,6 +191,7 @@ public class TronControlPanel extends JPanel {
     {
         JPanel _playButtons = new JPanel();
         _playButtons.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+        _playButtons.setPreferredSize(new Dimension(Game.TRON_CONTROL_PANEL_WIDTH, 50));
 
         // Play/Pause Button
         JPanel _p_Button = new JPanel();
@@ -255,7 +278,20 @@ public class TronControlPanel extends JPanel {
         return _south;
     }
 
-    public void displayWinner(String winner)
+    /**
+     * **COMPLETE THIS**
+     * @param players : **COMPLETE THIS**
+     */
+    private void initializePlayersBoard(Joueur[] players)
+    {
+        players_board_container = new PlayersBoardContainer(players);
+    }
+
+    /**
+     * **COMPLETE THIS**
+     * @param winner : **COMPLETE THIS**
+     */
+    public void displayWinner(String winner, Color winner_color)
     {
         if (winner_display_timer != null) winner_display_timer.cancel();
         winner_display_timer = new Timer();
@@ -268,7 +304,10 @@ public class TronControlPanel extends JPanel {
                 if (winner_displayed) displayLogo();
                 else
                 {
-                    title_container = new JLabel(winner + " has won!");
+                    title_container = new JLabel(winner + " HAS WON!");
+                    title_container.setFont(roboto_thin);
+                    title_container.setForeground(winner_color);
+                    title_container.setBorder(BorderFactory.createEmptyBorder(15,0,0,0));
                     title_panel.revalidate();
                     title_panel.repaint();
                 }
@@ -302,4 +341,7 @@ public class TronControlPanel extends JPanel {
         title_panel.revalidate();
         title_panel.repaint();
     }
+
+    // Getters
+    public PlayersBoard getPlayersBoard() { return players_board_container.getPlayersBoard(); }
 }

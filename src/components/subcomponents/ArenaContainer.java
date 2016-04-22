@@ -55,8 +55,8 @@ public class ArenaContainer extends JPanel{
         calculateBordersWidth(arena_height);
         setBorder(BorderFactory.createMatteBorder(
             borders_width, 0,
-            borders_width, 10,
-            Color.black
+            borders_width, 0,
+            new Color(0,0,0,220)
         ));
     }
 
