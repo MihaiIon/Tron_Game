@@ -9,6 +9,14 @@ import java.awt.*;
  */
 public class ParametersPanel extends JPanel {
 
+    //*****************************
+    //NOTE: DONT KNOW WHY THE GETS IN TRONCONTROLPANEL IS NOT WORKING
+    //SO THE ELEMTS HERE WILL BE STATIC UNTIL SOLUTION IS FOUND
+    //**********************
+    private static JComboBox _arenaSize;
+    private static JComboBox _gameType;
+    private static JComboBox _playerSpeed;
+
     public ParametersPanel() {
 
         setPreferredSize(new Dimension(450,120));
@@ -28,7 +36,7 @@ public class ParametersPanel extends JPanel {
         _gameTypeTitle.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
 
         // GameType content
-        JComboBox _gameType = new JComboBox(new String[]{
+        _gameType = new JComboBox(new String[]{
                 "Human vs Human","Human vs Computer", "H vs H vs Computer"});
         _gameType.setPreferredSize(new Dimension(200,20));
         _gameType.setBackground(Color.white);
@@ -52,7 +60,7 @@ public class ParametersPanel extends JPanel {
         _playerSpeedTitle.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
 
         // Player Speed content
-        JComboBox _playerSpeed = new JComboBox(new String[]{
+        _playerSpeed = new JComboBox(new String[]{
                 "             1","             2", "             3"});
         _playerSpeed.setPreferredSize(new Dimension(112,20));
         _playerSpeed.setBackground(Color.white);
@@ -75,7 +83,7 @@ public class ParametersPanel extends JPanel {
         _arenaSizeTitle.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
 
         // List content
-        JComboBox _arenaSize = new JComboBox(new String[]{
+        _arenaSize = new JComboBox(new String[]{
                 "Small","Medium", "Big"});
         _arenaSize.setPreferredSize(new Dimension(132,20));
         _arenaSize.setBackground(Color.white);
@@ -89,5 +97,22 @@ public class ParametersPanel extends JPanel {
         add(_gameType_list);
         add(_arena_list);
         add(_speed_list);
+
+
     }
+
+    //Getters
+
+    public static JComboBox get_arenaSize() {
+        return _arenaSize;
+    }
+
+    public static JComboBox get_gameType() {
+        return _gameType;
+    }
+
+    public static JComboBox get_playerSpeed() {
+        return _playerSpeed;
+    }
+
 }

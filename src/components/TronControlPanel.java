@@ -1,5 +1,6 @@
 package components;
 
+import components.subcomponents.ButtonsPanel;
 import components.subcomponents.ParametersPanel;
 import components.subcomponents.PlayersBoard.PlayersBoard;
 import components.subcomponents.PlayersBoard.PlayersBoardContainer;
@@ -10,6 +11,7 @@ import players.Joueur;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +26,7 @@ public class TronControlPanel extends JPanel {
     // Panels
     private JPanel title_panel;
     private JPanel parameters_panel;
+    private JPanel buttons_panel;
     private PlayersBoardContainer players_board_container; // Contains players informations
 
     // Main Layout
@@ -34,7 +37,6 @@ public class TronControlPanel extends JPanel {
     private BufferedImage tron_logo;
 
     //JButtons
-    private JButton pButton;
     private JButton _start;
 
     // Show winner
@@ -114,8 +116,9 @@ public class TronControlPanel extends JPanel {
 
         //ADD
         initializeParameters();
+        initializeButtons();
         _center.add(parameters_panel);
-        _center.add(initializeButtons());
+        _center.add(buttons_panel);
 
         // Players board panel
         initializePlayersBoard(players);
@@ -176,7 +179,7 @@ public class TronControlPanel extends JPanel {
 
                     Tout ça tu ne peux pas le faire si tu instancie des truca par défault.
 
-                3.) Quand tu veux plus de contrôl sur un objet, crées une classe.
+                3.) Quand tu veux plus de contrôle sur un objet, crées une classe.
 
 
          */
@@ -184,72 +187,56 @@ public class TronControlPanel extends JPanel {
 
 
     /**
-     * **COMPLETE THIS**
+     * intitializes this section's buttons panel with the class ButtonsPanel
      * @return : **COMPLETE THIS**
      */
-    public JPanel initializeButtons()
+   public void initializeButtons() {
+       buttons_panel = new ButtonsPanel();  // components > subccmponents > ButtonsPanel.java.
+   }
+
+   public static Object[] getSelection()
     {
-        JPanel _playButtons = new JPanel();
-        _playButtons.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        _playButtons.setPreferredSize(new Dimension(Game.TRON_CONTROL_PANEL_WIDTH, 50));
+        Object[] returned_Objects = new Object[4];
 
-        // Play/Pause Button
-        JPanel _p_Button = new JPanel();
-        JButton pButton = new JButton("PAUSE");
-        pButton.addActionListener(
-            e -> {
+           returned_Objects[0] = getArenaSize();
+           returned_Objects[1] = getArenaSize();
+           returned_Objects[2] = isPlayer2Playing();
+           returned_Objects[3] = isComputerPlaying();
 
-                if(GameManager.getGameState().equals(Game.NULL)){ pButton.setText("PAUSE"); }
+        return returned_Objects;
 
-                else if(GameManager.getGameState().equals(Game.IN_PROGRESS))
-                {
-                    System.out.println("Pause pressed");
-                    pButton.setText("PLAY");
-                    GameManager.pause();
-                    System.out.println(GameManager.getGameState());
-                }
-
-                else if (GameManager.getGameState().equals(Game.PAUSED))
-                {
-                    System.out.println("Play pressed");
-                    pButton.setText("PAUSE");
-                    GameManager.resume();
-                    System.out.println(GameManager.getGameState());
-                }
-            }
-        );
-        pButton.setBackground(new Color (57,163,157));
-        _p_Button.add(pButton);
-        _p_Button.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-
-        // Start Button
-        JPanel _startButton = new JPanel();
-        _startButton.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        _start = new JButton("START");
-        _start.addActionListener(
-                e -> {
-                    if(GameManager.getGameState().equals(Game.NULL)){
-                        _start.setText("RESET");
-                        System.out.println(_start.getText());
-                        GameManager.start();
-                    }
-                    else {
-                        pButton.setText("PAUSE");
-                        GameManager.replay(500, 500, true, true);
-
-                    }
-                }
-        );
-        _start.setBackground(new Color (57,163,157));
-        _startButton.add(_start);
-
-
-        // ADD
-        _playButtons.add(_startButton);
-        _playButtons.add(_p_Button);
-        // Return
-        return _playButtons;
     }
+
+    public static Object getArenaSize()
+    {
+        int dimensions;
+
+        if ((ParametersPanel.get_arenaSize()).getSelectedIndex() == 0) dimensions = 400;
+        else if ((ParametersPanel.get_arenaSize()).getSelectedIndex() == 1) dimensions = 500;
+        else if ((ParametersPanel.get_arenaSize()).getSelectedIndex() == 2) dimensions = 750;
+        else{dimensions = 500;}
+
+        Integer size = new Integer(dimensions);
+        return size;
+    }
+
+    public static Object isPlayer2Playing()
+    {
+        //Verifies if the selection is on the 1st or 3rd postion and returns the value found
+        Boolean isPlayer2Playing = new Boolean(((ParametersPanel.get_gameType()).getSelectedIndex() == 0) || ((ParametersPanel.get_gameType()).getSelectedIndex() == 2));
+
+        return isPlayer2Playing;
+    }
+
+    public static Object isComputerPlaying()
+    {
+        //Verifies if the selection is on the 1st or 3rd postion and returns the value found
+        Boolean isComputerPlaying = new Boolean((ParametersPanel.get_gameType()).getSelectedIndex() == 1 || (ParametersPanel.get_gameType()).getSelectedIndex() == 2);
+
+        return isComputerPlaying;
+
+    }
+
 
     /**
      * Initialize and returns the bottom pane of the BorderLayout. Contains : Show-Controls JButton
