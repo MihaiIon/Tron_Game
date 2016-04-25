@@ -38,6 +38,7 @@ public class TronControlPanel extends JPanel {
 
     //JButtons
     private JButton _start;
+    private static JButton controls;
 
     // Show winner
     private Font roboto_thin;
@@ -247,7 +248,7 @@ public class TronControlPanel extends JPanel {
         JPanel _south = new JPanel();
         _south.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
         _south.setPreferredSize(new Dimension(450,30));
-        JButton controls = new JButton("");
+        controls = new JButton("");
         controls.addActionListener(
                 e ->{
                     tron_control_panel_layout.removeLayoutComponent(tron_control_panel_layout.getLayoutComponent(BorderLayout.CENTER));
@@ -331,4 +332,6 @@ public class TronControlPanel extends JPanel {
 
     // Getters
     public PlayersBoard getPlayersBoard() { return players_board_container.getPlayersBoard(); }
+
+    public static JButton getControls() { return controls; }
 }

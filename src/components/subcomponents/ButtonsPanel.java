@@ -68,12 +68,9 @@ public class ButtonsPanel extends JPanel{
         _startButton = new JButton("START");
         _startButton.addActionListener(
                 e -> {
-                    //if(GameManager.getGameState().equals(Game.NULL)){
+
                         _startButton.setText("RESET");
                         System.out.println(_startButton.getText());
-                       // GameManager.start();
-                    //}
-                   // else {
                         _pauseButton.setText("PAUSE");
                         initializeSelected();
                         System.out.println((Integer)selected_Array[0]);
@@ -81,9 +78,16 @@ public class ButtonsPanel extends JPanel{
                         System.out.println((Boolean)selected_Array[2]);
                         System.out.println((Boolean)selected_Array[3]);
 
+                       //Puts focus on game to allow player control
+                        _startButton.setFocusable(false);
+                        _pauseButton.setFocusable(false);
+                        (TronControlPanel.getControls()).setFocusable(false);
+                        (ParametersPanel.get_arenaSize()).setFocusable(false);
+                        (ParametersPanel.get_playerSpeed()).setFocusable(false);
+                        (ParametersPanel.get_gameType()).setFocusable(false);
+
                         GameManager.replay(((Integer)selected_Array[0]), ((Integer)selected_Array[1]),(Boolean)selected_Array[2], (Boolean)selected_Array[3]);
 
-                   // }
                 }
         );
         _startButton.setBackground(Game.TRON_CONTROL_PANEL_BUTTONS_BACKGROUND_COLOR);
