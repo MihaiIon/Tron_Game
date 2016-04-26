@@ -1,5 +1,6 @@
 package components.subcomponents;
 
+import components.Arene;
 import components.TronControlPanel;
 import constant.Game;
 import mecanism.GameManager;
@@ -31,6 +32,7 @@ public class ButtonsPanel extends JPanel{
         // Play/Pause Button
         JPanel _pauseButton_Panel = new JPanel();
         _pauseButton = new JButton("PAUSE");
+        _pauseButton.setFocusable(false);
         _pauseButton.addActionListener(
                 e -> {
 
@@ -66,6 +68,7 @@ public class ButtonsPanel extends JPanel{
         JPanel _startButton_Panel = new JPanel();
         _startButton_Panel.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
         _startButton = new JButton("START");
+        _startButton.setFocusable(false);
         _startButton.addActionListener(
                 e -> {
 
@@ -73,19 +76,19 @@ public class ButtonsPanel extends JPanel{
                         System.out.println(_startButton.getText());
                         _pauseButton.setText("PAUSE");
                         initializeSelected();
-                        System.out.println((Integer)selected_Array[0]);
-                        System.out.println((Integer)selected_Array[1]);
-                        System.out.println((Boolean)selected_Array[2]);
-                        System.out.println((Boolean)selected_Array[3]);
+                        //System.out.println((Integer)selected_Array[0]);
+                        //System.out.println((Integer)selected_Array[1]);
+                        //System.out.println((Boolean)selected_Array[2]);
+                        //System.out.println((Boolean)selected_Array[3]);
 
                        //Puts focus on game to allow player control
-                        _startButton.setFocusable(false);
-                        _pauseButton.setFocusable(false);
+
+/*
                         (TronControlPanel.getControls()).setFocusable(false);
                         (ParametersPanel.get_arenaSize()).setFocusable(false);
                         (ParametersPanel.get_playerSpeed()).setFocusable(false);
                         (ParametersPanel.get_gameType()).setFocusable(false);
-
+*/
                         GameManager.replay(((Integer)selected_Array[0]), ((Integer)selected_Array[1]),(Boolean)selected_Array[2], (Boolean)selected_Array[3]);
 
                 }

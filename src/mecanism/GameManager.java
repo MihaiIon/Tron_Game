@@ -168,7 +168,7 @@ public class GameManager implements KeyListener {
     }
 
     // Getters
-    public Arene getArena() { return arena; }
+    public static Arene getArena() { return arena; }
     public boolean isConsoleInfoON() { return console_info; }
     public static String getGameState() { return game_state; }
     public static Joueur[] getPlayers() { return players; }

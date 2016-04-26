@@ -23,7 +23,7 @@ public abstract class Joueur {
     private Color couleur;
     private String direction_courante;
     private String nouvelle_direction; // WHY
-    //private int nb_of_boost;
+    private int nb_of_boost;
 
     // Constructors
     public Joueur(Color color)
@@ -31,6 +31,8 @@ public abstract class Joueur {
         couleur = color;
         alive = true;
         boost = false;
+        nb_of_boost = 3;
+
     }
 
     public Joueur(int r, int g, int b)
@@ -96,9 +98,14 @@ public abstract class Joueur {
      * a certain amount of time.
      */
     public void boost(){
-        boost = true;
-        setSpeed(Game.PLAYERS_BOOST_SPEED);
-        boostDuration(this);
+
+        if (nb_of_boost > 0) {
+            boost = true;
+            setSpeed(Game.PLAYERS_BOOST_SPEED);
+            boostDuration(this);
+            nb_of_boost--;
+            System.out.println(nb_of_boost);
+        }
     }
 
     /**
@@ -162,5 +169,12 @@ public abstract class Joueur {
     public void kill(){
         alive = false;
         GameManager.killPlayer();
+    }
+
+    //Setters
+    public void setNb_of_boost(int n)
+    {
+        nb_of_boost = n;
+
     }
 }

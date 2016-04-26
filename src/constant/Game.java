@@ -18,6 +18,7 @@ public class Game {
     public static final int TRON_CONTROL_PANEL_HEIGHT = 700;
     public static final Color TRON_CONTROL_PANEL_BACKGROUND_COLOR = new Color(15,15,15);
     public static final Color TRON_CONTROL_PANEL_BUTTONS_BACKGROUND_COLOR = new Color (57,163,157);
+    public static final Color TRON_PARAMETERS_TEXT_COLOR = new Color(90,90,90);
     public static final Dimension TRON_PARAMETERS_DIMENSIONS = new Dimension(450, 30);
     public static final Dimension TRON_LIST_DIMENSIONS = new Dimension(200, 30);
 

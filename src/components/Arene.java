@@ -130,6 +130,7 @@ public class Arene extends JComponent{
         for (Joueur player : joueurs) {
             player.revive();
             player.initializeTrace(largeur_grille, hauteur_grille);
+            player.setNb_of_boost(3);
         }
     }
 

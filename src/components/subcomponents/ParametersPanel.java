@@ -40,8 +40,9 @@ public class ParametersPanel extends JPanel {
                 "Human vs Human","Human vs Computer", "H vs H vs Computer"});
         _gameType.setPreferredSize(new Dimension(200,20));
         _gameType.setBackground(Color.white);
-        _gameType.setForeground(Color.lightGray);
+        _gameType.setForeground(Game.TRON_PARAMETERS_TEXT_COLOR);
         _gameType.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
+        _gameType.setFocusable(false);
 
         // Add Gametype
         _gameType_list.add(_gameTypeTitle);
@@ -64,8 +65,9 @@ public class ParametersPanel extends JPanel {
                 "             1","             2", "             3"});
         _playerSpeed.setPreferredSize(new Dimension(112,20));
         _playerSpeed.setBackground(Color.white);
-        _playerSpeed.setForeground(Color.lightGray);
+        _playerSpeed.setForeground(Game.TRON_PARAMETERS_TEXT_COLOR);
         _playerSpeed.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
+        _playerSpeed.setFocusable(false);
 
         // Speed add
         _speed_list.add(_playerSpeedTitle);
@@ -87,8 +89,9 @@ public class ParametersPanel extends JPanel {
                 "Small","Medium", "Big"});
         _arenaSize.setPreferredSize(new Dimension(132,20));
         _arenaSize.setBackground(Color.white);
-        _arenaSize.setForeground(Color.lightGray);
+        _arenaSize.setForeground(Game.TRON_PARAMETERS_TEXT_COLOR);
         _arenaSize.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
+        _arenaSize.setFocusable(false);
         // arena add
         _arena_list.add(_arenaSizeTitle);
         _arena_list.add(_arenaSize);
