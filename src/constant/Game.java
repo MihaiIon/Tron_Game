@@ -14,15 +14,17 @@ public class Game {
 
     // TronControlPanel Properties
     public static final Dimension TRON_CONTROL_PANEL_DIMESIONS = new Dimension(500, 700);
-    public static final int TRON_CONTROL_PANEL_WIDTH = 500;
-    public static final int TRON_CONTROL_PANEL_HEIGHT = 700;
+    public static final int TRON_CONTROL_PANEL_WIDTH = TRON_CONTROL_PANEL_DIMESIONS.width;
+    public static final int TRON_CONTROL_PANEL_HEIGHT = TRON_CONTROL_PANEL_DIMESIONS.height;
     public static final Color TRON_CONTROL_PANEL_BACKGROUND_COLOR = new Color(15,15,15);
     public static final Color TRON_CONTROL_PANEL_BUTTONS_BACKGROUND_COLOR = new Color (57,163,157);
     public static final Color TRON_PARAMETERS_TEXT_COLOR = new Color(90,90,90);
     public static final Dimension TRON_PARAMETERS_DIMENSIONS = new Dimension(450, 30);
     public static final Dimension TRON_LIST_DIMENSIONS = new Dimension(200, 30);
+    public static final Dimension TRON_OPTIONS_DIMENSIONS = new Dimension(TRON_CONTROL_PANEL_WIDTH, 30);
+    public static final Dimension TRON_BUTTONS_DIMENSIONS = new Dimension(TRON_CONTROL_PANEL_WIDTH, 80);
 
-    // PlayersBoard
+    // playerboard
     public static final int PLAYERS_BOARD_CONTAINER_WIDTH = TRON_CONTROL_PANEL_WIDTH-50;
     public static final int PLAYERS_BOARD_CONTAINER_HEIGHT = 160;
     public static final int PLAYERS_BOARD_WIDTH = PLAYERS_BOARD_CONTAINER_WIDTH-22;

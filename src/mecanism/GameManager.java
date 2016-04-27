@@ -3,7 +3,7 @@ package mecanism;
 import components.Arene;
 import components.TronControlPanel;
 import components.TronPanel;
-import components.subcomponents.PlayersBoard.PlayersBoard;
+import components.subcomponents.playerboard.PlayersBoard;
 import constant.Direction;
 import constant.Game;
 import constant.RefreshRate;
@@ -22,11 +22,12 @@ import java.util.Timer;
 public class GameManager implements KeyListener {
 
     // Attributs
-    private static Arene arena;
     private static TronPanel tron_panel;
     private static TronControlPanel tron_control_panel;
     private static PlayersBoard players_board;
-    private boolean console_info;
+    private static Options options;
+    private static Arene arena;
+    private static boolean console_info;
     private static int refresh_rate;
 
     // Game flow variables
@@ -126,19 +127,32 @@ public class GameManager implements KeyListener {
      * If the settings are the same on replay, it keeps the same Arena and only resets the players.
      * Else, it creates a whole new Arena.
      */
-    public static void replay(int arena_width, int arena_height, boolean multiplayer, boolean computer_player)
+    public static void replay()
     {
+        // Stops winner blinking
         tron_control_panel.stopDisplayingWinner();
 
-        if (arena_width == arena.getLargeur_grille() && arena_height == arena.getHauteur_grille() &&
-                multiplayer == arena.isMultiplayer() && computer_player == arena.isComputerPlayer())
+        // Gets new options
+        options = new Options(tron_control_panel.getOptions());
+
+        // create Arena
+        if (options != null && options.getArenaWidth() == arena.getLargeur_grille() && options.getArenaHeight() == arena.getHauteur_grille() &&
+            options.isMultiplayer() == arena.isMultiplayer() && options.isComputerPlayer() == arena.isComputerPlayer())
         {
             arena.revivePlayers();
             players_board.resetStatus();
             players_alive_count = players.length;
         }
 
-        else createNewArena(arena_width, arena_height, multiplayer, computer_player);
+        else
+        {
+            createNewArena(
+                options.getArenaWidth(),
+                options.getArenaHeight(),
+                options.isMultiplayer(),
+                options.isComputerPlayer()
+            );
+        }
 
         start();
     }
@@ -295,7 +309,7 @@ public class GameManager implements KeyListener {
         switch (e.getKeyCode()){
             case KeyEvent.VK_R:                                     // Reset Game
 
-                replay(arena.getLargeur_grille(), arena.getHauteur_grille(), true, false);
+                replay();
                 break;
 
             case KeyEvent.VK_P:

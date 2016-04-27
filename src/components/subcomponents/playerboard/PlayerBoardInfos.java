@@ -1,4 +1,4 @@
-package components.subcomponents.PlayersBoard;
+package components.subcomponents.playerboard;
 
 import constant.Game;
 import javax.swing.*;
