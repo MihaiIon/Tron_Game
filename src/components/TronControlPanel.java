@@ -1,11 +1,12 @@
 package components;
 
+import com.company.Tron;
 import components.subcomponents.controlpanel.ButtonsPanel;
 import components.subcomponents.controlpanel.OptionsPanel;
-import components.subcomponents.playerboard.PlayersBoard;
-import components.subcomponents.playerboard.PlayersBoardContainer;
+import components.subcomponents.playerscontrols.PlayersControlsPanel;
+import components.subcomponents.playersboard.PlayersBoard;
+import components.subcomponents.playersboard.PlayersBoardContainer;
 import constant.Game;
-import players.Joueur;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -33,7 +34,7 @@ public class TronControlPanel extends JPanel {
     private OptionsPanel options_panel;
     private ButtonsPanel buttons_panel;
     private PlayersBoardContainer players_board_container; // Contains players informations
-    private JPanel controls_panel; // Contains players controls
+    private PlayersControlsPanel players_controls_panel; // Contains players controls
 
     // J-Components
     private JLabel title_container;
@@ -41,7 +42,6 @@ public class TronControlPanel extends JPanel {
     private JButton show_controls_btn;
 
     // Show winner
-    private Font roboto_thin;
     private Timer winner_display_timer;
     private boolean winner_displayed;
 
@@ -57,11 +57,12 @@ public class TronControlPanel extends JPanel {
         setLayout(new BorderLayout());
         tron_control_panel_layout = (BorderLayout)getLayout();
 
-        // Title panel
+        // Main Panels
         initializeTitlePanel();
         initializeMainPanel();
         add(title_panel,BorderLayout.NORTH);
         add(main_panel,BorderLayout.CENTER);
+        players_controls_panel = new PlayersControlsPanel();
         main_panel_displayed = true;
 
         // Add bottom pane
@@ -93,16 +94,6 @@ public class TronControlPanel extends JPanel {
             title_panel.add(title_container);
         }
         catch(IOException e){System.out.println(e);}
-
-        // Load Roboto thin font
-        try {
-            roboto_thin = Font.createFont(Font.TRUETYPE_FONT, new File("res/Roboto-Thin.ttf")).deriveFont(40f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(roboto_thin);
-
-        } catch (IOException | FontFormatException e) {
-            System.out.println("No such Font");
-        }
     }
 
     /**
@@ -197,7 +188,7 @@ public class TronControlPanel extends JPanel {
             e ->{
                 remove(tron_control_panel_layout.getLayoutComponent(BorderLayout.CENTER));
                 if (!main_panel_displayed) add(main_panel, BorderLayout.CENTER);
-                else add(new JButton("YOLO"), BorderLayout.CENTER);
+                else add(players_controls_panel, BorderLayout.CENTER);
                 main_panel_displayed = !main_panel_displayed;
                 revalidate();
                 repaint();
@@ -223,25 +214,25 @@ public class TronControlPanel extends JPanel {
         if (winner_display_timer != null) winner_display_timer.cancel();
         winner_display_timer = new Timer();
         winner_display_timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
+                @Override
+                public void run() {
 
-                title_panel.remove(title_container);
+                    title_panel.remove(title_container);
 
-                if (winner_displayed) displayLogo();
-                else
-                {
-                    title_container = new JLabel(winner + " HAS WON!");
-                    title_container.setFont(roboto_thin);
-                    title_container.setForeground(winner_color);
-                    title_container.setBorder(BorderFactory.createEmptyBorder(15,0,0,0));
-                    title_panel.revalidate();
-                    title_panel.repaint();
+                    if (winner_displayed) displayLogo();
+                    else
+                    {
+                        title_container = new JLabel(winner + " HAS WON!");
+                        title_container.setFont(Tron.roboto_thin.deriveFont(40f));
+                        title_container.setForeground(winner_color);
+                        title_container.setBorder(BorderFactory.createEmptyBorder(15,0,0,0));
+                        title_panel.revalidate();
+                        title_panel.repaint();
+                    }
+
+                    title_panel.add(title_container);
+                    winner_displayed = !winner_displayed;
                 }
-
-                title_panel.add(title_container);
-                winner_displayed = !winner_displayed;
-            }
             }, 0, 1000
         );
     }

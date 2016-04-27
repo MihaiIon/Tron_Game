@@ -1,7 +1,7 @@
 package components;
 
 import components.subcomponents.ArenaContainer;
-import components.subcomponents.playerboard.PlayersBoard;
+import components.subcomponents.playersboard.PlayersBoard;
 
 import javax.swing.*;
 import java.awt.*;

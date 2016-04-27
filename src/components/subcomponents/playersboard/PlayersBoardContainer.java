@@ -1,7 +1,7 @@
-package components.subcomponents.playerboard;
+package components.subcomponents.playersboard;
 
 import constant.Game;
-import players.Joueur;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;

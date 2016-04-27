@@ -3,7 +3,7 @@ package mecanism;
 import components.Arene;
 import components.TronControlPanel;
 import components.TronPanel;
-import components.subcomponents.playerboard.PlayersBoard;
+import components.subcomponents.playersboard.PlayersBoard;
 import constant.Direction;
 import constant.Game;
 import constant.RefreshRate;

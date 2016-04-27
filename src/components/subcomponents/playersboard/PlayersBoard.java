@@ -1,4 +1,4 @@
-package components.subcomponents.playerboard;
+package components.subcomponents.playersboard;
 
 import constant.Game;
 import players.HumanPlayer;

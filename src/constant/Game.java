@@ -24,6 +24,8 @@ public class Game {
     public static final Color TRON_CONTROL_PANEL_BACKGROUND_COLOR = new Color(15,15,15);
     public static final Color TRON_OPTIONS_LABELS_COLOR = new Color(180,180,180);
     public static final Color TRON_OPTIONS_BOXES_TEXT_COLOR = new Color(60,60,60);
+    public static final Color TRON_CONTROLS_LABELS_COLOR = new Color(128, 128, 128);
+
     public static final Color START_BTN_DEFAULT_BACKGROUND_COLOR = new Color (57,163,157);
     public static final Color PAUSE_BTN_DEFAULT_BACKGROUND_COLOR = new Color (201, 171, 52);
     public static final Color PAUSE_BTN_DEFAULT_FORGROUND_COLOR = new Color (151, 121, 48);
