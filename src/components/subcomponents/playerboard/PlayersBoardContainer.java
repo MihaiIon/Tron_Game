@@ -12,7 +12,7 @@ public class PlayersBoardContainer extends JPanel {
     // Attributes
     private PlayersBoard players_board;
 
-    public PlayersBoardContainer(Joueur[] players) {
+    public PlayersBoardContainer() {
 
         // JPanel
         setPreferredSize(new Dimension(
@@ -23,7 +23,7 @@ public class PlayersBoardContainer extends JPanel {
         setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
 
         // Players Board
-        players_board = new PlayersBoard(players);
+        players_board = new PlayersBoard();
         add(players_board);
     }
 

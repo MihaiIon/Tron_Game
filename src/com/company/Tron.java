@@ -11,16 +11,16 @@ import java.io.IOException;
 public class Tron {
 
     public static GameManager GM;
+    public static MainWindow window;
 
     public static void main(String[] args)
     {
         // Initialize Font
         initializeRobotoFont();
 
-        // Initialize Game
-        MainWindow window = new MainWindow();
+        // Initialize Game Window
+        window = new MainWindow();
         GM = new GameManager(window.getTronPanel());
-        GM.createNewArena(700,700,true, true);
         window.addKeyListener(GM);
         window.pack();
     }

@@ -18,7 +18,7 @@ public class PlayersBoard extends JPanel {
      * Sets up the players_board. The players_board contains all the informations related to each players : name,
      * color, status, boost remainers, total wins.
      */
-    public PlayersBoard(Joueur[] players)
+    public PlayersBoard()
     {
         // JPanel
         ((FlowLayout)getLayout()).setVgap(0);
@@ -28,7 +28,7 @@ public class PlayersBoard extends JPanel {
             Game.PLAYERS_BOARD_HEIGHT
         ));
 
-        initializePlayers(players);
+        initializePlayers(new Joueur[4]);
     }
 
     // Methods
@@ -60,7 +60,7 @@ public class PlayersBoard extends JPanel {
                 new Color(18, 18, 18)
             );
 
-            if (i-1 < players.length) {
+            if (i-1 < players.length && players[0] != null) {
                 players_infos[i].initializePlayerInfos();
                 players_infos[i].setName(
                     players[i-1] instanceof HumanPlayer

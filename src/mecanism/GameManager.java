@@ -308,7 +308,7 @@ public class GameManager implements KeyListener {
 
         switch (e.getKeyCode()){
             case KeyEvent.VK_R:                                     // Reset Game
-
+                tron_control_panel.getButtons().getStart().setDisplayStart(false);
                 replay();
                 break;
 
@@ -316,11 +316,6 @@ public class GameManager implements KeyListener {
 
                 if (game_state.equals(Game.IN_PROGRESS)) pause();   // Pause Game
                 else if (game_state.equals(Game.PAUSED)) resume();  // Resume Game
-                break;
-
-            case KeyEvent.VK_U:
-
-                start();                                            // Start Game
                 break;
 
             default:

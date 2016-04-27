@@ -21,21 +21,23 @@ import java.util.TimerTask;
  */
 public class TronControlPanel extends JPanel {
 
-    // Panels
-    private JPanel title_panel;
-    private OptionsPanel options_panel;
-    private JPanel buttons_panel;
-    private PlayersBoardContainer players_board_container; // Contains players informations
-
     // Main Layout
     private BorderLayout tron_control_panel_layout;
 
-    // J-components
+    // Panels
+    private JPanel title_panel;
+    private JPanel main_panel;
+
+    // J-Complexe-Panels
+    private OptionsPanel options_panel;
+    private ButtonsPanel buttons_panel;
+    private PlayersBoardContainer players_board_container; // Contains players informations
+    private JPanel controls_panel; // Contains players controls
+
+    // J-Components
     private JLabel title_container;
     private BufferedImage tron_logo;
-
-    //JButtons
-    //private static JButton controls;
+    private JButton show_controls_btn;
 
     // Show winner
     private Font roboto_thin;
@@ -46,7 +48,7 @@ public class TronControlPanel extends JPanel {
     /**
      * **COMPLETE THIS**
      */
-    public TronControlPanel(Joueur[] players) {
+    public TronControlPanel() {
 
         // Caracteristique
         setPreferredSize(Game.TRON_CONTROL_PANEL_DIMESIONS);
@@ -56,11 +58,12 @@ public class TronControlPanel extends JPanel {
 
         // Title panel
         initializeTitlePanel();
+        initializeMainPanel();
         add(title_panel,BorderLayout.NORTH);
-        add(getCenterPanel(players),BorderLayout.CENTER);
+        add(main_panel,BorderLayout.CENTER);
 
         // Add bottom pane
-        add(getSouthPanel(),BorderLayout.SOUTH);
+        add(InitializeSouthPanel(),BorderLayout.SOUTH);
 
         // set winner_displayed
         winner_displayed = false;
@@ -101,29 +104,24 @@ public class TronControlPanel extends JPanel {
     }
 
     /**
-     * Initialize and returns the center pane of the BorderLayout. Contains : game parameters or controls
-     * (switches between with the button located in tron_control_panel_layout bottom pane).
-     * @return : Center Pane.
+     * Initialize the main panel of the BorderLayout. Contains : game options controllers , buttons and players board.
      */
-    public JPanel getCenterPanel(Joueur[] players)
+    public void initializeMainPanel()
     {
-        JPanel _center = new JPanel();
-        _center.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        _center.setPreferredSize(new Dimension(225,210));
-        _center.setLayout(new FlowLayout());
+        // JPanel
+        main_panel = new JPanel();
+        main_panel.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
+        main_panel.setLayout(new FlowLayout());
 
-        //ADD
-        options_panel = new OptionsPanel();  // components > subccmponents > OptionsPanel.java.
-        buttons_panel = new ButtonsPanel();     // components > subccmponents > ButtonsPanel.java.
-        _center.add(options_panel);
-        _center.add(buttons_panel);
+        // Add sub components
+        options_panel = new OptionsPanel();  // components > subcomponents > OptionsPanel.java.
+        buttons_panel = new ButtonsPanel();  // components > subcomponents > ButtonsPanel.java.
+        main_panel.add(options_panel);
+        main_panel.add(buttons_panel);
 
-        // Players board panel
-        players_board_container = new PlayersBoardContainer(players);
-        _center.add(players_board_container, BorderLayout.CENTER);
-
-        //return
-        return _center;
+        // Add Players board panel
+        players_board_container = new PlayersBoardContainer();
+        main_panel.add(players_board_container, BorderLayout.CENTER);
     }
 
 
@@ -183,27 +181,32 @@ public class TronControlPanel extends JPanel {
      * Initialize and returns the bottom pane of the BorderLayout. Contains : Show-Controls JButton
      * @return : **COMPLETE THIS**
      */
-    public JPanel getSouthPanel()
+    public JPanel InitializeSouthPanel()
     {
         JPanel _south = new JPanel();
         _south.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        _south.setPreferredSize(new Dimension(450,30));
-        JButton controls = new JButton("");
-        controls.setFocusable(false);
-        controls.addActionListener(
+        _south.setPreferredSize(new Dimension(450,40));
+
+        //
+        show_controls_btn = new JButton("");
+        show_controls_btn.setFocusable(false);
+        show_controls_btn.addActionListener(
             e ->{
-                tron_control_panel_layout.removeLayoutComponent(tron_control_panel_layout.getLayoutComponent(BorderLayout.CENTER));
-                tron_control_panel_layout.addLayoutComponent(new JButton("YOLO"), BorderLayout.CENTER);
+                remove(tron_control_panel_layout.getLayoutComponent(BorderLayout.CENTER));
+                add(new JButton("YOLO"), BorderLayout.CENTER);
+                revalidate();
+                repaint();
             }
         );
 
-        controls.setText("<HTML><FONT color=\"#39A39D\"><U>Show Controls</U></FONT></HTML>");
-        controls.setHorizontalAlignment(SwingConstants.RIGHT);
-        controls.setBorderPainted(false);
-        controls.setOpaque(false);
-        controls.setBackground(Color.WHITE);
+        show_controls_btn.setText("<HTML><FONT color=\"#39A39D\"><U>Show Controls</U></FONT></HTML>");
+        show_controls_btn.setHorizontalAlignment(SwingConstants.RIGHT);
+        show_controls_btn.setBorderPainted(false);
+        show_controls_btn.setOpaque(false);
+        show_controls_btn.setBackground(Color.WHITE);
+
         // ADD
-        _south.add(controls);
+        _south.add(show_controls_btn);
         return _south;
     }
 
@@ -266,4 +269,5 @@ public class TronControlPanel extends JPanel {
     // Getters
     public PlayersBoard getPlayersBoard() { return players_board_container.getPlayersBoard(); }
     public Object[] getOptions() { return options_panel.getOptions(); }
+    public ButtonsPanel getButtons() { return buttons_panel; }
 }

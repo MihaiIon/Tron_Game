@@ -30,7 +30,7 @@ public class TronPanel extends JPanel{
         add(arena_container, BorderLayout.CENTER);
 
         // Add TronControlePanel to Top pane
-        control_panel = new TronControlPanel(arena.getPlayers());
+        control_panel = new TronControlPanel();
         add(control_panel, BorderLayout.EAST);
 
         setFocusable(true);
