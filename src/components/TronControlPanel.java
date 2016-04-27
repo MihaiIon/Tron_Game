@@ -27,6 +27,7 @@ public class TronControlPanel extends JPanel {
     // Panels
     private JPanel title_panel;
     private JPanel main_panel;
+    private boolean main_panel_displayed;
 
     // J-Complexe-Panels
     private OptionsPanel options_panel;
@@ -61,6 +62,7 @@ public class TronControlPanel extends JPanel {
         initializeMainPanel();
         add(title_panel,BorderLayout.NORTH);
         add(main_panel,BorderLayout.CENTER);
+        main_panel_displayed = true;
 
         // Add bottom pane
         add(InitializeSouthPanel(),BorderLayout.SOUTH);
@@ -184,23 +186,24 @@ public class TronControlPanel extends JPanel {
     public JPanel InitializeSouthPanel()
     {
         JPanel _south = new JPanel();
-        _south.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        _south.setPreferredSize(new Dimension(450,40));
+        _south.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        _south.setBorder(BorderFactory.createEmptyBorder(0,0,5,5));
+        _south.setOpaque(false);
 
-        //
+        // Show controls - Button
         show_controls_btn = new JButton("");
         show_controls_btn.setFocusable(false);
         show_controls_btn.addActionListener(
             e ->{
                 remove(tron_control_panel_layout.getLayoutComponent(BorderLayout.CENTER));
-                add(new JButton("YOLO"), BorderLayout.CENTER);
+                if (!main_panel_displayed) add(main_panel, BorderLayout.CENTER);
+                else add(new JButton("YOLO"), BorderLayout.CENTER);
+                main_panel_displayed = !main_panel_displayed;
                 revalidate();
                 repaint();
             }
         );
-
         show_controls_btn.setText("<HTML><FONT color=\"#39A39D\"><U>Show Controls</U></FONT></HTML>");
-        show_controls_btn.setHorizontalAlignment(SwingConstants.RIGHT);
         show_controls_btn.setBorderPainted(false);
         show_controls_btn.setOpaque(false);
         show_controls_btn.setBackground(Color.WHITE);

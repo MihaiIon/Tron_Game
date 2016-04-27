@@ -23,7 +23,7 @@ public class Game {
 
     public static final Color TRON_CONTROL_PANEL_BACKGROUND_COLOR = new Color(15,15,15);
     public static final Color TRON_OPTIONS_LABELS_COLOR = new Color(180,180,180);
-    public static final Color TRON_OPTIONS_BOXES_TEXT_COLOR = new Color(100,100,100);
+    public static final Color TRON_OPTIONS_BOXES_TEXT_COLOR = new Color(60,60,60);
     public static final Color START_BTN_DEFAULT_BACKGROUND_COLOR = new Color (57,163,157);
     public static final Color PAUSE_BTN_DEFAULT_BACKGROUND_COLOR = new Color (201, 171, 52);
     public static final Color PAUSE_BTN_DEFAULT_FORGROUND_COLOR = new Color (151, 121, 48);
@@ -31,7 +31,7 @@ public class Game {
     public static final Color PAUSE_BTN_INACTIVE_FORGROUND_COLOR = new Color (55, 55, 54);
     public static final Color PAUSE_BTN_PAUSED_BACKGROUND_COLOR = new Color (44, 158, 77);
     public static final Color PAUSE_BTN_PAUSED_FORGROUND_COLOR_1 = new Color (71, 184, 92);
-    public static final Color PAUSE_BTN_PAUSED_FORGROUND_COLOR_2 = new Color (41, 125, 62);
+    public static final Color PAUSE_BTN_PAUSED_FORGROUND_COLOR_2 = new Color (41, 113, 57);
 
     public static final Dimension TRON_JLABELS_CONTAINER_DIMENSIONS = new Dimension(140, 120);
     public static final Dimension TRON_JCOMPONENTS_CONTAINER_DIMENSIONS = new Dimension(220, 120);

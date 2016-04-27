@@ -129,6 +129,71 @@ public class OptionsPanel extends JPanel {
      * **COMPLETE THIS**
      * @return : **COMPLETE THIS**
      */
+    private JPanel initializeJComboBoxsColumn()
+    {
+        // JPanel properties
+        JPanel _boxes_col = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 2));
+        _boxes_col.setPreferredSize(Game.TRON_JCOMPONENTS_CONTAINER_DIMENSIONS);
+        _boxes_col.setOpaque(false);
+
+
+        // ***********************************************************************
+        // JComponents...
+
+
+        // Game Type JComboBox
+        game_type = new JComboBox(new String[]{ "Human vs Human","Human vs Computer", "H vs H vs Computer" });
+        game_type.setFocusable(false);
+        game_type.setBackground(Color.white);
+        game_type.setForeground(Game.TRON_OPTIONS_BOXES_TEXT_COLOR);
+        game_type.setPreferredSize(Game.TRON_OPTIONS_DIMENSIONS);
+
+        JPanel _game_type_contaier = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        _game_type_contaier.setOpaque(false);
+        _game_type_contaier.add(game_type);
+        _game_type_contaier.setPreferredSize(Game.TRON_JCOMBOBOXES_CONTAINER_DIMENSIONS);
+
+
+        // Arena Size JComboBox
+        arena_size = new JComboBox(new String[]{ "Small","Medium", "Big"} );
+        arena_size.setSelectedItem("Medium");
+        arena_size.setFocusable(false);
+        arena_size.setBackground(Color.white);
+        arena_size.setForeground(Game.TRON_OPTIONS_BOXES_TEXT_COLOR);
+        arena_size.setPreferredSize(Game.TRON_OPTIONS_DIMENSIONS);
+
+        JPanel _arena_size_contaier = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        _arena_size_contaier.setOpaque(false);
+        _arena_size_contaier.add(arena_size);
+        _arena_size_contaier.setPreferredSize(Game.TRON_JCOMBOBOXES_CONTAINER_DIMENSIONS);
+
+
+        // Players Speed
+        player_speed = new JTextField("Enter numbers between [1-10]");
+        player_speed.setBackground(Color.white);
+        player_speed.setForeground(Game.TRON_OPTIONS_BOXES_TEXT_COLOR);
+        player_speed.setPreferredSize(Game.TRON_OPTIONS_DIMENSIONS);
+
+        JPanel _players_speed_contaier = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        _players_speed_contaier.setOpaque(false);
+        _players_speed_contaier.add(player_speed);
+        _players_speed_contaier.setPreferredSize(Game.TRON_JCOMBOBOXES_CONTAINER_DIMENSIONS);
+
+
+        // ..End labels
+        // ************************************************************************
+
+        _boxes_col.add(_game_type_contaier);
+        _boxes_col.add(_arena_size_contaier);
+        _boxes_col.add(_players_speed_contaier);
+
+        return _boxes_col;
+    }
+
+    /**
+     * **COMPLETE THIS**
+     * @return : **COMPLETE THIS**
+     */
     private JPanel initializeLabelsColumn()
     {
         // JPanel properties
@@ -173,72 +238,6 @@ public class OptionsPanel extends JPanel {
         _labels_col.add(_label_speed);
 
         return _labels_col;
-    }
-
-
-    /**
-     * **COMPLETE THIS**
-     * @return : **COMPLETE THIS**
-     */
-    private JPanel initializeJComboBoxsColumn()
-    {
-        // JPanel properties
-        JPanel _boxes_col = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 2));
-        _boxes_col.setPreferredSize(Game.TRON_JCOMPONENTS_CONTAINER_DIMENSIONS);
-        _boxes_col.setOpaque(false);
-
-
-        // ***********************************************************************
-        // JComponents...
-
-
-        // Game Type JComboBox
-        game_type = new JComboBox(new String[]{ "Human vs Human","Human vs Computer", "H vs H vs Computer" });
-        game_type.setFocusable(false);
-        game_type.setBackground(Color.white);
-        game_type.setForeground(Game.TRON_OPTIONS_BOXES_TEXT_COLOR);
-        game_type.setPreferredSize(Game.TRON_OPTIONS_DIMENSIONS);
-
-        JPanel _game_type_contaier = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        _game_type_contaier.setOpaque(false);
-        _game_type_contaier.add(game_type);
-        _game_type_contaier.setPreferredSize(Game.TRON_JCOMBOBOXES_CONTAINER_DIMENSIONS);
-
-
-        // Arena Size JComboBox
-        arena_size = new JComboBox(new String[]{ "Small","Medium", "Big"} );
-        arena_size.setSelectedItem("Medium");
-        arena_size.setFocusable(false);
-        arena_size.setBackground(Color.white);
-        arena_size.setForeground(Game.TRON_OPTIONS_BOXES_TEXT_COLOR);
-        arena_size.setPreferredSize(Game.TRON_OPTIONS_DIMENSIONS);
-
-        JPanel _arena_size_contaier = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        _arena_size_contaier.setOpaque(false);
-        _arena_size_contaier.add(arena_size);
-        _arena_size_contaier.setPreferredSize(Game.TRON_JCOMBOBOXES_CONTAINER_DIMENSIONS);
-
-
-        // Players Speed
-        player_speed = new JTextField("allo");
-        player_speed.setBackground(Color.white);
-        player_speed.setForeground(Game.TRON_OPTIONS_BOXES_TEXT_COLOR);
-        player_speed.setPreferredSize(Game.TRON_OPTIONS_DIMENSIONS);
-
-        JPanel _players_speed_contaier = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        _players_speed_contaier.setOpaque(false);
-        _players_speed_contaier.add(player_speed);
-        _players_speed_contaier.setPreferredSize(Game.TRON_JCOMBOBOXES_CONTAINER_DIMENSIONS);
-
-
-        // ..End labels
-        // ************************************************************************
-
-        _boxes_col.add(_game_type_contaier);
-        _boxes_col.add(_arena_size_contaier);
-        _boxes_col.add(_players_speed_contaier);
-
-        return _boxes_col;
     }
 
     /**
