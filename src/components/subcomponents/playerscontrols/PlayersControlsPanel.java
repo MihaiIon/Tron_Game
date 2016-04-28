@@ -23,7 +23,6 @@ public class PlayersControlsPanel extends JPanel {
 
         //--------------------------------------------------------------------------------------------
 
-
         /*
          *  JLabels
          */
@@ -83,7 +82,7 @@ public class PlayersControlsPanel extends JPanel {
         _controls_player2.add(new Control("NUM_0", "BOOST"));
         _controls_player2.setPreferredSize(new Dimension(Game.TRON_CONTROL_PANEL_WIDTH-20, 160));
 
-        
+
 
         //--------------------------------------------------------------------------------------------
 

@@ -2,6 +2,7 @@ package mecanism;
 
 import com.company.Tron;
 import constant.Game;
+import players.ComputerPlayer;
 import players.Joueur;
 import players.attributes.Point;
 
@@ -12,47 +13,102 @@ import java.util.TimerTask;
  */
 public class TronTimer extends TimerTask {
 
-    private Point last_position;
-
     // Constructor
     public TronTimer(){}
 
+    /**
+     * Each time this method is called, each player ( alive ) advances in their current direction.
+     *
+     * For collision purpose, a coordinate ( last_point ) is created, containing the current position of
+     * the player before it moves forward. Explained below.
+     *
+     * If only one player remains alive ( GameManager.getPlayersAliveCount() == 1 ), GameManager.endGame() is
+     * called with the last player alive ( winner ) and the game ends.
+     *
+     * A variable _current_player saves the current player in it. This allows to save some computations related
+     * to accessing the player each time.
+     *
+     *
+     * ---------COLLISION SYSTEM----------- *
+     *
+     * Two Checks are made
+     *
+     *      1. Is player in collision with the Arena walls
+     *      2. Is player in collision with a path ( including it's self )
+     *
+     *        ...COMPLETE THIS...
+     *
+     *
+     * -----------Computer IA-------------- *
+     *
+     *        ...COMPLETE THIS...
+     *
+     *
+     */
     @Override
     public void run() {
+
+        Point _last_position;
+        Joueur _current_player;
+
         for (int i=0; i<GameManager.getPlayers().length; i++){
-            if (GameManager.getPlayers()[i].isAlive()) {
 
-                if (GameManager.getPlayersAliveCount() == 1) GameManager.endGame(GameManager.getPlayers()[i]);
+            // Saves current player for easy access
+            _current_player = GameManager.getPlayers()[i];
 
-                last_position = new Point(
-                    GameManager.getPlayers()[i].getCurrentPosition().getX(),
-                    GameManager.getPlayers()[i].getCurrentPosition().getY()
-                );
-
-                GameManager.getPlayers()[i].getTrace().allonge(GameManager.getPlayers()[i].getDirection());
-
-                if (Tron.GM.getArena().isPlayerInCollisionWithArenaWalls(GameManager.getPlayers()[i].getCurrentPosition()) ||
-                    Tron.GM.getArena().isPlayerInCollisionWithPath(GameManager.getPlayers()[i].getCurrentPosition(), last_position))
+            if (_current_player.isAlive()) {
+                if (GameManager.getPlayersAliveCount() == 1) GameManager.endGame(_current_player);
+                else
                 {
-                    GameManager.getPlayers()[i].kill();
-                    GameManager.getPlayersBoard().getPlayerInfos(i).setStatus(Game.PLAYER_STATUS_DEAD);
+                    // Save current position
+                    _last_position = new Point(
+                        _current_player.getCurrentPosition().getX(),
+                        _current_player.getCurrentPosition().getY()
+                    );
+
+                    // Player advances
+                    GameManager.getPlayers()[i].getTrace().allonge(GameManager.getPlayers()[i].getDirection());
+
+                    // Computer IA
+                    if (_current_player instanceof ComputerPlayer) {}
+
+                    // Collision checks
+                    if (isPlayerInCollision(GameManager.getPlayers()[i], _last_position)) {
+                        GameManager.getPlayers()[i].kill();
+                        GameManager.getPlayersBoard().getPlayerInfos(i).setStatus(Game.PLAYER_STATUS_DEAD);
+                    }
                 }
             }
         }
 
-        if (Tron.GM.isConsoleInfoON() && GameManager.getPlayers()[0].isAlive()) {
+        refreshArena();  // Refresh Arena
+
+
+        // ***** FOR DEBUG PURPOSE **************************************************
+        if (Tron.GM.isConsoleInfoON() && GameManager.getPlayers()[0].isAlive())
+        {
             System.out.println();
             GameManager.getPlayers()[0].print();
         }
-
-        refresh();      // Refresh Arena
+        // ***** FOR DEBUG PURPOSE **************************************************
     }
 
-    // Methods
     /**
-     * Redraws the current...**COMPLETE THIS**
+     * Checks if the player is in collision with a wall or another player's path ( or it's self ).
+     * @param player : Current player.
+     * @return : If player is in collision, return true;
      */
-    private void refresh(){
+    private boolean isPlayerInCollision(Joueur player, Point last_position)
+    {
+        return Tron.GM.getArena().isPlayerInCollisionWithArenaWalls(player.getCurrentPosition()) ||
+               Tron.GM.getArena().isPlayerInCollisionWithPath(player.getCurrentPosition(), last_position);
+    }
+
+
+    /**
+     * Redraws the current arena...**COMPLETE THIS**
+     */
+    private void refreshArena(){
         //tron_panel.revalidate();
         //tron_panel.repaint();
         Tron.GM.getArena().repaint();
