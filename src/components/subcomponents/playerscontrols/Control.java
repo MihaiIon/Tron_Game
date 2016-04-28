@@ -30,7 +30,7 @@ public class Control extends JPanel {
         JLabel _label_result = new JLabel(result);
         _label_result.setForeground(Game.TRON_CONTROLS_LABELS_COLOR);
         _label_result.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
-        _label_result.setFont(Tron.roboto_thin.deriveFont(20f));
+        _label_result.setFont(Tron.roboto_thin.deriveFont(19f));
         _label_result.setOpaque(false);
         add(_label_result);
     }

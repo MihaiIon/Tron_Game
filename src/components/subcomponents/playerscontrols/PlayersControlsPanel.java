@@ -70,7 +70,7 @@ public class PlayersControlsPanel extends JPanel {
         _controls_player1.add(new Control("S", Direction.DOWN));
         _controls_player1.add(new Control("A", Direction.LEFT));
         _controls_player1.add(new Control("SPACE", "BOOST"));
-        _controls_player1.setPreferredSize(new Dimension(Game.TRON_CONTROL_PANEL_WIDTH-10, 140));
+        _controls_player1.setPreferredSize(new Dimension(Game.TRON_CONTROL_PANEL_WIDTH-20, 140));
 
 
         // Player 2
@@ -83,10 +83,7 @@ public class PlayersControlsPanel extends JPanel {
         _controls_player2.add(new Control("NUM_0", "BOOST"));
         _controls_player2.setPreferredSize(new Dimension(Game.TRON_CONTROL_PANEL_WIDTH-20, 160));
 
-
-
-
-
+        
 
         //--------------------------------------------------------------------------------------------
 

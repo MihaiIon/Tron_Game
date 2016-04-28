@@ -15,7 +15,7 @@ public class Icon extends JPanel {
 
         // JPanel properties
         setOpaque(false);
-        setPreferredSize(new Dimension(38 + 14*(key.length()-1), 36 ));
+        setPreferredSize(new Dimension(38 + 12*(key.length()-1), 36 ));
         ((FlowLayout)getLayout()).setVgap(2);
 
         // Magic happens here
