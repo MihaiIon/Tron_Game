@@ -187,8 +187,14 @@ public class TronControlPanel extends JPanel {
         show_controls_btn.addActionListener(
             e ->{
                 remove(tron_control_panel_layout.getLayoutComponent(BorderLayout.CENTER));
-                if (!main_panel_displayed) add(main_panel, BorderLayout.CENTER);
-                else add(players_controls_panel, BorderLayout.CENTER);
+                if (!main_panel_displayed){
+                    add(main_panel, BorderLayout.CENTER);
+                    show_controls_btn.setText("<HTML><FONT color=\"#39A39D\"><U>Show Controls</U></FONT></HTML>");
+                }
+                else{
+                    add(players_controls_panel, BorderLayout.CENTER);
+                    show_controls_btn.setText("<HTML><FONT color=\"#39A39D\"><U>Back</U></FONT></HTML>");
+                }
                 main_panel_displayed = !main_panel_displayed;
                 revalidate();
                 repaint();

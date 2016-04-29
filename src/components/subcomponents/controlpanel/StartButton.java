@@ -31,6 +31,7 @@ public class StartButton extends JButton {
         try {
             loaded = Font.createFont(Font.TRUETYPE_FONT, new File("res/loaded.ttf")).deriveFont(28f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(loaded);
         } catch (IOException|FontFormatException e) { System.out.println("No such font."); }
 
         repaint();
