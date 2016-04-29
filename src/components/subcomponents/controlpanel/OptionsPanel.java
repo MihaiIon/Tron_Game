@@ -26,96 +26,6 @@ public class OptionsPanel extends JPanel {
 
     public OptionsPanel()
     {
-        /*
-        setPreferredSize(Game.TRON_OPTIONS_DIMENSIONS);
-        //setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        setBackground(Color.red);
-
-        /*
-        *      @GameType list
-         */
-        /*
-        JPanel _gameType_list = new JPanel();
-        _gameType_list.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        _gameType_list.setPreferredSize(Game.TRON_JLABEL_DIMENSIONS);
-
-        // GAMETYPE
-
-        JLabel _gameTypeTitle = new JLabel("Game Type");
-        _gameTypeTitle.setForeground(Color.white);
-        _gameTypeTitle.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
-
-        // GameType content
-        game_type = new JComboBox(new String[]{
-                "Human vs Human","Human vs Computer", "H vs H vs Computer"});
-        game_type.setPreferredSize(new Dimension(200,20));
-        game_type.setBackground(Color.white);
-        game_type.setForeground(Game.TRON_PARAMETERS_TEXT_COLOR);
-        game_type.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
-        game_type.setFocusable(false);
-
-        // Add Gametype
-        _gameType_list.add(_gameTypeTitle);
-        _gameType_list.add(game_type);
-
-        /*
-        *      @Player Speed list
-         */
-        /*
-        JPanel _speed_list = new JPanel();
-        _speed_list.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        _speed_list.setPreferredSize(Game.);
-
-        // Player Speed
-        JLabel _playerSpeedLabel= new JLabel("Players speed");
-        _playerSpeedLabel.setForeground(Color.white);
-        _playerSpeedLabel.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
-
-        // Player Speed content
-        player_speed = new JComboBox(new String[]{
-                "             1","             2", "             3"});
-        player_speed.setPreferredSize(new Dimension(112,20));
-        player_speed.setBackground(Color.white);
-        player_speed.setForeground(Game.TRON_PARAMETERS_TEXT_COLOR);
-        player_speed.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
-        player_speed.setFocusable(false);
-
-        // Speed add
-        _speed_list.add(_playerSpeedLabel);
-        _speed_list.add(player_speed);
-        /*
-        *      @Arena list
-         */
-        /*
-        JPanel _arena_list = new JPanel();
-        _arena_list.setBackground(Game.TRON_CONTROL_PANEL_BACKGROUND_COLOR);
-        _arena_list.setPreferredSize(Game.TRON_JLABEL_DIMENSIONS);
-
-        // Arena Size text
-        JLabel _arenaSizeTitle = new JLabel("Arena Size");
-        _arenaSizeTitle.setForeground(Color.white);
-        _arenaSizeTitle.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
-
-        // List content
-        arena_size = new JComboBox(new String[]{
-                "Small","Medium", "Big"});
-        arena_size.setPreferredSize(new Dimension(132,20));
-        arena_size.setBackground(Color.white);
-        arena_size.setForeground(Game.TRON_PARAMETERS_TEXT_COLOR);
-        arena_size.setPreferredSize(Game.TRON_LIST_DIMENSIONS);
-        arena_size.setFocusable(false);
-        // arena add
-        _arena_list.add(_arenaSizeTitle);
-        _arena_list.add(arena_size);
-
-        // ADD
-        add(_gameType_list);
-        add(_arena_list);
-        add(_speed_list);*/
-
-
-
-
         // JPanel properties
         setLayout(new BorderLayout(0, 0));
         setOpaque(false);
@@ -155,8 +65,8 @@ public class OptionsPanel extends JPanel {
 
 
         // Arena Size JComboBox
-        arena_size = new JComboBox(new String[]{ "Small","Medium", "Big"} );
-        arena_size.setSelectedItem("Medium");
+        arena_size = new JComboBox(new String[]{ "Small","Medium  [Default(500x500)]", "Large"} );
+        arena_size.setSelectedIndex(1);
         arena_size.setFocusable(false);
         arena_size.setBackground(Color.white);
         arena_size.setForeground(Game.TRON_OPTIONS_BOXES_TEXT_COLOR);
