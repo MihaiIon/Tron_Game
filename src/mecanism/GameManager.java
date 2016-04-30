@@ -142,6 +142,7 @@ public class GameManager implements KeyListener {
             arena.revivePlayers();
             players_board.resetStatus();
             players_alive_count = players.length;
+            setDefaultPlayersSpeed(options.getPlayerSpeed());
         }
 
         else
@@ -152,6 +153,7 @@ public class GameManager implements KeyListener {
                 options.isMultiplayer(),
                 options.isComputerPlayer()
             );
+            setDefaultPlayersSpeed(options.getPlayerSpeed());
         }
 
         start();
@@ -210,7 +212,7 @@ public class GameManager implements KeyListener {
      * **COMPLETE THIS**
      * @param default_players_peed : **COMPLETE THIS**
      */
-    public void setDefaultPlayersSpeed(int default_players_peed){
+    public static void setDefaultPlayersSpeed(int default_players_peed){
         for (Joueur player : players)  player.setSpeed(default_players_peed);
     }
 
@@ -218,6 +220,12 @@ public class GameManager implements KeyListener {
      * Diminish players_alive by one.
      */
     public static void killPlayer(){ players_alive_count--; }
+
+    /**
+     * **COMPLETE THIS**
+     * @return : **COMPLETE THIS**
+     */
+    public static Options getOptions(){ return options; }
 
 
 

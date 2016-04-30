@@ -79,7 +79,7 @@ public class OptionsPanel extends JPanel {
 
 
         // Players Speed
-        player_speed = new JTextField("Enter numbers between [1-10]");
+        player_speed = new JTextField("Enter numbers between [1-5]");
         player_speed.setBackground(Color.white);
         player_speed.setForeground(Game.TRON_OPTIONS_BOXES_TEXT_COLOR);
         player_speed.setPreferredSize(Game.TRON_OPTIONS_DIMENSIONS);
@@ -159,7 +159,8 @@ public class OptionsPanel extends JPanel {
             getArenaDimensions().width,
             getArenaDimensions().height,
             isPlayer2Playing(),
-            isComputerPlaying()
+            isComputerPlaying(),
+            getPlayersSpeed()
         };
     }
 
@@ -193,5 +194,22 @@ public class OptionsPanel extends JPanel {
     private Object isComputerPlaying()
     {
         return (game_type.getSelectedIndex() == 1 || game_type.getSelectedIndex() == 2);
+    }
+
+    /**
+     * **COMPLETE THIS**
+     * @return : **COMPLETE THIS**
+     */
+    private int getPlayersSpeed()
+    {
+        int _speed;
+
+        try {
+            _speed = Integer.parseInt(player_speed.getText());
+            if (_speed > 5) _speed = 5;
+        }
+        catch(NumberFormatException e) { return Game.PLAYERS_DEFAULT_SPEED; }
+
+        return _speed;
     }
 }

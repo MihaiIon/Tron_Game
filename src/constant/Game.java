@@ -53,7 +53,7 @@ public class Game {
      * Players
      */
     public static final int PLAYERS_DEFAULT_SPEED = 3;
-    public static final int PLAYERS_BOOST_SPEED = 10;
+    public static final double PLAYERS_BOOST_RATIO = 3.33;
     public static final int PLAYERS_BOOST_DURATION = 400;
     public static final Color PLAYER_1_COLOR = new Color(251, 158, 17);
     public static final Color PLAYER_2_COLOR = new Color(96, 197, 226);

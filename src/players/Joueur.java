@@ -101,7 +101,7 @@ public abstract class Joueur {
 
         if (nb_of_boost > 0) {
             boost = true;
-            setSpeed(Game.PLAYERS_BOOST_SPEED);
+            setSpeed((int)(GameManager.getOptions().getPlayerSpeed()*Game.PLAYERS_BOOST_RATIO));
             boostDuration(this);
             nb_of_boost--;
             System.out.println(nb_of_boost);
@@ -163,7 +163,7 @@ public abstract class Joueur {
     public void setSpeed(int default_players_peed) { trace.setSpeed(default_players_peed); }
     public void setBoost(boolean isBoosting) {
         boost = isBoosting;
-        setSpeed(Game.PLAYERS_DEFAULT_SPEED);
+        setSpeed(GameManager.getOptions().getPlayerSpeed());
     }
     public void revive() { alive = true;  }
     public void kill(){

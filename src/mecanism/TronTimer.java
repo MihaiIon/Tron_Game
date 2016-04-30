@@ -68,6 +68,8 @@ public class TronTimer extends TimerTask {
                     // Computer IA
                     if (_current_player instanceof ComputerPlayer) {
 
+                        int _amplitude = 20;
+
                         Point _target_position =  new Point(
                                 _current_player.getCurrentPosition().getX(),
                                 _current_player.getCurrentPosition().getY()
@@ -76,16 +78,16 @@ public class TronTimer extends TimerTask {
                         switch (_current_player.getDirection()){
 
                             case Direction.DOWN:
-                                _target_position.setY(_target_position.getY()+5);
+                                _target_position.setY(_target_position.getY()+_amplitude);
                                 break;
                             case Direction.UP:
-                                _target_position.setY(_target_position.getY()-5);
+                                _target_position.setY(_target_position.getY()-_amplitude);
                                 break;
                             case Direction.LEFT:
-                                _target_position.setX(_target_position.getX()-5);
+                                _target_position.setX(_target_position.getX()-_amplitude);
                                 break;
                             case Direction.RIGHT:
-                                _target_position.setX(_target_position.getX()+5);
+                                _target_position.setX(_target_position.getX()+_amplitude);
                                 break;
                             default:
                         }
