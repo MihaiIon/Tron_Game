@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import components.Arene;
+import components.subcomponents.playersboard.PlayerBoardInfos;
 import constant.Direction;
 import constant.Game;
 import liste.Liste;
@@ -103,8 +104,12 @@ public abstract class Joueur {
             boost = true;
             setSpeed((int)(GameManager.getOptions().getPlayerSpeed()*Game.PLAYERS_BOOST_RATIO));
             boostDuration(this);
+            int _counter = 0;
+            for (int i = 0;i < GameManager.getPlayers().length && GameManager.getPlayers()[i] != this; i++) _counter++;
+            GameManager.getPlayersBoard().getPlayerInfos(_counter).useBoost(3-nb_of_boost);
             nb_of_boost--;
-            System.out.println(nb_of_boost);
+
+
         }
     }
 

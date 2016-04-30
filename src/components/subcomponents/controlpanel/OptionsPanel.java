@@ -1,5 +1,6 @@
 package components.subcomponents.controlpanel;
 
+
 import constant.Game;
 import javax.swing.*;
 import java.awt.*;
@@ -52,7 +53,7 @@ public class OptionsPanel extends JPanel {
 
 
         // Game Type JComboBox
-        game_type = new JComboBox(new String[]{ "Human vs Human","Human vs Computer", "H vs H vs Computer" });
+        game_type = new JComboBox(new String[]{ "Human vs Human","Human vs Computer", "H vs H vs Computer", "Computer vs Computer" });
         game_type.setFocusable(false);
         game_type.setBackground(Color.white);
         game_type.setForeground(Game.TRON_OPTIONS_BOXES_TEXT_COLOR);
@@ -206,9 +207,17 @@ public class OptionsPanel extends JPanel {
 
         try {
             _speed = Integer.parseInt(player_speed.getText());
-            if (_speed > 5) _speed = 5;
+            if(_speed < 1 || _speed > 5 )
+            {
+                _speed = Game.PLAYERS_DEFAULT_SPEED;
+                player_speed.setText("FormatException => set to 3");
+
+            }
         }
-        catch(NumberFormatException e) { return Game.PLAYERS_DEFAULT_SPEED; }
+        catch(NumberFormatException e) {
+            player_speed.setText("FormatException => set to 3");
+            return Game.PLAYERS_DEFAULT_SPEED;
+        }
 
         return _speed;
     }

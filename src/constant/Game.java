@@ -34,6 +34,7 @@ public class Game {
     public static final Color PAUSE_BTN_PAUSED_BACKGROUND_COLOR = new Color (44, 158, 77);
     public static final Color PAUSE_BTN_PAUSED_FORGROUND_COLOR_1 = new Color (71, 184, 92);
     public static final Color PAUSE_BTN_PAUSED_FORGROUND_COLOR_2 = new Color (41, 113, 57);
+    public static final Color BOOST_INACTIVE_BACKGROUND_COLOR = new Color (71, 71, 70);
 
     public static final Dimension TRON_JLABELS_CONTAINER_DIMENSIONS = new Dimension(140, 120);
     public static final Dimension TRON_JCOMPONENTS_CONTAINER_DIMENSIONS = new Dimension(220, 120);

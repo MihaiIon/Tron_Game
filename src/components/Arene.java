@@ -151,11 +151,17 @@ public class Arene extends JComponent{
                     new HumanPlayer(Game.PLAYER_1_COLOR),
                     new HumanPlayer(Game.PLAYER_2_COLOR)
             };
-        else
+        else if(computer_player)
             joueurs = new Joueur[]{
                     new HumanPlayer(Game.PLAYER_1_COLOR),
                     new ComputerPlayer(Game.COMPUTER_COLOR)
             };
+        else {
+            joueurs = new Joueur[]{
+                    new ComputerPlayer(Color.green),
+                    new ComputerPlayer(Color.magenta)
+            };
+        }
     }
 
     /**

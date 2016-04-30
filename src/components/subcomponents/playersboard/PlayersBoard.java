@@ -1,6 +1,7 @@
 package components.subcomponents.playersboard;
 
 import constant.Game;
+import mecanism.GameManager;
 import players.HumanPlayer;
 import players.Joueur;
 import javax.swing.*;
@@ -81,8 +82,11 @@ public class PlayersBoard extends JPanel {
     public void resetStatus()
     {
         for (int i=1; i<players_infos.length; i++){
-            if (players_infos[i].getStatus() != null)
+
+            if (players_infos[i].getStatus() != null) {
                 players_infos[i].setStatus(Game.PLAYER_STATUS_ALIVE);
+                players_infos[i].resetBoost(GameManager.getPlayers()[i-1].getColor());
+            }
         }
     }
 

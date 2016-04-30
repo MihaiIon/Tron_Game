@@ -1,6 +1,8 @@
 package components.subcomponents.playersboard;
 
 import constant.Game;
+import players.Joueur;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +12,6 @@ public class PlayerBoardInfos extends JPanel {
     private Color color;
     private String name;
     private String status;
-    private int boosts;
     private int wins;
 
     // JComponents
@@ -20,6 +21,12 @@ public class PlayerBoardInfos extends JPanel {
     private JLabel status_cell;
     private JPanel boosts_cell;
     private JLabel wins_cell;
+
+    //boosts
+    private JPanel boost_1;
+    private JPanel boost_2;
+    private JPanel boost_3;
+
 
     // Constructor
     public PlayerBoardInfos(Color background_color, Color separators_color)
@@ -182,6 +189,34 @@ public class PlayerBoardInfos extends JPanel {
                 ADD BOOSTS
          */
 
+        //Boost 1
+        boost_1 = new JPanel();
+        boost_1.setPreferredSize(new Dimension(20,10));
+        boost_1.setOpaque(false);
+        boost_1.setBorder(BorderFactory.createLineBorder(
+                background_color, 2
+        ));
+
+        //Boost 2
+        boost_2 = new JPanel();
+        boost_2.setPreferredSize(new Dimension(20,10));
+        boost_2.setOpaque(false);
+        boost_2.setBorder(BorderFactory.createLineBorder(
+                background_color, 2
+        ));
+
+        //Bosst 3
+        boost_3 = new JPanel();
+        boost_3.setPreferredSize(new Dimension(20,10));
+        boost_3.setOpaque(false);
+        boost_3.setBorder(BorderFactory.createLineBorder(
+                background_color, 2
+        ));
+
+        //ADDS
+        boosts_cell.add(boost_1);
+        boosts_cell.add(boost_2);
+        boosts_cell.add(boost_3);
         add(boosts_cell);
     }
 
@@ -212,7 +247,6 @@ public class PlayerBoardInfos extends JPanel {
     public void initializePlayerInfos(){
         // Initialize attributes
         status = Game.PLAYER_STATUS_ALIVE;
-        boosts = 3;
         wins = 0;
         wins_cell.setText("0");
     }
@@ -227,7 +261,6 @@ public class PlayerBoardInfos extends JPanel {
     public Color getColor()         { return color; }
     public String getName()         { return name;  }
     public String getStatus()       { return status;}
-    public int getRemainingBoosts() { return boosts;}
     public int getTotalWins()       { return wins;  }
 
     // Setters
@@ -237,7 +270,34 @@ public class PlayerBoardInfos extends JPanel {
         name_cell.setForeground(color);
         color_container.setBackground(color);
         color_container.setOpaque(true);
+        boost_1.setBackground(color);
+        boost_1.setOpaque(true);
+        boost_2.setBackground(color);
+        boost_2.setOpaque(true);
+        boost_3.setBackground(color);
+        boost_3.setOpaque(true);
 
+    }
+    public void useBoost(int index)
+    {
+
+        switch (index){
+            case 0:
+                boost_1.setBackground(Game.BOOST_INACTIVE_BACKGROUND_COLOR);
+                break;
+            case 1:
+                boost_2.setBackground(Game.BOOST_INACTIVE_BACKGROUND_COLOR);
+                break;
+            case 2:
+                boost_3.setBackground(Game.BOOST_INACTIVE_BACKGROUND_COLOR);
+                break;
+        }
+    }
+    public void resetBoost(Color color)
+    {
+        boost_1.setBackground(color);
+        boost_2.setBackground(color);
+        boost_3.setBackground(color);
     }
 
     public void setName(String name)
